@@ -18,7 +18,7 @@ flowchart TB
 
     A51 ===|"S0/1/0 · 2001:db8:1:4::2/64 · area 0"| R1
     R1 ---|"S0/1/1 ↔ S0/1/0 · …:4000::/64 · area 2"| R2
-    R2 -.->|"Tunnel0 GRE · 2001:db8:12:1::2"| NOG
+    R2 -.- |"Tunnel0 GRE · 2001:db8:12:1::2"| NOG
     R2 ---|"Gi0/0/1 trunk · .15 .30 .45 .60 · native 75"| ROOT
     ROOT ---|"Gi1/0/1 trunk · VLAN 15"| ACA
     ROOT ---|"Gi1/0/2 trunk · VLAN 30"| BAX

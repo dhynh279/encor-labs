@@ -33,10 +33,10 @@ flowchart TB
     D4 ---|".156/30"| D5
     D4 ---|".140/30"| D6
     D5 ===|"2 × /30"| D6
-    D1 & D2 --> VX(["Vixen S1 / S2<br/>trunk · native 100"])
-    D5 & D6 --> BZ(["Blitzen S1 / S2<br/>trunk 1,10,67"])
-    D7 & D8 --> DS(["Dasher SW1 / SW2<br/>trunk 90-120 · native 200"])
-    D3 --> AP(["AP + Meraki uplinks"])
+    D1 & D2 --- VX(["Vixen S1 / S2<br/>trunk · native 100"])
+    D5 & D6 --- BZ(["Blitzen S1 / S2<br/>trunk 1,10,67"])
+    D7 & D8 --- DS(["Dasher SW1 / SW2<br/>trunk 90-120 · native 200"])
+    D3 --- AP(["AP + Meraki uplinks"])
 ```
 
 ## Devices

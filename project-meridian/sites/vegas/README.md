@@ -17,8 +17,8 @@ flowchart TB
     S1["S1"]
 
     A51 ===|"S0/1/0 · 2001:db8:1:5::2/64 · area 0"| EDGE
-    EDGE -.->|"Tunnel0 GRE · 2001:db8:13:1::2"| BKK1
-    EDGE -.->|"Tunnel1 GRE · 2001:db8:13:2::2"| BKK2
+    EDGE -.- |"Tunnel0 GRE · 2001:db8:13:1::2"| BKK1
+    EDGE -.- |"Tunnel1 GRE · 2001:db8:13:2::2"| BKK2
     EDGE ---|"Gi0/0/0 · …:3060::1"| S2
     S2 ---|"Gi0/0/0 · …:3040::1"| R2
     S2 ---|"Gi0/0/0 · …:3050::1"| R3
