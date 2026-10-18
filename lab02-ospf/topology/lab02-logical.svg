@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 370" width="1020" font-family="Arial, Helvetica, sans-serif">
+<rect width="680" height="370" fill="#FFFFFF"/>
+<text x="340" y="20" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="600" fill="#2C2C2A">Lab 2 — Logical topology (OSPF areas)</text>
+<g transform="translate(0,20)">
+<rect x="104" y="40" width="152" height="70" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+<text x="180" y="58" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#3C3489">Area 1</text>
+<text x="180" y="78" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#534AB7">10.0.12.0/30</text>
+<text x="180" y="96" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#534AB7">2001:db8:12::/64</text>
+<rect x="264" y="40" width="152" height="70" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+<text x="340" y="58" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#04342C">Area 0</text>
+<text x="340" y="78" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#0F6E56">10.0.23.0/30</text>
+<text x="340" y="96" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#0F6E56">2001:db8:23::/64</text>
+<rect x="424" y="40" width="152" height="70" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+<text x="500" y="58" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#3C3489">Area 2</text>
+<text x="500" y="78" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#534AB7">10.0.34.0/30</text>
+<text x="500" y="96" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#534AB7">2001:db8:34::/64</text>
+<line x1="180" y1="110" x2="180" y2="176" stroke="#B4B2A9" stroke-width="1" stroke-dasharray="4 3"/>
+<line x1="340" y1="110" x2="340" y2="176" stroke="#B4B2A9" stroke-width="1" stroke-dasharray="4 3"/>
+<line x1="500" y1="110" x2="500" y2="176" stroke="#B4B2A9" stroke-width="1" stroke-dasharray="4 3"/>
+<line x1="160" y1="180" x2="200" y2="180" stroke="#5F5E5A" stroke-width="1.5"/>
+<line x1="320" y1="180" x2="360" y2="180" stroke="#5F5E5A" stroke-width="1.5"/>
+<line x1="480" y1="180" x2="520" y2="180" stroke="#5F5E5A" stroke-width="1.5"/>
+<rect x="40" y="140" width="120" height="80" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1"/>
+<text x="100" y="160" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#2C2C2A">R1</text>
+<text x="100" y="180" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#444441">RID 1.1.1.1</text>
+<text x="100" y="200" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#444441">Internal, area 1</text>
+<rect x="200" y="140" width="120" height="80" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1"/>
+<text x="260" y="160" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#2C2C2A">R2</text>
+<text x="260" y="180" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#444441">RID 2.2.2.2</text>
+<text x="260" y="200" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#444441">ABR, areas 1/0</text>
+<rect x="360" y="140" width="120" height="80" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1"/>
+<text x="420" y="160" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#2C2C2A">R3</text>
+<text x="420" y="180" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#444441">RID 3.3.3.3</text>
+<text x="420" y="200" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#444441">ABR, areas 0/2</text>
+<rect x="520" y="140" width="120" height="80" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1"/>
+<text x="580" y="160" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#2C2C2A">R4</text>
+<text x="580" y="180" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#444441">RID 4.4.4.4</text>
+<text x="580" y="200" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#444441">Internal, area 2</text>
+<line x1="100" y1="220" x2="100" y2="250" stroke="#5F5E5A" stroke-width="1"/>
+<line x1="580" y1="220" x2="580" y2="250" stroke="#5F5E5A" stroke-width="1"/>
+<rect x="30" y="250" width="140" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+<text x="100" y="268" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#3C3489">Lo1–Lo4</text>
+<text x="100" y="288" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#534AB7">172.16.0–3.0/24</text>
+<rect x="510" y="250" width="140" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="1"/>
+<text x="580" y="268" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#3C3489">Lo0 IPv6</text>
+<text x="580" y="288" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#534AB7">2001:db8:4::4/128</text>
+<text x="340" y="268" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#444441">Lower-numbered router = .1 / ::1</text>
+<text x="340" y="288" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#444441">Lo0 /32 = router ID on every router</text>
+<text x="340" y="326" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#444441">Stage 3: R2 summarizes area 1 → 172.16.0.0/22 · R3 filters 172.16.2.0/24 into area 2</text>
+</g>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 210" width="1020" font-family="Arial, Helvetica, sans-serif">
+<rect width="680" height="210" fill="#FFFFFF"/>
+<text x="340" y="20" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="600" fill="#2C2C2A">Lab 2 — Physical topology</text>
+<g transform="translate(0,30)">
+<line x1="140" y1="88" x2="200" y2="88" stroke="#5F5E5A" stroke-width="1.5"/>
+<line x1="300" y1="88" x2="360" y2="88" stroke="#5F5E5A" stroke-width="1.5"/>
+<line x1="460" y1="88" x2="520" y2="88" stroke="#5F5E5A" stroke-width="1.5"/>
+<rect x="40" y="60" width="100" height="56" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1"/>
+<text x="90" y="78" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#2C2C2A">R1</text>
+<text x="90" y="98" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#444441">ISR4331</text>
+<rect x="200" y="60" width="100" height="56" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1"/>
+<text x="250" y="78" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#2C2C2A">R2</text>
+<text x="250" y="98" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#444441">ISR4331</text>
+<rect x="360" y="60" width="100" height="56" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1"/>
+<text x="410" y="78" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#2C2C2A">R3</text>
+<text x="410" y="98" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#444441">ISR4331</text>
+<rect x="520" y="60" width="100" height="56" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1"/>
+<text x="570" y="78" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#2C2C2A">R4</text>
+<text x="570" y="98" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#444441">ISR4331</text>
+<text x="143" y="50" text-anchor="start" dominant-baseline="central" font-size="12" fill="#444441">G0/0/0</text>
+<text x="197" y="128" text-anchor="end" dominant-baseline="central" font-size="12" fill="#444441">G0/0/0</text>
+<text x="303" y="50" text-anchor="start" dominant-baseline="central" font-size="12" fill="#444441">G0/0/1</text>
+<text x="357" y="128" text-anchor="end" dominant-baseline="central" font-size="12" fill="#444441">G0/0/0</text>
+<text x="463" y="50" text-anchor="start" dominant-baseline="central" font-size="12" fill="#444441">G0/0/1</text>
+<text x="517" y="128" text-anchor="end" dominant-baseline="central" font-size="12" fill="#444441">G0/0/0</text>
+<text x="340" y="160" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#444441">All links: copper cross-over, GigabitEthernet</text>
+</g>
+</svg>

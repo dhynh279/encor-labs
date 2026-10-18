@@ -1,0 +1,16 @@
+! Lab 02 — R4 Stage 1 config as applied (Packet Tracer ISR4331)
+! Addressing only; OSPF added in Stage 2. Replace with final show run when the lab is done.
+!
+hostname R4
+no ip domain-lookup
+ipv6 unicast-routing
+!
+interface Loopback0
+ ip address 4.4.4.4 255.255.255.255
+ ipv6 address 2001:db8:4::4/128
+!
+interface GigabitEthernet0/0/0
+ description to R3
+ ip address 10.0.34.2 255.255.255.252
+ ipv6 address 2001:db8:34::2/64
+ no shutdown
