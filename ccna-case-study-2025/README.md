@@ -17,21 +17,7 @@ A four-site company network ("DDH Networks") connected through an ISP. I designe
 
 ## Topology
 
-```mermaid
-flowchart LR
-    subgraph OSPF["OSPF area 0"]
-        LM["LIMA<br/>branch LAN<br/>172.26.7.0/26"]
-        BG["BELGUM<br/>Syslog + SNMP servers"]
-        COL["COLORADO · HQ<br/>VLANs 100 / 200 / 300<br/>172.26.4–6.0/24<br/>OSPF ⇄ RIP"]
-    end
-    ISP["ISP<br/>web server<br/>static NAT → 64.100.231.1"]
-    GE["GERMANY<br/>branch LAN<br/>172.26.0.0/22<br/>GERMANY-ACL"]
-
-    LM --- BG --- COL
-    COL ---|"PAT"| ISP
-    ISP ---|"PAT"| GE
-    COL -.-|"GRE + IPsec tunnel · RIPv2"| GE
-```
+![CCNA case study topology](docs/diagrams/topology.svg)
 
 Everything inside the company is `172.26.0.0/16`. Lima, Belgum and Colorado run OSPF area 0 over serial links. Germany can only be reached across the internet, so it joins through a **GRE tunnel encrypted with IPsec** (the dashed line, `1.1.1.0/30`), running RIPv2 inside the tunnel. Colorado redistributes between OSPF and RIP. Both edge routers use PAT to reach the ISP. Per-interface addressing is in [docs/addressing.md](docs/addressing.md).
 
