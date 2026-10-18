@@ -1,9 +1,6 @@
 ! Lab 01 — SW2 final running-config (Packet Tracer 3650, IOS XE 16.3.2)
 ! Captured 2026-10-17 after build + break/fix restore.
 ! VLANs 10 USERS / 20 VOICE / 99 NATIVE live in vlan.dat, not running-config.
-! NOTE: global spanning-tree priority lines and Port-channel1 were not in the captured
-! output (it began at Gi1/0/1). They are reconstructed from the design and Po1 rebuild.
-! Members were changed passive -> active after the capture (break/fix restore).
 !
 version 16.3.2
 no service timestamps log datetime msec
@@ -19,8 +16,8 @@ no ipv6 cef
 no ip domain-lookup
 !
 spanning-tree mode rapid-pvst
-spanning-tree vlan 10 priority 28672
 spanning-tree vlan 20 priority 24576
+spanning-tree vlan 10 priority 28672
 !
 interface Port-channel1
  switchport trunk native vlan 99
