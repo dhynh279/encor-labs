@@ -14,33 +14,48 @@ Five teams each built a different enterprise network on real Cisco gear, then jo
 
 ```mermaid
 flowchart TB
-    subgraph HUB["HUB · MPLS · area 0"]
-        P1["P1"] === P2["P2"]
-        P1 === P3["P3"]
-        P1 === P4["P4"]
-        P2 === P3
-        P2 === P4
-        P3 === P4
+    subgraph T1["Team 1 · 20.0.0.0/16"]
+        ER["EdgeR"]
+        EE["EdgeE"]
     end
 
-    T1R["Team 1 EdgeR<br/>RIP"]
-    T1E["Team 1 EdgeE<br/>EIGRP 1 ⇄ OSPF 7"]
-    T2["Team 2<br/>OSPF area 99"]
-    HASA{{"Hub ASA<br/>EIGRP 200 ⇄ OSPF 65535"}}
-    T3["Team 3 R4<br/>EIGRP 200"]
-    T3ASA{{"Team 3 ASA"}}
-    T4ASA{{"Team 4 ASA<br/>EIGRP 200 ⇄ OSPF 1"}}
-    T4["Team 4 PE-3<br/>OSPF"]
+    subgraph HUB["Hub · 8.8.0.0/16"]
+        P1["P1"]
+        CORE(("MPLS core<br/>P1–P4 full mesh<br/>OSPF 65535"))
+        P2["P2"]
+        P4["P4"]
+        HASA{{"Hub ASA<br/>OSPF ⇄ EIGRP"}}
+    end
 
-    P1 ---|"8.8.9.100/30 · RIP"| T1R
-    P1 ---|"8.8.9.104/30 · EIGRP 1"| T1E
-    P2 ---|"8.8.9.108/30 · area 99"| T2
-    P4 ---|"8.8.9.48/29 · OSPF"| HASA
-    HASA ---|"8.8.9.40/30 · EIGRP 200"| T3
-    T3 -.-|"EIGRP 200 mesh"| T3ASA
-    T3ASA ---|"172.0.0.212/30 · EIGRP 200"| T4ASA
-    T4ASA ---|"192.168.255.220/30 · area 3"| T4
+    subgraph T2["Team 2 · 10.0.0.0/16"]
+        T2ASA{{"ASA"}}
+    end
+
+    subgraph T3["Team 3 · 172.0.0.0/24"]
+        R4["R4"]
+        MESH["R1–R5 mesh<br/>+ 2 branch sites"]
+        T3ASA{{"ASA"}}
+    end
+
+    subgraph T4["Team 4 · 192.168.0.0/16"]
+        T4ASA{{"ASA<br/>EIGRP ⇄ OSPF"}}
+        PE["PE-0 … PE-4"]
+    end
+
+    ER ---|"RIP"| P1
+    EE ---|"EIGRP 1"| P1
+    P1 === CORE
+    P2 === CORE
+    P4 === CORE
+    P2 -.-|"OSPF area 99"| T2ASA
+    P4 ---|"OSPF"| HASA
+    HASA ---|"EIGRP 200"| R4
+    R4 --- MESH --- T3ASA
+    T3ASA ---|"EIGRP 200"| T4ASA
+    T4ASA --- PE
 ```
+
+Solid lines are links whose addresses match on both ends in the final saves. The dashed Team 2 link is the hub's port for Team 2, which doesn't match Team 2's final firewall save (see known issue T2-2). The hub's four switches are a full mesh, drawn in detail on the [hub page](hub/README.md).
 
 Team 4 has no link of its own into the hub; its traffic goes through Team 3's network and two ASAs. Team 3 was the transit path, and Team 4 was brought into the WAN that way on 11/04.
 
