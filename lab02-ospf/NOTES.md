@@ -32,7 +32,7 @@ Lower-numbered router gets .1 / ::1. Cabling: copper cross-over.
 | 1 | Build + addressing | Done — all neighbor pings successful (IPv4 + IPv6) |
 | 2 | OSPFv2: point-to-point links, passive loopbacks, R1 Lo1–4 as /24 | Done — 9 routes on R4, extended ping + neighbors verified |
 | 3 | R2 `area 1 range 172.16.0.0 255.255.252.0`; R3 `area 2 filter-list prefix` deny 172.16.2.0/24 in | Summary done; filter deferred to GNS3/CML (not in PT) |
-| 4 | OSPFv3 | — |
+| 4 | OSPFv3 | Done — R1 has all 3 OI routes |
 | 5 | Break/fix: hello mismatch, MTU (EXSTART), area mismatch | — |
 
 ## Stage 1 verification
@@ -91,14 +91,38 @@ router ospf 1
 | Effect | Type 3 LSA never enters the area | LSA stays in LSDB, route not installed |
 | Scope | Whole area | That router only |
 
+## Stage 4 — OSPFv3
+
+Per-interface: `ipv6 router ospf 1` + `router-id X.X.X.X`; on each IPv6 interface `ipv6 ospf 1 area N` and (links) `ipv6 ospf network point-to-point`.
+
+R1 `show ipv6 route ospf`: OI 2001:db8:4::4/128 [110/4], OI 2001:db8:23::/64 [110/2], OI 2001:db8:34::/64 [110/3] — all via R2's FE80:: link-local. R3 sees 4::4/128 as **O** (same area as R4).
+
+### Issues hit
+1. **2WAY/DROTHER on R1–R2.** OSPFv3 doesn't inherit OSPFv2's `ip ospf network point-to-point` — link was broadcast for IPv6. After waiting, DR/BDR elected (R2 DR: equal priority → highest RID).
+2. **p2p command entered under G0/0/1 on R1** (`%OSPFv3: OSPF not enabled on GigabitEthernet0/0/1`) — R1's link is G0/0/0.
+3. **`shutdown` typed at `R1#`** → `% Unknown command or computer name` — needs interface config mode.
+4. **R1 FULL but no OSPFv3 routes.** LSDB held a stale Net (Type 2) LSA + Intra-Area-Prefix LSA referencing it, left from the broadcast/DR period. Fixed by save → close PT → reopen.
+5. **4::4/128 missing everywhere** — R4 Lo0 had no `ipv6 ospf 1 area 2`. `show ipv6 ospf interface brief` listed only Gi0/0/0.
+
+### OSPFv3 LSA types seen
+| v3 name | Type | v2 equivalent |
+|---|---|---|
+| Router | 1 | Router (1) — no prefixes in v3 |
+| Net | 2 | Network (2) — no prefixes in v3 |
+| Inter-Area Prefix | 3 | Summary (3) |
+| Link | 8 | — new: link-local + link prefixes |
+| Intra-Area Prefix | 9 | — new: carries the prefixes |
+
 ## Packet Tracer quirks
 - If `ospfv3 1 ipv6 area X` is rejected, use `ipv6 router ospf 1` + `ipv6 ospf 1 area X`.
 - If `ip ospf network point-to-point` is rejected on loopbacks, skip it — the /32s still summarize under the /22.
 - Changing a loopback's network type may not re-advertise until `clear ip ospf process` on that router.
 - **After `clear ip ospf process`, R1 showed neighbor FULL but its LSDB held only its own Router LSA and no OSPF routes.** Impossible on real IOS (FULL = LSDBs synced). Fix: `shutdown` / `no shutdown` on the link → clean adjacency, LSAs and routes back.
 - `show running-config` prints `ip ospf priority 1` on every interface with an `ip ospf` command — that's PT showing the default.
+- Changing OSPFv3 network type broadcast → p2p leaves a stale Net LSA; routes don't install until PT is closed and reopened.
+- `show ipv6 ospf interface brief` shows `Nbrs 0/0` even when the neighbor is FULL.
 - Inline `ping X source Y` not supported — use interactive extended `ping`.
-- No `area X filter-list` and no OSPF `distribute-list` — do Stage 3 filtering in GNS3/EVE-NG or the DevNet CML sandbox.
+- No `area X filter-list`, no OSPF `distribute-list`, no `area range ... not-advertise` — do Stage 3 filtering in GNS3/EVE-NG or the DevNet CML sandbox.
 
 ## Next
 - Stage 3 filter on a platform that supports `area filter-list`: try with and without R2's summary.
