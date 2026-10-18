@@ -1,0 +1,155 @@
+
+hostname R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+!
+!
+!
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint TP-self-signed-1720221338
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1720221338
+ revocation-check none
+ rsakeypair TP-self-signed-1720221338
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+!
+crypto pki certificate chain TP-self-signed-1720221338
+ certificate self-signed 01
+  ! <certificate data removed>
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  ! <certificate data removed>
+!
+!
+no license feature hseck9
+license udi pid ISR4221/K9 sn <removed>
+memory free low-watermark processor 63109
+!
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+!
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface Serial0/1/0
+ description LINK to R2
+ ip address 172.0.0.253 255.255.255.252
+!
+interface Serial0/1/1
+ description LINK to SITE-1
+ ip address 172.0.0.225 255.255.255.252
+!
+interface Serial0/2/0
+ description LINK to R3
+ ip address 172.0.0.249 255.255.255.252
+!
+interface Serial0/2/1
+ description LINK to R4
+ ip address 172.0.0.245 255.255.255.252
+!
+!
+router eigrp 200
+ network 172.0.0.224 0.0.0.3
+ network 172.0.0.244 0.0.0.3
+ network 172.0.0.248 0.0.0.3
+ network 172.0.0.252 0.0.0.3
+!
+ip http server
+ip http authentication local
+ip http secure-server
+ip forward-protocol nd
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ transport input none
+ stopbits 1
+line aux 0
+line vty 0 4
+ login
+ transport input ssh
+line vty 5 14
+ login
+ transport input ssh
+!
+!
+!
+!
+!
+!
+!
+end

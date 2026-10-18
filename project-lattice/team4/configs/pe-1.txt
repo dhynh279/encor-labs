@@ -1,0 +1,66 @@
+en
+config t
+hostname Provider-E-1
+ip cef distributed
+no ip domain lookup
+ip domain name PE1.com
+username admin privilege 15 secret <removed>
+crypto key generate rsa general-keys modulus 2048
+ip ssh version 2
+banner motd $
+      ============================
+      = THIS IS A MANAGED DEVICE =
+      ````````````````````````````
+      =       CREDENTIALS        =
+      =                          =
+      =    USERNAME : admin      =
+      =    PASSWORD : <removed>      =
+      ============================$
+!
+line con 0
+logging sync
+login local
+exit
+!
+line vty 0 15
+transport input ssh
+login local
+exit
+!
+ip dhcp excluded-address 192.168.64.1 192.168.64.10
+!
+ip dhcp pool DC-1
+ network 192.168.64.0 255.255.224.0
+ default-router 192.168.64.1
+ domain-name DC-1.Local
+exit
+!
+interface Loopback1
+ description (MANAGMENT)
+ ip address 192.168.128.3 255.255.255.240
+!
+int s0/1/0
+description (TO PE0)
+ip address 192.168.255.246 255.255.255.252
+no shut
+!
+int g0/0/0
+description (TO DC-1)
+ip address 192.168.255.233 255.255.255.252
+no shut
+!
+int lo0
+description (MPLS LOOPBACK AND ROUTER ID)
+ip address 10.10.10.10 255.255.255.255
+no shut
+exit
+!
+router ospf 10
+ log-adjacency-changes
+ network 192.168.64.0 0.0.31.255 area 1
+ network 192.168.255.232 0.0.0.3 area 1
+ network 192.168.128.0 0.0.0.15 area 0
+ network 192.168.255.244 0.0.0.3 area 0
+exit
+!
+wr

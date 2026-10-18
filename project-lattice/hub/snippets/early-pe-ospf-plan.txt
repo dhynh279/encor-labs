@@ -1,0 +1,42 @@
+PE1
+router ospf 65535
+network 8.8.7.12 255.255.255.252 area 0
+network 8.8.9.28 255.255.255.252 area 0
+network 8.8.9.32 255.255.255.252 area 0
+
+PE2
+router ospf 65535
+network 8.8.7.16 255.255.255.252 area 0
+network 8.8.9.16 255.255.255.252 area 0
+PE3
+router ospf 65535
+network 8.8.7.20 255.255.255.252 area 0
+network 8.8.9.40 255.255.255.252 area 0
+PE4
+router ospf 65535
+network 8.8.7.24 255.255.255.252 area 0
+network 8.8.9.44 255.255.255.252 area 0
+P1
+router ospf 65535
+network 8.8.8.12 255.255.255.252 area 0
+network 8.8.8.16 255.255.255.252 area 0
+network 8.8.8.20 255.255.255.252 area 0
+network 8.8.7.12 255.255.255.252 area 0
+P2
+router ospf 65535
+network 8.8.8.12 255.255.255.252 area 0
+network 8.8.8.24 255.255.255.252 area 0
+network 8.8.8.28 255.255.255.252 area 0
+network 8.8.7.14 255.255.255.252 area 0
+P3
+router ospf 65535
+network 8.8.8.20 255.255.255.252 area 0
+network 8.8.8.24 255.255.255.252 area 0
+network 8.8.8.32 255.255.255.252 area 0
+network 8.8.7.20 255.255.255.252 area 0
+P4
+router ospf 65535
+Network 8.8.8.32 255.255.255.252 area 0
+network 8.8.8.16 255.255.255.252 area 0
+network 8.8.8.28 255.255.255.252 area 0
+network 8.8.7.24 255.255.255.252 area 0

@@ -1,0 +1,126 @@
+hostname R4
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+ip name-server 100.20.30.40 8.8.8.13
+ip domain name test.com
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint TP-self-signed-1361824752
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1361824752
+ revocation-check none
+ rsakeypair TP-self-signed-1361824752
+!
+!
+crypto pki certificate chain TP-self-signed-1361824752
+ certificate self-signed 01
+  ! <certificate data removed>
+        quit
+!
+!
+license udi pid ISR4221/K9 sn <removed>
+memory free low-watermark processor 63109
+!
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+!
+username cisco privilege 15 secret 9 <removed>
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ description LINK to ISP
+ ip address 8.8.9.42 255.255.255.252
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ negotiation auto
+!
+interface Serial0/1/0
+ description Link to R5
+ ip address 172.0.0.233 255.255.255.252
+!
+interface Serial0/1/1
+ description Link to R1
+ ip address 172.0.0.246 255.255.255.252
+!
+!
+router eigrp 200
+ network 8.0.0.0
+ network 8.8.9.40 0.0.0.3
+ network 172.0.0.232 0.0.0.3
+ network 172.0.0.244 0.0.0.3
+ redistribute static
+ neighbor 8.8.9.41 GigabitEthernet0/0/0
+!
+ip http server
+ip http authentication local
+ip http secure-server
+ip forward-protocol nd
+ip route 0.0.0.0 0.0.0.0 GigabitEthernet0/0/0
+ip ssh version 2
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ transport input none
+ stopbits 1
+line aux 0
+line vty 0 4
+ logging synchronous
+ login local
+ transport input ssh
+line vty 5 15
+ logging synchronous
+ login local
+ transport input ssh
+!
+!
+!
+!
+!
+!
+!
+end

@@ -1,0 +1,127 @@
+
+
+!
+! Last configuration change at 08:48:30 UTC Sun Aug 22 2021
+!
+version 15.6
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname R3
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 <removed>
+!
+no aaa new-model
+ethernet lmi ce
+memory-size iomem 15
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name team1.lab
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+license udi pid CISCO2901/K9 sn <removed>
+license boot module c2900 technology-package securityk9
+!
+!
+username admin secret 5 <removed>
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ description LinkToSwitch
+ ip address 20.0.255.227 255.255.255.240
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 20.0.0.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface Serial0/0/0
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+interface Serial0/0/1
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+router ospf 3
+ router-id 3.3.3.3
+ network 20.0.0.0 0.0.0.255 area 3
+ network 20.0.255.224 0.0.0.15 area 0
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+ip ssh version 2
+!
+!
+!
+!
+control-plane
+!
+!
+banner motd ^CUnathorized access prohibited^C
+!
+line con 0
+ password 7 <removed>
+ login
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+!
+scheduler allocate 20000 1000
+!
+end

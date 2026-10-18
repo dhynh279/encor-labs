@@ -1,0 +1,137 @@
+!
+! Last configuration change at 21:30:40 UTC Tue Nov 4 2025
+!
+version 17.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+!
+hostname R2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name team2.com
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint TP-self-signed-826213188
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-826213188
+ revocation-check none
+ rsakeypair TP-self-signed-826213188
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+!
+crypto pki certificate chain TP-self-signed-826213188
+ certificate self-signed 01
+  ! <certificate data removed>
+        quit
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  ! <certificate data removed>
+        quit
+!
+!
+license udi pid ISR4221/K9 sn <removed>
+memory free low-watermark processor 63109
+!
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+enable secret 9 <removed>
+!
+username admin privilege 15 secret 9 <removed>
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ ip address 10.0.50.249 255.255.255.252
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ ip address 10.0.50.241 255.255.255.252
+ negotiation auto
+!
+interface Serial0/1/0
+!
+interface Serial0/1/1
+!
+router ospf 50
+ network 10.0.0.0 0.0.7.255 area 99
+ network 10.0.16.0 0.0.7.255 area 99
+ network 10.0.32.0 0.0.7.255 area 99
+ network 10.0.50.248 0.0.0.3 area 99
+ network 10.0.50.252 0.0.0.3 area 99
+ default-information originate
+!
+ip http server
+ip http authentication local
+ip http secure-server
+ip forward-protocol nd
+!
+!
+!
+!
+!
+!
+control-plane
+!
+banner motd ^CAuthorized Access Only^C
+!
+line con 0
+ logging synchronous
+ transport input none
+ stopbits 1
+line aux 0
+line vty 0 4
+ exec-timeout 15 0
+ login local
+ transport input ssh
+line vty 5 14
+ login
+ transport input ssh
+!
+!
+!
+!
+!
+!
+!
+end

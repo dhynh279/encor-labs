@@ -1,0 +1,140 @@
+hostname EdgeE
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name team1.lab
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint TP-self-signed-2373983659
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2373983659
+ revocation-check none
+ rsakeypair TP-self-signed-2373983659
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+!
+crypto pki certificate chain TP-self-signed-2373983659
+ certificate self-signed 01
+  ! <certificate data removed>
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  ! <certificate data removed>
+!
+!
+license udi pid ISR4221/K9 sn <removed>
+memory free low-watermark processor 63109
+!
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+enable secret 9 <removed>
+!
+username admin secret 9 <removed>
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ description Link to Hub
+ ip address 8.8.9.106 255.255.255.252
+ negotiation auto
+!
+interface Serial0/1/0
+ description LinkToNS
+ ip address 20.0.255.245 255.255.255.252
+!
+interface Serial0/1/1
+ no ip address
+ shutdown
+!
+!
+router eigrp 1
+ network 8.0.0.0
+ network 8.0.0.0 0.0.255.255
+ network 20.0.0.0
+ network 20.0.0.0 0.0.255.255
+ redistribute ospf 7 metric 5 2 255 255 1500
+!
+router ospf 7
+ router-id 9.9.9.9
+ redistribute eigrp 1 metric 5
+ network 20.0.255.244 0.0.0.3 area 7
+!
+ip http server
+ip http authentication local
+ip http secure-server
+ip forward-protocol nd
+ip route 0.0.0.0 0.0.0.0 Serial0/1/0
+ip ssh bulk-mode 131072
+ip ssh version 2
+!
+!
+!
+!
+!
+!
+control-plane
+!
+banner motd ^CUnauthorized Access Prohibited^C
+!
+line con 0
+ password 7 <removed>
+ login
+ transport input none
+ stopbits 1
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 14
+ login
+ transport input ssh
+!
+!
+!
+!
+!
+!
+!
+end

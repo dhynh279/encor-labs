@@ -1,0 +1,73 @@
+en
+config t
+hostname Provider-E-3
+ip cef distributed
+no ip domain lookup
+ip domain name PE3.com
+username admin privilege 15 secret <removed>
+crypto key generate rsa general-keys modulus 2048
+ip ssh version 2
+banner motd $
+      ============================
+      = THIS IS A MANAGED DEVICE =
+      ````````````````````````````
+      =       CREDENTIALS        =
+      =                          	   =
+      =    USERNAME : admin      =
+      =    PASSWORD : <removed>      =
+      ============================$
+!
+line con 0
+logging sync
+login local
+exit
+!
+line vty 0 15
+transport input ssh
+login local
+exit
+!
+ip dhcp excluded-address 192.168.0.1 192.168.0.10
+!
+ip dhcp pool site-1
+ network 192.168.0.0 255.255.224.0
+ default-router 192.168.0.1
+ domain-name SITE-1.Local
+exit
+!
+interface Loopback1
+ description (MANAGEMENT)
+ ip address 192.168.128.6 255.255.255.240
+!
+int s0/1/0
+description (TO PE0)
+ip address 192.168.255.254 255.255.255.252
+no shut
+!
+int g0/0/0
+description (TO site-1 )
+ip address 192.168.255.225 255.255.255.252
+no shutdown
+!
+int g0/0/1
+description (TO THE FIREWALL)
+ip address 192.168.255.222 255.255.255.252
+no shut
+!
+int lo0
+description (MPLS LOOPBACK AND ROUTER ID)
+ip address 30.30.30.30 255.255.255.255
+no shut
+exit
+!
+router ospf 30
+log-adjacency-changes detail
+ network 192.168.255.224 0.0.0.3 area 3
+ network 192.168.0.0 0.0.31.255 area 3
+ network 192.168.128.0 0.0.0.15 area 0
+network 192.168.255.220 0.0.0.3 area 3
+network 192.168.255.252 0.0.0.3 area 0
+ default-information originate
+exit
+!
+wr

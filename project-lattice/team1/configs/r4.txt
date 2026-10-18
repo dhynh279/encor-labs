@@ -1,0 +1,123 @@
+
+
+!
+! Last configuration change at 11:59:47 UTC Wed Jan 11 2006
+version 15.1
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname R4
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 <removed>
+!
+no aaa new-model
+!
+memory-size iomem 15
+!
+dot11 syslog
+ip source-route
+!
+!
+ip cef
+!
+!
+!
+no ip domain lookup
+ip domain name team1.lab
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+voice-card 0
+!
+crypto pki token default removal timeout 0
+!
+!
+!
+!
+license udi pid CISCO2811 sn <removed>
+username admin secret 5 <removed>
+!
+redundancy
+!
+!
+ip ssh version 2
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 20.0.1.1 255.255.255.0
+!
+interface FastEthernet0/0
+ description LinkToSwitch
+ ip address 20.0.255.228 255.255.255.240
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+router ospf 4
+ router-id 2.2.2.2
+ area 4 stub
+ network 20.0.1.0 0.0.0.255 area 4
+ network 20.0.255.224 0.0.0.15 area 0
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+mgcp profile default
+!
+!
+!
+!
+!
+banner motd ^CUnathorized access prohibited^C
+!
+line con 0
+ password 7 <removed>
+ login
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+!
+scheduler allocate 20000 1000
+end

@@ -1,0 +1,94 @@
+en
+config t
+hostname DC-1-L3SW1
+ip routing
+username admin privilege 15 secret <removed>
+no ip domain-lookup
+ip domain-name L3-DC-1
+crypto key generate rsa general-keys modulus 2048
+ip ssh version 2
+!
+!
+!
+!
+!
+interface Loopback0
+ description (Management)
+ ip address 192.168.128.1 255.255.255.240
+no shut
+exit
+!
+interface GigabitEthernet1/0/1
+ description (HOST 1)
+ switchport access vlan 10
+ switchport mode access
+no shut
+exit
+!
+interface GigabitEthernet1/0/2
+ description (HOST)
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+no shut
+exit
+!
+interface GigabitEthernet1/0/3
+ description (HOST)
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+no shut
+exit
+!
+interface GigabitEthernet1/0/24
+ no switchport
+ ip address 192.168.255.234 255.255.255.252
+ ip ospf 1 area 1
+no shut
+!
+interface Vlan10
+ mac-address 0001.64e2.6201
+ ip address 192.168.64.1 255.255.255.240
+ ip helper-address 192.168.255.233
+no shut
+exit
+!
+router ospf 1
+ router-id 11.11.11.11
+ log-adjacency-changes
+ network 192.168.64.0 0.0.31.255 area 1
+ network 192.168.255.232 0.0.0.3 area 1
+ network 192.168.128.0 0.0.0.15 area 1
+!
+ip default-gateway 192.168.255.233
+!
+banner motd $
+      ============================
+      = THIS IS A MANAGED DEVICE =
+      ````````````````````````````
+      =       CREDENTIALS        =
+      =                          =
+      =    USERNAME : admin      =
+      =    PASSWORD : <removed>      =
+      ============================$
+!
+!
+!
+!
+line con 0
+ logging synchronous
+ login local
+!
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login local
+ transport input ssh
+!
+!
+!
+!
+end
+wr

@@ -1,0 +1,145 @@
+
+!
+! Last configuration change at 19:55:37 UTC Thu Nov 6 2025
+!
+version 17.12
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+!
+hostname RA
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+no ip domain lookup
+ip domain name team1.lab
+!
+!
+!
+!
+!
+!
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+vtp version 1
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint TP-self-signed-568977188
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-568977188
+ revocation-check none
+ rsakeypair TP-self-signed-568977188
+ hash sha256
+!
+!
+crypto pki certificate chain TP-self-signed-568977188
+ certificate self-signed 01
+  ! <certificate data removed>
+!
+!
+diagnostic bootup level minimal
+!
+license udi pid ISR4221/K9 sn <removed>
+memory free low-watermark processor 61631
+!
+spanning-tree extend system-id
+!
+enable secret 9 <removed>
+!
+username admin secret 9 <removed>
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ no ip address
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface Serial0/1/0
+ description LinkToEdgeR
+ ip address 20.0.255.254 255.255.255.252
+ ip ospf network point-to-point
+!
+interface Serial0/1/1
+ description LinkToR1
+ ip address 20.0.255.249 255.255.255.252
+ ip ospf network point-to-point
+!
+router ospf 6
+ router-id 6.6.6.6
+ area 1 virtual-link 4.4.4.4
+ redistribute rip metric 5
+ network 20.0.255.248 0.0.0.3 area 1
+!
+router rip
+ version 2
+ redistribute ospf 6 metric 5
+ network 20.0.0.0
+ no auto-summary
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+ip route 0.0.0.0 0.0.0.0 20.0.255.253
+ip ssh bulk-mode 131072
+!
+!
+!
+!
+!
+control-plane
+!
+banner motd ^CUnathorized access prohibited^C
+!
+line con 0
+ password 7 <removed>
+ login
+ transport input none
+ stopbits 1
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 14
+ login
+ transport input ssh
+!
+!
+!
+!
+!
+!
+!
+end

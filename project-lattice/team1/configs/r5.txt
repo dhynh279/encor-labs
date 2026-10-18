@@ -1,0 +1,137 @@
+!
+! Last configuration change at 21:00:40 UTC Thu Nov 6 2025
+!
+version 15.5
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname R5
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 <removed>
+!
+no aaa new-model
+ethernet lmi ce
+memory-size iomem 15
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+no ip domain lookup
+ip domain name team1.lab
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+license udi pid CISCO2901/K9 sn <removed>
+license accept end user agreement
+license boot module c2900 technology-package securityk9
+license boot module c2900 technology-package datak9
+!
+!
+username admin secret 5 <removed>
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 20.0.2.1 255.255.255.0
+!
+interface Loopback1
+ no ip address
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ description LinkToSwitch
+ ip address 20.0.255.229 255.255.255.240
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+!
+router ospf 5
+ router-id 1.1.1.1
+ area 5 stub no-summary
+ network 20.0.2.0 0.0.0.255 area 5
+ network 20.0.255.224 0.0.0.15 area 0
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+ip ssh version 2
+!
+!
+!
+!
+control-plane
+!
+!
+banner motd ^CUnathorized access prohibited^C
+!
+line con 0
+ password 7 <removed>
+ login
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+!
+scheduler allocate 20000 1000
+!
+end

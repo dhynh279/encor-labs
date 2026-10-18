@@ -1,0 +1,135 @@
+run
+
+!
+! Last configuration change at 19:37:20 UTC Tue Nov 4 2025
+!
+version 17.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+!
+hostname R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name team2.com
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint TP-self-signed-4015705826
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-4015705826
+ revocation-check none
+ rsakeypair TP-self-signed-4015705826
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+!
+crypto pki certificate chain TP-self-signed-4015705826
+ certificate self-signed 01
+  ! <certificate data removed>
+        quit
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  ! <certificate data removed>
+        quit
+!
+!
+license udi pid ISR4221/K9 sn <removed>
+memory free low-watermark processor 63109
+!
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+enable secret 9 <removed>
+!
+username admin privilege 15 secret 9 <removed>
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ ip address 10.0.50.253 255.255.255.252
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ ip address 10.0.50.245 255.255.255.252
+ negotiation auto
+!
+interface Serial0/1/0
+!
+interface Serial0/1/1
+!
+router ospf 50
+ network 10.0.50.244 0.0.0.3 area 99
+ network 10.0.50.252 0.0.0.3 area 99
+!
+ip http server
+ip http authentication local
+ip http secure-server
+ip forward-protocol nd
+!
+!
+!
+!
+!
+!
+control-plane
+!
+banner motd ^CAuthorized Access Only^C
+!
+line con 0
+ logging synchronous
+ transport input none
+ stopbits 1
+line aux 0
+line vty 0 4
+ exec-timeout 15 0
+ login local
+ transport input ssh
+line vty 5 14
+ login
+ transport input ssh
+!
+!
+!
+!
+!
+!
+!
+end

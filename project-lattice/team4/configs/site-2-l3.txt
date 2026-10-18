@@ -1,0 +1,69 @@
+en
+config t
+hostname SITE-2-L3SW1
+ip routing
+username admin privilege 15 secret <removed>
+no ip domain-lookup
+ip domain-name SITE-2.local
+crypto key generate rsa general-keys modulus 2048
+ip ssh version 2
+!
+interface g1/0/24
+no switchport
+description (UPLINK TO PE-4)
+ip address 192.168.255.230 255.255.255.252
+no shut
+exit
+!
+interface vlan 40
+ip address 192.168.32.1 255.255.224.0
+ip helper-address 192.168.255.229
+no shut
+!
+int lo0
+description (MANAGEMENT)
+ip address 192.168.128.9 255.255.255.240
+ip ospf 1 area 4
+exit
+!
+
+router ospf 1
+ router-id 41.41.41.41
+ log-adjacency-changes
+ network 192.168.255.228 0.0.0.3 area 4
+ network 192.168.32.0 0.0.31.255 area 4
+ network 192.168.128.0 0.0.0.15 area 4
+!
+ip default-gateway 192.168.255.229
+!
+banner motd $
+      ============================
+      = THIS IS A MANAGED DEVICE =
+      ````````````````````````````
+      =       CREDENTIALS        =
+      =                          =
+      =    USERNAME : admin      =
+      =    PASSWORD : <removed>      =
+      ============================$
+!
+!
+!
+!
+line con 0
+ logging synchronous
+ login local
+!
+line vty 0
+ login local
+ transport input ssh
+line vty 1 4
+ login local
+ transport input ssh
+line vty 5 15
+ login local
+ transport input ssh
+!
+!
+!
+!
+end

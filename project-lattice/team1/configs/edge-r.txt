@@ -1,0 +1,136 @@
+
+!
+! Last configuration change at 20:57:30 UTC Thu Nov 6 2025
+!
+version 17.12
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+!
+hostname EdgeR
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+no ip domain lookup
+ip domain name team1.lab
+!
+!
+!
+!
+!
+!
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+vtp version 1
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint TP-self-signed-3944459313
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3944459313
+ revocation-check none
+ rsakeypair TP-self-signed-3944459313
+ hash sha256
+!
+!
+crypto pki certificate chain TP-self-signed-3944459313
+ certificate self-signed 01
+  ! <certificate data removed>
+        quit
+!
+!
+diagnostic bootup level minimal
+!
+license udi pid ISR4221/K9 sn <removed>
+memory free low-watermark processor 63109
+!
+spanning-tree extend system-id
+!
+enable secret 9 <removed>
+!
+username admin secret 9 <removed>
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ description LinkToHub
+ ip address 8.8.9.102 255.255.255.252
+ negotiation auto
+!
+interface Serial0/1/0
+ description LinkToRA
+ ip address 20.0.255.253 255.255.255.252
+!
+interface Serial0/1/1
+ no ip address
+!
+router rip
+ version 2
+ network 8.0.0.0
+ network 20.0.0.0
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+ip ssh bulk-mode 131072
+!
+!
+!
+!
+!
+control-plane
+!
+banner motd ^CUnathorized access prohibited^C
+!
+line con 0
+ password 7 <removed>
+ login
+ transport input none
+ stopbits 1
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 14
+ login
+ transport input ssh
+!
+!
+!
+!
+!
+!
+!
+end

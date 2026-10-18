@@ -1,0 +1,24 @@
+ip dhcp pool DC-1
+network 192.168.64.0 255.255.224.0
+default router 192.168.64.10
+domain-name DC-1
+
+
+
+
+ip dhcp pool DC-2
+network 192.168.96.0 255.255.224.0
+default-router 192.168.96.10
+domain-name DC-2
+
+
+
+ip dhcp pool Site-1
+network 192.168.0.0 255.255.224.0
+default-router 192.168.0.10
+domain-name Site-1
+
+ip dhcp pool Site-2
+network 192.168.32.0 255.255.224.0
+default-router 192.168.32.10
+domain-name Site-2
