@@ -1,0 +1,331 @@
+
+!
+! Last configuration change at 02:20:07 UTC Wed Mar 10 1993 by Admin
+!
+version 15.0
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname DSW-1
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 <removed>
+!
+username Admin privilege 15 secret 5 <removed>
+username Guest privilege 0 secret 5 <removed>
+no aaa new-model
+switch 1 provision ws-c3750v2-48ps
+system mtu routing 1500
+vtp domain MAT-VLAN'S.COM
+vtp mode transparent
+ip routing
+ip domain-name DSW-1.edu
+ip dhcp excluded-address 10.10.10.225 10.10.10.227
+ip dhcp excluded-address 10.10.10.233 10.10.10.235
+ip dhcp excluded-address 10.10.10.241 10.10.10.243
+ip dhcp excluded-address 10.10.10.249 10.10.10.251
+ip dhcp excluded-address 10.10.10.230
+ip dhcp excluded-address 10.10.10.238
+ip dhcp excluded-address 10.10.10.246
+ip dhcp excluded-address 10.10.10.254
+!
+ip dhcp pool VLAN40-1
+ network 10.10.10.224 255.255.255.248
+ default-router 10.10.10.226
+ domain-name VLAN40-1.NET
+!
+ip dhcp pool VLAN30-1
+ network 10.10.10.232 255.255.255.248
+ default-router 10.10.10.234
+ domain-name VLAN30-1.NET
+!
+ip dhcp pool VLAN20-1
+ network 10.10.10.240 255.255.255.248
+ default-router 10.10.10.242
+ domain-name VLAN20-1.NET
+!
+ip dhcp pool VLAN10-1
+ network 10.10.10.248 255.255.255.248
+ default-router 10.10.10.250
+ domain-name VLAN10-1.NET
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-2559075712
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2559075712
+ revocation-check none
+ rsakeypair TP-self-signed-2559075712
+!
+!
+crypto pki certificate chain TP-self-signed-2559075712
+ certificate self-signed 01
+  ! <certificate data removed>
+        quit
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+vlan 10
+ name Email
+!
+vlan 20
+ name Radius
+!
+vlan 30
+ name SNMP
+!
+vlan 40
+ name Proxmox
+!
+vlan 99
+ name VOID
+!
+vlan 100
+ name Native
+!
+vlan 999
+!
+ip ssh version 2
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ description MNGT INTERFACES
+ ip address 201.10.0.241 255.255.255.240
+!
+interface Loopback1
+ description OSPF - INTERFACE -RID
+ ip address 10.1.1.1 255.255.255.255
+!
+interface FastEthernet1/0/1
+ description Connected to Core-1
+ no switchport
+ ip address dhcp
+ ip ospf 1 area 10
+!
+interface FastEthernet1/0/2
+ description Connection to Core-2
+ no switchport
+ ip address 200.10.0.249 255.255.255.252
+ ip ospf 1 area 10
+!
+interface FastEthernet1/0/3
+!
+interface FastEthernet1/0/4
+!
+interface FastEthernet1/0/5
+!
+interface FastEthernet1/0/6
+!
+interface FastEthernet1/0/7
+!
+interface FastEthernet1/0/8
+!
+interface FastEthernet1/0/9
+!
+interface FastEthernet1/0/10
+!
+interface FastEthernet1/0/11
+!
+interface FastEthernet1/0/12
+!
+interface FastEthernet1/0/13
+!
+interface FastEthernet1/0/14
+!
+interface FastEthernet1/0/15
+!
+interface FastEthernet1/0/16
+!
+interface FastEthernet1/0/17
+!
+interface FastEthernet1/0/18
+!
+interface FastEthernet1/0/19
+!
+interface FastEthernet1/0/20
+!
+interface FastEthernet1/0/21
+!
+interface FastEthernet1/0/22
+!
+interface FastEthernet1/0/23
+!
+interface FastEthernet1/0/24
+!
+interface FastEthernet1/0/25
+!
+interface FastEthernet1/0/26
+!
+interface FastEthernet1/0/27
+!
+interface FastEthernet1/0/28
+!
+interface FastEthernet1/0/29
+!
+interface FastEthernet1/0/30
+!
+interface FastEthernet1/0/31
+!
+interface FastEthernet1/0/32
+!
+interface FastEthernet1/0/33
+!
+interface FastEthernet1/0/34
+!
+interface FastEthernet1/0/35
+ description TO SW1 - VIXEN AREA 10
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 100
+ switchport mode trunk
+!
+interface FastEthernet1/0/36
+ description TO SW2 - VIXEN AREA 10
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 100
+ switchport mode trunk
+!
+interface FastEthernet1/0/37
+!
+interface FastEthernet1/0/38
+!
+interface FastEthernet1/0/39
+!
+interface FastEthernet1/0/40
+!
+interface FastEthernet1/0/41
+!
+interface FastEthernet1/0/42
+!
+interface FastEthernet1/0/43
+!
+interface FastEthernet1/0/44
+!
+interface FastEthernet1/0/45
+!
+interface FastEthernet1/0/46
+!
+interface FastEthernet1/0/47
+!
+interface FastEthernet1/0/48
+!
+interface GigabitEthernet1/0/1
+!
+interface GigabitEthernet1/0/2
+!
+interface GigabitEthernet1/0/3
+!
+interface GigabitEthernet1/0/4
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan10
+ description (VLAN 10 L-SVI)
+ ip address 10.10.10.249 255.255.255.248
+ standby version 2
+ standby 10 ip 10.10.10.250
+ standby 10 priority 105
+ standby 10 preempt
+!
+interface Vlan20
+ description (VLAN 20 L-SVI)
+ ip address 10.10.10.241 255.255.255.248
+ standby version 2
+ standby 20 ip 10.10.10.242
+ standby 20 priority 105
+ standby 20 preempt
+!
+interface Vlan30
+ description (VLAN 30 L-SVI)
+ ip address 10.10.10.233 255.255.255.248
+ standby version 2
+ standby 30 ip 10.10.10.234
+!
+interface Vlan40
+ description (VLAN 40 L-SVI)
+ ip address 10.10.10.225 255.255.255.248
+ standby version 2
+ standby 40 ip 10.10.10.226
+!
+router ospf 1
+ router-id 10.1.1.1
+ passive-interface FastEthernet1/0/34
+ passive-interface FastEthernet1/0/35
+ network 10.10.10.224 0.0.0.7 area 10
+ network 10.10.10.232 0.0.0.7 area 10
+ network 10.10.10.240 0.0.0.7 area 10
+ network 10.10.10.248 0.0.0.7 area 10
+ network 201.10.0.240 0.0.0.7 area 10
+!
+ip http server
+ip http secure-server
+!
+!
+!
+banner exec ^C
+          ======================================================================
+          =            !!YOU HAVE SUCCESSFULLY ACCESSED THIS DEVICE!!          =
+          =                                                                    =
+          =  If you have any question about this device, Please Contact the    =
+          =  administrator at (ddominguez-real792@mustangs.deltacollege.edu)   =
+          =                            Thankyou                                =
+          ======================================================================
+^C
+banner login ^C
+          ======================================================================
+          =   The Device you are about to access belongs the the distrebution  =
+          =  layer. If you wish to proceed, Please enter the appropate (ADMIN) =
+          = Credential. Alternitivly, you may use The (GUEST) credentails      =
+          =   Provided below to access this device with (VIEW only) Privilage. =
+          =                                                                    =
+          =                      (Guest Credentials)                           =
+          =                                                                    =
+          =                       Username : Guest                             =
+          =                       Password : <removed>                             =
+          =                                                                    =
+          ======================================================================
+^C
+banner motd ^C
+           =====================================================================
+           =            (Please Read BEFORE accessing this Deivce)             =
+           = You are about to access a Device that Belongs to the Distribution =
+           =layer. Once you proceed from this point onwards, your Connection   =
+           =information will be logged and kept in our records. Proceed with   =
+           =                          !!CAUTION!!                              =
+           =====================================================================
+^C
+!
+line con 0
+ logging synchronous
+ login local
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login local
+ transport input ssh
+!
+end

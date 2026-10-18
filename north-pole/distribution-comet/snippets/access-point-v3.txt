@@ -1,0 +1,237 @@
+
+!
+! Last configuration change at 05:46:58 UTC Mon Mar 15 1993
+version 15.3
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname NorthPole
+!
+!
+logging rate-limit console 9
+enable secret 5 <removed>
+!
+no aaa new-model
+no ip source-route
+no ip cef
+!
+!
+!
+!
+dot11 syslog
+!
+dot11 ssid A10-WIRELESS-1
+   vlan 13
+   authentication open
+   authentication key-management wpa version 2
+   mbssid guest-mode
+   wpa-psk ascii 7 <removed>
+!
+dot11 ssid A20-WIRELESS-1
+   vlan 14
+   authentication open
+   authentication key-management wpa version 2
+   mbssid guest-mode
+   wpa-psk ascii 7 <removed>
+!
+dot11 ssid A30-WIRELESS-1
+   vlan 15
+   authentication open
+   authentication key-management wpa version 2
+   mbssid guest-mode
+   wpa-psk ascii 7 <removed>
+!
+dot11 ssid CORE-WIRELESS-1
+   vlan 11
+   authentication open
+   authentication key-management wpa version 2
+   mbssid guest-mode
+   wpa-psk ascii 7 <removed>
+!
+dot11 ssid DISTRO-WIRELESS-1
+   vlan 12
+   authentication open
+   authentication key-management wpa version 2
+   mbssid guest-mode
+   wpa-psk ascii 7 <removed>
+!
+!
+dot11 wpa handshake timeout 1000
+!
+!
+!
+username Cisco password 7 <removed>
+!
+!
+bridge irb
+!
+!
+!
+interface Dot11Radio0
+ no ip address
+ !
+ encryption mode ciphers aes-ccm
+ !
+ encryption vlan 11 mode ciphers aes-ccm
+ !
+ encryption vlan 12 mode ciphers aes-ccm
+ !
+ encryption vlan 13 mode ciphers aes-ccm
+ !
+ encryption vlan 14 mode ciphers aes-ccm
+ !
+ encryption vlan 15 mode ciphers aes-ccm
+ !
+ ssid A10-WIRELESS-1
+ !
+ ssid A20-WIRELESS-1
+ !
+ ssid A30-WIRELESS-1
+ !
+ ssid CORE-WIRELESS-1
+ !
+ ssid DISTRO-WIRELESS-1
+ !
+ antenna gain 0
+ mbssid
+ speed  basic-1.0 basic-2.0 basic-5.5 basic-11.0 basic-6.0 basic-9.0 basic-12.0 basic-18.0 basic-24.0 basic-36.0 basic-48.0 basic-54.0 m0. m1. m2. m3. m4. m5. m6. m7. m8. m9. m10. m11. m12. m13. m14. m15.
+ packet retries 64 drop-packet
+ station-role root
+!
+interface Dot11Radio0.11
+ encapsulation dot1Q 11
+ bridge-group 11
+ bridge-group 11 subscriber-loop-control
+ bridge-group 11 spanning-disabled
+ bridge-group 11 block-unknown-source
+ no bridge-group 11 source-learning
+ no bridge-group 11 unicast-flooding
+!
+interface Dot11Radio0.12
+ encapsulation dot1Q 12
+ bridge-group 12
+ bridge-group 12 subscriber-loop-control
+ bridge-group 12 spanning-disabled
+ bridge-group 12 block-unknown-source
+ no bridge-group 12 source-learning
+ no bridge-group 12 unicast-flooding
+!
+interface Dot11Radio0.13
+ encapsulation dot1Q 13
+ bridge-group 13
+ bridge-group 13 subscriber-loop-control
+ bridge-group 13 spanning-disabled
+ bridge-group 13 block-unknown-source
+ no bridge-group 13 source-learning
+ no bridge-group 13 unicast-flooding
+!
+interface Dot11Radio0.14
+ encapsulation dot1Q 14
+ bridge-group 14
+ bridge-group 14 subscriber-loop-control
+ bridge-group 14 spanning-disabled
+ bridge-group 14 block-unknown-source
+ no bridge-group 14 source-learning
+ no bridge-group 14 unicast-flooding
+!
+interface Dot11Radio0.15
+ encapsulation dot1Q 15
+ bridge-group 15
+ bridge-group 15 subscriber-loop-control
+ bridge-group 15 spanning-disabled
+ bridge-group 15 block-unknown-source
+ no bridge-group 15 source-learning
+ no bridge-group 15 unicast-flooding
+!
+interface Dot11Radio0.200
+ encapsulation dot1Q 200 native
+ bridge-group 1
+ bridge-group 1 subscriber-loop-control
+ bridge-group 1 spanning-disabled
+ bridge-group 1 block-unknown-source
+ no bridge-group 1 source-learning
+ no bridge-group 1 unicast-flooding
+!
+interface Dot11Radio1
+ no ip address
+ shutdown
+ antenna gain 0
+ peakdetect
+ no dfs band block
+ packet retries 64 drop-packet
+ channel dfs
+ station-role root
+ bridge-group 1
+ bridge-group 1 subscriber-loop-control
+ bridge-group 1 spanning-disabled
+ bridge-group 1 block-unknown-source
+ no bridge-group 1 source-learning
+ no bridge-group 1 unicast-flooding
+!
+interface GigabitEthernet0
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0.11
+ encapsulation dot1Q 11
+ bridge-group 11
+ bridge-group 11 spanning-disabled
+ no bridge-group 11 source-learning
+!
+interface GigabitEthernet0.12
+ encapsulation dot1Q 12
+ bridge-group 12
+ bridge-group 12 spanning-disabled
+ no bridge-group 12 source-learning
+!
+interface GigabitEthernet0.13
+ encapsulation dot1Q 13
+ bridge-group 13
+ bridge-group 13 spanning-disabled
+ no bridge-group 13 source-learning
+!
+interface GigabitEthernet0.14
+ encapsulation dot1Q 14
+ bridge-group 14
+ bridge-group 14 spanning-disabled
+ no bridge-group 14 source-learning
+!
+interface GigabitEthernet0.15
+ encapsulation dot1Q 15
+ bridge-group 15
+ bridge-group 15 spanning-disabled
+ no bridge-group 15 source-learning
+!
+interface GigabitEthernet0.200
+ encapsulation dot1Q 200 native
+ bridge-group 1
+ bridge-group 1 spanning-disabled
+ no bridge-group 1 source-learning
+!
+interface BVI1
+ mac-address 006c.bc73.e9ec
+ ip address 202.10.0.2 255.255.255.0
+ ipv6 address dhcp
+ ipv6 address autoconfig
+ ipv6 enable
+!
+ip default-gateway 202.10.0.1
+ip forward-protocol nd
+ip http server
+no ip http secure-server
+ip http help-path http://www.cisco.com/warp/public/779/smbiz/prodconfig/help/eag
+!
+!
+bridge 1 route ip
+!
+!
+!
+line con 0
+line vty 0 4
+ login local
+ transport input all
+!
+end

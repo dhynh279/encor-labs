@@ -1,0 +1,140 @@
+!
+! Last configuration change at 20:06:59 UTC Tue Nov 25 2025
+!
+version 17.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+!
+hostname DNS
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+ip host email.blitzen.com 10.10.20.254
+ip host proxmox.blitzen.com 10.10.20.230
+ip host snmp.blitzen.com 10.10.20.238
+ip name-server 10.10.20.253
+ip domain name blitzen.com
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint TP-self-signed-1720221338
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1720221338
+ revocation-check none
+ rsakeypair TP-self-signed-1720221338
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+!
+crypto pki certificate chain TP-self-signed-1720221338
+ certificate self-signed 01
+  ! <certificate data removed>
+        quit
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  ! <certificate data removed>
+        quit
+!
+!
+license udi pid ISR4221/K9 sn <removed>
+memory free low-watermark processor 63109
+!
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+!
+username cisco privilege 15 secret 9 <removed>
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 10.10.20.9 255.255.255.240
+!
+interface GigabitEthernet0/0/0
+ ip address 10.10.20.253 255.255.255.248
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface Serial0/1/0
+ no ip address
+ shutdown
+!
+interface Serial0/1/1
+ no ip address
+ shutdown
+!
+ip http server
+ip http authentication local
+ip http secure-server
+ip forward-protocol nd
+ip dns server
+ip ssh version 2
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ login local
+ transport input none
+ stopbits 1
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 14
+ login
+ transport input ssh
+!
+!
+!
+!
+!
+!
+!
+end

@@ -1,0 +1,423 @@
+
+!
+! Last configuration change at 08:38:49 UTC Wed Nov 26 2025 by Admin
+!
+version 16.12
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service call-home
+platform punt-keepalive disable-kernel-core
+!
+hostname Distribution-L3-3
+!
+!
+vrf definition Mgmt-vrf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+enable secret 9 <removed>
+!
+no aaa new-model
+switch 1 provision c9300l-24t-4g
+!
+!
+!
+!
+call-home
+ ! If contact email address in call-home is configured as sch-smart-licensing@cisco.com
+ ! the email address configured in Cisco Smart License Portal will be used as contact email address to send SCH notifications.
+ contact-email-addr sch-smart-licensing@cisco.com
+ profile "CiscoTAC-1"
+  active
+  destination transport-method http
+  no destination transport-method email
+ip routing
+!
+ip domain name Distribution-L3-3.edu
+ip dhcp excluded-address 200.10.0.137
+ip dhcp excluded-address 200.10.0.137 200.10.0.140
+ip dhcp excluded-address 202.10.0.1 202.10.0.3
+ip dhcp excluded-address 202.10.0.1 202.10.0.5
+ip dhcp excluded-address 202.10.1.1 202.10.1.5
+ip dhcp excluded-address 202.10.2.1 202.10.2.5
+ip dhcp excluded-address 202.10.3.1 202.10.3.5
+ip dhcp excluded-address 202.10.4.1 202.10.4.5
+!
+ip dhcp pool CORE-WIRELESS-1
+ network 202.10.0.0 255.255.255.0
+ default-router 202.10.0.1
+ domain-name CORE-WIRELESS-1
+ dns-server 10.10.20.227
+!
+ip dhcp pool DISTRO-WIRELESS-1
+ network 202.10.1.0 255.255.255.0
+ default-router 202.10.1.1
+ domain-name DISTRO-WIRELESS-1
+ dns-server 10.10.20.227
+!
+ip dhcp pool A10-WIRELESS-1
+ network 202.10.2.0 255.255.255.0
+ default-router 202.10.2.1
+ domain-name A10-WIRELESS-1
+ dns-server 10.10.20.227
+!
+ip dhcp pool A20-WIRELESS-1
+ network 202.10.3.0 255.255.255.0
+ default-router 202.10.3.1
+ domain-name A20-WIRELESS-1
+ dns-server 10.10.20.227
+!
+ip dhcp pool A30-WIRELESS-1
+ network 202.10.4.0 255.255.255.0
+ default-router 202.10.4.1
+ domain-name A30-WIRELESS-1
+ dns-server 10.10.20.227
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+vtp domain MAT-VLAN'S.COM
+vtp mode off
+no device-tracking logging theft
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+crypto pki trustpoint TP-self-signed-2134881181
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2134881181
+ revocation-check none
+ rsakeypair TP-self-signed-2134881181
+!
+!
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  ! <certificate data removed>
+        quit
+crypto pki certificate chain TP-self-signed-2134881181
+ certificate self-signed 01
+  ! <certificate data removed>
+        quit
+!
+!
+license boot level network-advantage
+!
+!
+diagnostic bootup level minimal
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+memory free low-watermark processor 134335
+!
+username Admin privilege 15 secret 9 <removed>
+username Guest privilege 0 secret 9 <removed>
+!
+redundancy
+ mode sso
+!
+!
+!
+!
+!
+transceiver type all
+ monitoring
+!
+vlan 10
+ name Email-Server
+!
+vlan 11-15
+!
+vlan 20
+ name Radious-Server
+!
+vlan 30
+ name SNMP-SERVER
+!
+vlan 40
+ name PROXMOX-SERVER
+!
+vlan 99
+ name void
+!
+vlan 100
+ name Native
+!
+vlan 414,999,3900
+!
+!
+class-map match-any system-cpp-police-ewlc-control
+  description EWLC Control
+class-map match-any system-cpp-police-topology-control
+  description Topology control
+class-map match-any system-cpp-police-sw-forward
+  description Sw forwarding, L2 LVX data packets, LOGGING, Transit Traffic
+class-map match-any system-cpp-default
+  description EWLC Data, Inter FED Traffic
+class-map match-any system-cpp-police-sys-data
+  description Openflow, Exception, EGR Exception, NFL Sampled Data, RPF Failed
+class-map match-any system-cpp-police-punt-webauth
+  description Punt Webauth
+class-map match-any system-cpp-police-l2lvx-control
+  description L2 LVX control packets
+class-map match-any system-cpp-police-forus
+  description Forus Address resolution and Forus traffic
+class-map match-any system-cpp-police-multicast-end-station
+  description MCAST END STATION
+class-map match-any system-cpp-police-high-rate-app
+  description High Rate Applications
+class-map match-any system-cpp-police-multicast
+  description MCAST Data
+class-map match-any system-cpp-police-l2-control
+  description L2 control
+class-map match-any system-cpp-police-dot1x-auth
+  description DOT1X Auth
+class-map match-any system-cpp-police-data
+  description ICMP redirect, ICMP_GEN and BROADCAST
+class-map match-any system-cpp-police-stackwise-virt-control
+  description Stackwise Virtual OOB
+class-map match-any non-client-nrt-class
+class-map match-any system-cpp-police-routing-control
+  description Routing control and Low Latency
+class-map match-any system-cpp-police-protocol-snooping
+  description Protocol snooping
+class-map match-any system-cpp-police-dhcp-snooping
+  description DHCP snooping
+class-map match-any system-cpp-police-ios-routing
+  description L2 control, Topology control, Routing control, Low Latency
+class-map match-any system-cpp-police-system-critical
+  description System Critical and Gold Pkt
+class-map match-any system-cpp-police-ios-feature
+  description ICMPGEN,BROADCAST,ICMP,L2LVXCntrl,ProtoSnoop,PuntWebauth,MCASTData,Transit,DOT1XAuth,Swfwd,LOGGING,L2LVXData,ForusTraffic,ForusARP,McastEndStn,Openflow,Exception,EGRExcption,NflSampled,RpfFailed
+!
+policy-map system-cpp-policy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ description Management
+ ip address 201.10.0.243 255.255.255.240
+!
+interface Loopback1
+ description Router-ID
+ ip address 20.1.1.3 255.255.255.255
+!
+interface GigabitEthernet0/0
+ vrf forwarding Mgmt-vrf
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet1/0/1
+ description LinkToCoreLeaf1
+ no switchport
+ ip address dhcp
+ ip ospf 1 area 20
+!
+interface GigabitEthernet1/0/2
+ description LinkToCoreLeaf2
+ no switchport
+ ip address 200.10.0.229 255.255.255.252
+ ip ospf 1 area 20
+!
+interface GigabitEthernet1/0/3
+ description LinkToCoreLeaf3
+ no switchport
+ ip address dhcp
+ ip ospf 1 area 20
+!
+interface GigabitEthernet1/0/4
+ description LinkToCoreLeaf4
+ no switchport
+ ip address 200.10.0.221 255.255.255.252
+ ip ospf 1 area 20
+!
+interface GigabitEthernet1/0/5
+!
+interface GigabitEthernet1/0/6
+!
+interface GigabitEthernet1/0/7
+!
+interface GigabitEthernet1/0/8
+!
+interface GigabitEthernet1/0/9
+!
+interface GigabitEthernet1/0/10
+!
+interface GigabitEthernet1/0/11
+!
+interface GigabitEthernet1/0/12
+ switchport trunk allowed vlan 1,414,3900
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/13
+ switchport trunk allowed vlan 1,414,3900
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/14
+ switchport trunk allowed vlan 1,414,3900
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/15
+ switchport trunk allowed vlan 1,414,3900
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/16
+ switchport trunk native vlan 200
+ switchport mode trunk
+ spanning-tree portfast trunk
+!
+interface GigabitEthernet1/0/17
+!
+interface GigabitEthernet1/0/18
+!
+interface GigabitEthernet1/0/19
+!
+interface GigabitEthernet1/0/20
+!
+interface GigabitEthernet1/0/21
+!
+interface GigabitEthernet1/0/22
+!
+interface GigabitEthernet1/0/23
+ description LinkToDistribution-M-5
+ no switchport
+ ip address 200.10.0.161 255.255.255.252
+ ip ospf network point-to-point
+!
+interface GigabitEthernet1/0/24
+ description LinkToDistribution-M-6
+ no switchport
+ ip address 200.10.0.153 255.255.255.252
+ ip ospf network point-to-point
+!
+interface GigabitEthernet1/1/1
+!
+interface GigabitEthernet1/1/2
+!
+interface GigabitEthernet1/1/3
+!
+interface GigabitEthernet1/1/4
+!
+interface AppGigabitEthernet1/0/1
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan11
+ description CORE-WIRELESS-1 INTERFACES
+ ip address 202.10.0.1 255.255.255.0
+!
+interface Vlan12
+ description DISTRO-WIRELESS-1
+ ip address 202.10.1.1 255.255.255.0
+!
+interface Vlan13
+ description A10-WIRELESS-1
+ ip address 202.10.2.1 255.255.255.0
+!
+interface Vlan14
+ description A20-WIRELESS-1
+ ip address 202.10.3.1 255.255.255.0
+!
+interface Vlan15
+ description A30-WIRELESS-1
+ ip address 202.10.4.1 255.255.255.0
+!
+router ospf 1
+ router-id 20.1.1.3
+ network 10.10.20.224 0.0.0.31 area 20
+ network 200.10.0.128 0.0.0.15 area 20
+ network 200.10.0.152 0.0.0.3 area 20
+ network 200.10.0.160 0.0.0.3 area 20
+ network 201.10.0.240 0.0.0.15 area 20
+ network 202.10.0.0 0.0.0.255 area 20
+ network 202.10.1.0 0.0.0.255 area 20
+ network 202.10.2.0 0.0.0.255 area 20
+ network 202.10.3.0 0.0.0.255 area 20
+ network 202.10.4.0 0.0.0.255 area 20
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+ip ssh version 2
+!
+!
+!
+!
+!
+!
+control-plane
+ service-policy input system-cpp-policy
+!
+banner exec ^C
+          ======================================================================
+          =            !!YOU HAVE SUCCESSFULLY ACCESSED THIS DEVICE!!          =
+          =                                                                    =
+          =  If you have any question about this device, Please Contact the    =
+          =  administrator at (ddominguez-real792@mustangs.deltacollege.edu)   =
+          =                            Thankyou                                =
+          ======================================================================
+^C
+banner login ^C
+          ======================================================================
+          =   The Device you are about to access belongs the the distrebution  =
+          =  layer. If you wish to proceed, Please enter the appropate (ADMIN) =
+          = Credential. Alternitivly, you may use The (GUEST) credentails      =
+          =   Provided below to access this device with (VIEW only) Privilage. =
+          =                                                                    =
+          =                      (Guest Credentials)                           =
+          =                                                                    =
+          =                       Username : Guest                             =
+          =                       Password : <removed>                             =
+          =                                                                    =
+          ======================================================================
+^C
+banner motd ^C
+           =====================================================================
+           =            (Please Read BEFORE accessing this Deivce)             =
+           = You are about to access a Device that Belongs to the Distribution =
+           =layer. Once you proceed from this point onwards, your Connection   =
+           =information will be logged and kept in out records. Proceed with   =
+           =                          !!CAUTION!!                              =
+           =====================================================================
+^C
+!
+line con 0
+ logging synchronous
+ login local
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login local
+ transport input ssh
+!
+!
+!
+!
+!
+!
+end

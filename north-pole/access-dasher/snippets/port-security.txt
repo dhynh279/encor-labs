@@ -1,0 +1,19 @@
+description UNUSED
+switchport mode access
+switchport access vlan 500
+shutdown
+
+
+
+
+switchport mode trunk
+switchport trunk allowed vlan 90,110,120
+switchport trunk native vlan 200
+
+
+switchport port-security
+switchport port-security max 5
+switchport port-security mac-address sticky
+switchport port-security violation shutdown
+spanning-tree bpdu guard enable
+spanning-tree portfast edge

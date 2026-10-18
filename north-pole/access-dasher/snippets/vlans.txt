@@ -1,0 +1,10 @@
+vlan 90
+name Email_Server
+vlan 100
+name Radius_Server
+vlan 110
+name SNMP_Server
+vlan 120
+name Proxmox_Server
+vlan 500
+name VOID

@@ -1,0 +1,41 @@
+
+//"Add VLANS to all the Switches in the LAN"//
+!
+vlan 10
+name Servers
+vlan 67
+name Management
+vlan 117
+name Unused
+vlan 414
+name Native
+!
+------ DSW-5 ----------
+!
+//"This is the SVI that must be configured on DSW-5"//
+int vlan 10
+description SERVERS - SVI - L
+ ip address 10.10.20.230 255.255.255.128
+ standby version 2
+ standby 10 ip 10.10.20.129
+ standby 10 priority 105
+ standby 10 preempt
+!
+------ DSW-6 ----------
+!
+"This is the SVI that must be configured on DSW-6"
+ int vlan 10
+description SERVERS - SVI - R
+ ip address 10.10.20.231 255.255.255.128
+ standby version 2
+ standby 10 ip 10.10.20.129
+ standby 10 priority 100
+!
+-------------TRUNK PORTS----------
+//"Configs for the all trunk ports in the LAN"//
+!
+ int range ()
+ switchport mode trunk
+ switchport trunk allowed vlan 10,414,67
+ switchport trunk native vlan 414
+ spanning-tree portfast trunk

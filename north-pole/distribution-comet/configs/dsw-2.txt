@@ -1,0 +1,448 @@
+uilding configuration...
+
+!
+! Last configuration change at 03:28:41 UTC Fri Dec 5 2025 by Admin
+!
+version 16.12
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service call-home
+platform punt-keepalive disable-kernel-core
+platform management port rate-limt-enabled
+!
+hostname DSW-2
+!
+!
+vrf definition Mgmt-vrf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+enable secret 9 <removed>
+!
+no aaa new-model
+switch 1 provision ws-c3650-12x48uq
+!
+!
+!
+!
+call-home
+ ! If contact email address in call-home is configured as sch-smart-licensing@cisco.com
+ ! the email address configured in Cisco Smart License Portal will be used as contact email address to send SCH notifications.
+ contact-email-addr sch-smart-licensing@cisco.com
+ profile "CiscoTAC-1"
+  active
+  destination transport-method http
+  no destination transport-method email
+ip routing
+!
+!
+!
+!
+!
+ip domain name DSW-2.edu
+ip dhcp excluded-address 10.10.10.252 10.10.10.253
+ip dhcp excluded-address 10.10.10.249 10.10.10.251
+ip dhcp excluded-address 10.10.10.241 10.10.10.243
+ip dhcp excluded-address 10.10.10.244 10.10.10.245
+ip dhcp excluded-address 10.10.10.233 10.10.10.235
+ip dhcp excluded-address 10.10.10.236 10.10.10.237
+ip dhcp excluded-address 10.10.10.225 10.10.10.227
+ip dhcp excluded-address 10.10.10.228 10.10.10.229
+!
+ip dhcp pool VLAN10-2
+ network 10.10.10.248 255.255.255.248
+ default-router 10.10.10.250
+ domain-name VLAN10-2.net
+!
+ip dhcp pool VLAN20-2
+ network 10.10.10.240 255.255.255.248
+ default-router 10.10.10.242
+ domain-name VLAN20-2.net
+!
+ip dhcp pool VLAN30-2
+ network 10.10.10.232 255.255.255.248
+ default-router 10.10.10.234
+ domain-name VLAN30-2.net
+!
+ip dhcp pool VLAN40-2
+ network 10.10.10.224 255.255.255.248
+ default-router 10.10.10.226
+ domain-name VLAN40-2.net
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+vtp domain MAT-VLAN'S.COM
+vtp mode transparent
+no device-tracking logging theft
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+crypto pki trustpoint TP-self-signed-1478072585
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1478072585
+ revocation-check none
+ rsakeypair TP-self-signed-1478072585
+!
+!
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  ! <certificate data removed>
+        quit
+crypto pki certificate chain TP-self-signed-1478072585
+ certificate self-signed 01
+  ! <certificate data removed>
+        quit
+!
+!
+license boot level ipbasek9
+!
+!
+diagnostic bootup level minimal
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+memory free low-watermark processor 79467
+!
+username Admin privilege 15 secret 9 <removed>
+username Guest privilege 0 secret 9 <removed>
+!
+redundancy
+ mode sso
+!
+!
+!
+!
+!
+transceiver type all
+ monitoring
+!
+vlan 10
+ name Email
+!
+vlan 20
+ name Radius
+!
+vlan 30
+ name SNMP
+!
+vlan 40
+ name Proxmox
+!
+vlan 99
+ name VOID
+!
+vlan 100
+ name Native
+!
+vlan 999
+!
+!
+class-map match-any system-cpp-police-topology-control
+  description Topology control
+class-map match-any system-cpp-police-sw-forward
+  description Sw forwarding, L2 LVX data, LOGGING
+class-map match-any system-cpp-default
+  description EWLC control, EWLC data, Inter FED
+class-map match-any system-cpp-police-sys-data
+  description Learning cache ovfl, High Rate App, Exception, EGR Exception, NFL SAMPLED DATA, RPF Failed
+class-map match-any system-cpp-police-punt-webauth
+  description Punt Webauth
+class-map match-any system-cpp-police-l2lvx-control
+  description L2 LVX control packets
+class-map match-any system-cpp-police-forus
+  description Forus Address resolution and Forus traffic
+class-map match-any system-cpp-police-multicast-end-station
+  description MCAST END STATION
+class-map match-any system-cpp-police-multicast
+  description Transit Traffic and MCAST Data
+class-map match-any system-cpp-police-l2-control
+  description L2 control
+class-map match-any system-cpp-police-dot1x-auth
+  description DOT1X Auth
+class-map match-any system-cpp-police-data
+  description ICMP redirect, ICMP_GEN and BROADCAST
+class-map match-any system-cpp-police-stackwise-virt-control
+  description Stackwise Virtual
+class-map match-any non-client-nrt-class
+class-map match-any system-cpp-police-routing-control
+  description Routing control and Low Latency
+class-map match-any system-cpp-police-protocol-snooping
+  description Protocol snooping
+class-map match-any system-cpp-police-dhcp-snooping
+  description DHCP snooping
+class-map match-any system-cpp-police-system-critical
+  description System Critical and Gold Pkt
+!
+policy-map system-cpp-policy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ description Mgnt INTERFACE
+ ip address 201.10.0.242 255.255.255.240
+!
+interface Loopback1
+ description (Router ID Keepalive)
+ ip address 10.1.1.2 255.255.255.255
+!
+interface GigabitEthernet0/0
+ vrf forwarding Mgmt-vrf
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet1/0/1
+ description Connection to Core-1
+ no switchport
+ ip address dhcp
+ ip ospf 1 area 10
+!
+interface GigabitEthernet1/0/2
+ description Connetion to Core-2
+ no switchport
+ ip address 200.10.0.241 255.255.255.252
+ ip ospf 1 area 10
+!
+interface GigabitEthernet1/0/3
+ description Connection to Core-3
+ no switchport
+ ip address dhcp
+ ip ospf 1 area 10
+!
+interface GigabitEthernet1/0/4
+!
+interface GigabitEthernet1/0/5
+!
+interface GigabitEthernet1/0/6
+!
+interface GigabitEthernet1/0/7
+!
+interface GigabitEthernet1/0/8
+!
+interface GigabitEthernet1/0/9
+!
+interface GigabitEthernet1/0/10
+!
+interface GigabitEthernet1/0/11
+!
+interface GigabitEthernet1/0/12
+!
+interface GigabitEthernet1/0/13
+!
+interface GigabitEthernet1/0/14
+!
+interface GigabitEthernet1/0/15
+!
+interface GigabitEthernet1/0/16
+!
+interface GigabitEthernet1/0/17
+!
+interface GigabitEthernet1/0/18
+!
+interface GigabitEthernet1/0/19
+!
+interface GigabitEthernet1/0/20
+!
+interface GigabitEthernet1/0/21
+!
+interface GigabitEthernet1/0/22
+!
+interface GigabitEthernet1/0/23
+!
+interface GigabitEthernet1/0/24
+!
+interface GigabitEthernet1/0/25
+!
+interface GigabitEthernet1/0/26
+!
+interface GigabitEthernet1/0/27
+!
+interface GigabitEthernet1/0/28
+!
+interface GigabitEthernet1/0/29
+!
+interface GigabitEthernet1/0/30
+!
+interface GigabitEthernet1/0/31
+!
+interface GigabitEthernet1/0/32
+!
+interface GigabitEthernet1/0/33
+!
+interface GigabitEthernet1/0/34
+!
+interface GigabitEthernet1/0/35
+ description (TO VIXEN TEAM -AREA10)
+ switchport trunk native vlan 100
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/36
+ description (TO VIXEN TEAM -AREA10)
+ switchport trunk native vlan 100
+ switchport mode trunk
+!
+interface TenGigabitEthernet1/0/37
+!
+interface TenGigabitEthernet1/0/38
+!
+interface TenGigabitEthernet1/0/39
+!
+interface TenGigabitEthernet1/0/40
+!
+interface TenGigabitEthernet1/0/41
+!
+interface TenGigabitEthernet1/0/42
+!
+interface TenGigabitEthernet1/0/43
+!
+interface TenGigabitEthernet1/0/44
+!
+interface TenGigabitEthernet1/0/45
+!
+interface TenGigabitEthernet1/0/46
+!
+interface TenGigabitEthernet1/0/47
+!
+interface TenGigabitEthernet1/0/48
+!
+interface TenGigabitEthernet1/1/1
+!
+interface TenGigabitEthernet1/1/2
+!
+interface TenGigabitEthernet1/1/3
+!
+interface TenGigabitEthernet1/1/4
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ description (VLAN 10 R-SVI)
+ mac-address 00e0.f967.5501
+ ip address 10.10.10.251 255.255.255.248
+ standby version 2
+ standby 10 ip 10.10.10.250
+!
+interface Vlan20
+ description (VLAN 20 R-SVI)
+ mac-address 00e0.f967.5502
+ ip address 10.10.10.243 255.255.255.248
+ standby version 2
+ standby 20 ip 10.10.10.242
+!
+interface Vlan30
+ description (VLAN 30 R-SVI)
+ mac-address 00e0.f967.5503
+ ip address 10.10.10.235 255.255.255.248
+ standby version 2
+ standby 30 ip 10.10.10.234
+ standby 30 priority 105
+ standby 30 preempt
+!
+interface Vlan40
+ description (VLAN 40 R-SVI)
+ mac-address 00e0.f967.5504
+ ip address 10.10.10.227 255.255.255.248
+ standby version 2
+ standby 40 ip 10.10.10.226
+ standby 40 priority 105
+ standby 40 preempt
+!
+router ospf 1
+ router-id 10.1.1.2
+ passive-interface GigabitEthernet1/0/35
+ passive-interface GigabitEthernet1/0/36
+ network 10.10.10.224 0.0.0.7 area 10
+ network 10.10.10.232 0.0.0.7 area 10
+ network 10.10.10.240 0.0.0.7 area 10
+ network 10.10.10.248 0.0.0.7 area 10
+ network 201.10.0.240 0.0.0.15 area 10
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+ip ssh version 2
+!
+!
+!
+!
+!
+control-plane
+ service-policy input system-cpp-policy
+!
+banner exec ^C
+          ======================================================================
+          =            !!YOU HAVE SUCCESSFULLY ACCESSED THIS DEVICE!!          =
+          =                                                                    =
+          =  If you have any question about this device, Please Contact the    =
+          =  administrator at (ddominguez-real792@mustangs.deltacollege.edu)   =
+          =                            Thankyou                                =
+          ======================================================================
+^C
+banner login ^C
+          ======================================================================
+          =   The Device you are about to access belongs the the distrebution  =
+          =  layer. If you wish to proceed, Please enter the appropate (ADMIN) =
+          = Credential. Alternitivly, you may use The (GUEST) credentails      =
+          =   Provided below to access this device with (VIEW only) Privilage. =
+          =                                                                    =
+          =                      (Guest Credentials)                           =
+          =                                                                    =
+          =                       Username : Guest                             =
+          =                       Password : <removed>                             =
+          =                                                                    =
+          ======================================================================
+^C
+banner motd ^C
+           =====================================================================
+           =            (Please Read BEFORE accessing this Deivce)             =
+           = You are about to access a Device that Belongs to the Distribution =
+           =layer. Once you proceed from this point onwards, your Connection   =
+           =information will be logged and kept in our records. Proceed with   =
+           =                          !!CAUTION!!                              =
+           =====================================================================
+^C
+!
+line con 0
+ logging synchronous
+ login local
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login local
+ transport input ssh
+!
+!
+!
+!
+!
+!
+!
+end

@@ -1,0 +1,469 @@
+
+version 15.0
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname RDLPH-CL-2
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 9 <removed>
+!
+no aaa new-model
+switch 1 provision ws-c3750v2-48ps
+system mtu routing 1500
+ip routing
+no ip domain-lookup
+ip domain-name RUDOLPH-LEAF-2.com
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-3946709888
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3946709888
+ revocation-check none
+ rsakeypair TP-self-signed-3946709888
+!
+!
+crypto pki certificate chain TP-self-signed-3946709888
+ certificate self-signed 01
+  ! <certificate data removed>
+!
+!
+!
+!
+!
+no errdisable detect cause gbic-invalid
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+ip ssh version 2
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet1/0/1
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/2
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/3
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/4
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/5
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/6
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/7
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/8
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/9
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/10
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/11
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/12
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/13
+ description TO_CORE1
+ no switchport
+ ip address 100.10.0.250 255.255.255.252
+!
+interface FastEthernet1/0/14
+ description TO_CORE2
+ no switchport
+ ip address 100.10.0.230 255.255.255.252
+!
+interface FastEthernet1/0/15
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/16
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/17
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/18
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/19
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/20
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/21
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/22
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/23
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/24
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/25
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/26
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/27
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/28
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/29
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/30
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/31
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/32
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/33
+ description TO_DSW2
+ no switchport
+ ip address 200.10.0.242 255.255.255.252
+ ip ospf 8008 area 10
+!
+interface FastEthernet1/0/34
+ description TO_DSW4
+ no switchport
+ ip address 200.10.0.198 255.255.255.252
+ ip ospf 8008 area 20
+!
+interface FastEthernet1/0/35
+ description TO_DSW3
+ no switchport
+ ip address 200.10.0.230 255.255.255.252
+ ip ospf 8008 area 20
+!
+interface FastEthernet1/0/36
+ description TO_DSW1
+ no switchport
+ ip address 200.10.0.250 255.255.255.252
+ ip ospf 8008 area 10
+!
+interface FastEthernet1/0/37
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/38
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/39
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/40
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/41
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/42
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/43
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/44
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/45
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/46
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/47
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface FastEthernet1/0/48
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport port-security maximum 4
+ switchport port-security
+ shutdown
+!
+interface GigabitEthernet1/0/1
+ description LINK to RUDOLPH-CORE-1
+ no switchport
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/0/2
+ description LINK to RUDOLPH-CORE-2
+ no switchport
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/0/3
+ shutdown
+!
+interface GigabitEthernet1/0/4
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 8008
+ router-id 1.10.1.4
+ network 100.10.0.228 0.0.0.3 area 0
+ network 100.10.0.248 0.0.0.3 area 0
+!
+ip http server
+ip http secure-server
+!
+!
+!
+!
+line con 0
+line vty 0 4
+ login
+line vty 5 15
+ login
+!
+end
