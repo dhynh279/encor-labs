@@ -4,6 +4,10 @@ Blueprint 3.1.a–c · Platform: Packet Tracer, 3× 3650-24PS · Completed 2026-
 
 ## Topology
 
+![Physical topology](topology/lab01-physical.png)
+
+![Logical topology](topology/lab01-logical.png)
+
 | Link | Ports | Role |
 |---|---|---|
 | SW1 ↔ SW2 | Gi1/0/1-2 ↔ Gi1/0/1-2 | LACP Po1, 802.1Q trunk |
