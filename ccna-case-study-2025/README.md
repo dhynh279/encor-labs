@@ -18,32 +18,22 @@ A four-site company network ("DDH Networks") connected through an ISP. I designe
 ## Topology
 
 ```mermaid
-flowchart TB
-    WEB["Web server (IIS)<br/>10.0.0.2 ⇄ 64.100.231.1"]
-    ISP["ISP<br/>static NAT"]
-    COL["COLORADO — HQ<br/>OSPF + RIP · PAT · NTP master"]
-    GE["GERMANY — branch<br/>RIP · PAT · GERMANY-ACL"]
-    BG["BELGUM — services<br/>OSPF"]
-    LM["LIMA — branch<br/>OSPF"]
-    SW["COLO-LAN switch<br/>port-security · mgmt VLAN 401"]
-    VL["VLAN 100 · 172.26.4.0/24<br/>VLAN 200 · 172.26.5.0/24<br/>VLAN 300 · 172.26.6.0/24"]
-    GLAN["Germany LAN<br/>172.26.0.0/22"]
-    LLAN["Lima LAN<br/>172.26.7.0/26"]
-    SRV["Syslog 172.26.255.238<br/>SNMP 172.26.255.242"]
+flowchart LR
+    subgraph OSPF["OSPF area 0"]
+        LM["LIMA<br/>branch LAN<br/>172.26.7.0/26"]
+        BG["BELGUM<br/>Syslog + SNMP servers"]
+        COL["COLORADO · HQ<br/>VLANs 100 / 200 / 300<br/>172.26.4–6.0/24<br/>OSPF ⇄ RIP"]
+    end
+    ISP["ISP<br/>web server<br/>static NAT → 64.100.231.1"]
+    GE["GERMANY<br/>branch LAN<br/>172.26.0.0/22<br/>GERMANY-ACL"]
 
-    WEB --- ISP
-    ISP ---|"209.165.200.0/30"| COL
-    COL ---|"OSPF · .248/30"| BG
-    BG ---|"OSPF · .252/30"| LM
-    BG --- SRV
-    LM --- LLAN
-    COL ---|"trunk"| SW --- VL
-    ISP ---|"209.165.100.0/30"| GE
-    COL -.-|"GRE + IPsec · RIPv2"| GE
-    GE --- GLAN
+    LM --- BG --- COL
+    COL ---|"PAT"| ISP
+    ISP ---|"PAT"| GE
+    COL -.-|"GRE + IPsec tunnel · RIPv2"| GE
 ```
 
-Inside the company everything is `172.26.0.0/16`. The dashed line is the GRE tunnel (`1.1.1.0/30`), which runs across the ISP. Colorado, Belgum and Lima run OSPF area 0. Germany is only reachable across the internet, so it joins over a **GRE tunnel encrypted with IPsec**, running RIPv2 inside the tunnel. Colorado redistributes between the two protocols.
+Everything inside the company is `172.26.0.0/16`. Lima, Belgum and Colorado run OSPF area 0 over serial links. Germany can only be reached across the internet, so it joins through a **GRE tunnel encrypted with IPsec** (the dashed line, `1.1.1.0/30`), running RIPv2 inside the tunnel. Colorado redistributes between OSPF and RIP. Both edge routers use PAT to reach the ISP. Per-interface addressing is in [docs/addressing.md](docs/addressing.md).
 
 ## Phase 1 — Addressing (VLSM)
 
