@@ -1,23 +1,95 @@
-! Lab 02 — R1 Stage 1 config as applied (Packet Tracer ISR4331)
-! Addressing only; OSPF added in Stage 2. Replace with final show run when the lab is done.
+! Lab 02 — R1 final running-config (Packet Tracer ISR4331)
+! Captured 2026-10-17 after Stages 1–5 (break/fix faults restored).
+!
+version 15.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
 !
 hostname R1
-no ip domain-lookup
+!
+no ip cef
 ipv6 unicast-routing
+!
+no ipv6 cef
+!
+no ip domain-lookup
+!
+spanning-tree mode pvst
 !
 interface Loopback0
  ip address 1.1.1.1 255.255.255.255
+ ip ospf network point-to-point
+ ip ospf priority 1
+!
 interface Loopback1
  ip address 172.16.0.1 255.255.255.0
+ ip ospf network point-to-point
+ ip ospf priority 1
+!
 interface Loopback2
  ip address 172.16.1.1 255.255.255.0
+ ip ospf network point-to-point
+ ip ospf priority 1
+!
 interface Loopback3
  ip address 172.16.2.1 255.255.255.0
+ ip ospf network point-to-point
+ ip ospf priority 1
+!
 interface Loopback4
  ip address 172.16.3.1 255.255.255.0
+ ip ospf network point-to-point
+ ip ospf priority 1
 !
 interface GigabitEthernet0/0/0
  description to R2
  ip address 10.0.12.1 255.255.255.252
- ipv6 address 2001:db8:12::1/64
- no shutdown
+ ip ospf network point-to-point
+ ip ospf priority 1
+ duplex auto
+ speed auto
+ ipv6 address 2001:DB8:12::1/64
+ ipv6 ospf network point-to-point
+ ipv6 ospf 1 area 1
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface GigabitEthernet0/0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+router ospf 1
+ router-id 1.1.1.1
+ log-adjacency-changes
+ passive-interface Loopback0
+ passive-interface Loopback1
+ passive-interface Loopback2
+ passive-interface Loopback3
+ passive-interface Loopback4
+ network 1.1.1.1 0.0.0.0 area 1
+ network 172.16.0.0 0.0.3.255 area 1
+ network 10.0.12.0 0.0.0.3 area 1
+!
+ipv6 router ospf 1
+ router-id 1.1.1.1
+ log-adjacency-changes
+!
+ip classless
+!
+ip flow-export version 9
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+end
