@@ -30,7 +30,7 @@ Lower-numbered router gets .1 / ::1. Cabling: copper cross-over.
 | # | Stage | Status |
 |---|---|---|
 | 1 | Build + addressing | Done — all neighbor pings successful (IPv4 + IPv6) |
-| 2 | OSPFv2: point-to-point links, passive loopbacks, R1 Lo1–4 as /24 | In progress — routes verified on R1/R2/R4 |
+| 2 | OSPFv2: point-to-point links, passive loopbacks, R1 Lo1–4 as /24 | Done — 9 routes on R4, extended ping + neighbors verified |
 | 3 | R2 `area 1 range 172.16.0.0 255.255.252.0`; R3 `area 2 filter-list prefix` deny 172.16.2.0/24 in | Summary done; filter deferred to GNS3/CML (not in PT) |
 | 4 | OSPFv3 | — |
 | 5 | Break/fix: hello mismatch, MTU (EXSTART), area mismatch | — |
