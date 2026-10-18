@@ -30,7 +30,7 @@ Lower-numbered router gets .1 / ::1. Cabling: copper cross-over.
 | # | Stage | Status |
 |---|---|---|
 | 1 | Build + addressing | Done — all neighbor pings successful (IPv4 + IPv6) |
-| 2 | OSPFv2: point-to-point links, passive loopbacks, R1 Lo1–4 as /24 | Next |
+| 2 | OSPFv2: point-to-point links, passive loopbacks, R1 Lo1–4 as /24 | In progress — routes verified on R1/R2/R4 |
 | 3 | R2 `area 1 range 172.16.0.0 255.255.252.0`; R3 `area 2 filter-list prefix` deny 172.16.2.0/24 in | — |
 | 4 | OSPFv3 | — |
 | 5 | Break/fix: hello mismatch, MTU (EXSTART), area mismatch | — |
@@ -46,10 +46,40 @@ Lower-numbered router gets .1 / ::1. Cabling: copper cross-over.
 
 Remote loopbacks not reachable yet — expected until Stage 2.
 
+## Stage 2 verification
+
+R4 `show ip route ospf` (baseline for Stage 3) — 9 routes, all O IA via 10.0.34.1:
+
+| Prefix | Cost |
+|---|---|
+| 1.1.1.1/32 | 4 |
+| 2.2.2.2/32 | 3 |
+| 3.3.3.3/32 | 2 |
+| 10.0.12.0/30 | 3 |
+| 10.0.23.0/30 | 2 |
+| 172.16.0.0/24, 172.16.1.0/24, 172.16.2.0/24, 172.16.3.0/24 | 4 |
+
+Header: `172.16.0.0/24 is subnetted, 4 subnets` (one mask).
+
+R1 `show ip ospf database`, area 1: Router LSAs from 1.1.1.1 and 2.2.2.2; Summary LSAs from 2.2.2.2 for 2.2.2.2, 3.3.3.3, 4.4.4.4, 10.0.23.0, 10.0.34.0.
+
+O vs O IA: on R2 (ABR, areas 1 + 0) area 1 and area 0 routes are **O**, only area 2 routes are **O IA**. On R1, **2.2.2.2 is O IA** even though R2 is the direct neighbor — R2's Lo0 is in area 0, so R1 learns it from a Type 3 Summary LSA.
+
+## Issues hit during Stage 2
+
+1. **R2 Lo0 missing from OSPF.** No `network 2.2.2.2 0.0.0.0 area 0` → R4 had 8 routes, no 2.2.2.2. `passive-interface Loopback0` did nothing because the interface wasn't in OSPF.
+2. **R1 Lo2 advertised as 172.16.1.1/32.** Missing `ip ospf network point-to-point` on Lo2 only. OSPF advertises loopbacks as /32 host routes by default regardless of configured mask. R4's header read `172.16.0.0/16 is variably subnetted, 4 subnets, 2 masks` until fixed.
+3. **"Variably subnetted" under 10.0.0.0/8 with all /30 links** — the extra mask is the **L** local /32 for the router's own interface address, not an error.
+
 ## Packet Tracer quirks
 - If `ospfv3 1 ipv6 area X` is rejected, use `ipv6 router ospf 1` + `ipv6 ospf 1 area X`.
 - If `ip ospf network point-to-point` is rejected on loopbacks, skip it — the /32s still summarize under the /22.
+- Changing a loopback's network type may not re-advertise until `clear ip ospf process` on that router.
+- **After `clear ip ospf process`, R1 showed neighbor FULL but its LSDB held only its own Router LSA and no OSPF routes.** Impossible on real IOS (FULL = LSDBs synced). Fix: `shutdown` / `no shutdown` on the link → clean adjacency, LSAs and routes back.
+- `show running-config` prints `ip ospf priority 1` on every interface with an `ip ospf` command — that's PT showing the default.
+- Inline `ping X source Y` not supported — use interactive extended `ping`.
 
 ## Next
-- Stage 2 OSPFv2; baseline `show ip route ospf` on R4 (expect O IA for all area 0/1 prefixes) before Stage 3.
+- Finish Stage 2: extended ping R1 → 4.4.4.4 sourced 1.1.1.1; `show ip ospf neighbor` on R2 and R3.
+- Recall questions still open: why 1.1.1.1 costs 4 on R4; why 3.3.3.3 costs 2 not 1; why GE costs the same as FE and how to fix it.
 - Save final `show run` from each router to `configs/R1.txt`–`R4.txt` and the `.pkt` to this folder.
