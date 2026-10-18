@@ -1,0 +1,159 @@
+version 17.12
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+!
+hostname LIMA
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+no ip domain lookup
+ip domain name LIMA.com
+!
+!
+!
+!
+!
+!
+ip dhcp excluded-address 172.26.7.1 172.26.7.10
+!
+ip dhcp pool LIMA
+ network 172.26.7.0 255.255.255.192
+ default-router 172.26.7.1
+ domain-name LIMA.com
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+vtp version 1
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint TP-self-signed-2707455598
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2707455598
+ revocation-check none
+ rsakeypair TP-self-signed-2707455598
+ hash sha256
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+ hash sha256
+!
+!
+crypto pki certificate chain TP-self-signed-2707455598
+ certificate self-signed 01
+  ! <certificate data removed>
+        quit
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  ! <certificate data removed>
+        quit
+!
+!
+diagnostic bootup level minimal
+!
+license udi pid ISR4221/K9 sn <removed>
+memory free low-watermark processor 61631
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+enable secret 9 <removed>
+!
+username admin secret 9 <removed>
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 30.30.30.30 255.255.255.255
+!
+interface GigabitEthernet0/0/0
+ no shutdown
+ description UPLINK
+ ip address 172.26.7.1 255.255.255.192
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface Serial0/1/0
+ no shutdown
+ description LINK TO BELGUM
+ ip address 172.26.255.254 255.255.255.252
+!
+interface Serial0/1/1
+ no ip address
+ shutdown
+!
+router ospf 50
+ router-id 30.30.30.30
+ network 172.26.7.0 0.0.0.255 area 0
+ network 172.26.255.252 0.0.0.3 area 0
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+ip ssh bulk-mode 131072
+ip ssh time-out 45
+!
+!
+logging host 172.26.255.238
+!
+!
+!
+control-plane
+!
+banner motd ^CAUTHROZIED ACCESS ONLY^C
+!
+line con 0
+ password 7 <removed>
+ logging synchronous
+ transport input none
+ stopbits 1
+line aux 0
+line vty 0 4
+ password 7 <removed>
+ login local
+ transport input ssh
+line vty 5 15
+ password 7 <removed>
+ login local
+ transport input ssh
+!
+ntp server 172.26.255.245
+!
+!
+!
+!
+!
+!
+end

@@ -1,0 +1,153 @@
+version 17.12
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+!
+hostname BELGUM
+!
+boot-start-marker
+boot config bootflash:lice
+boot-end-marker
+!
+!
+no aaa new-model
+!
+no ip domain lookup
+ip domain name BELGUM.com
+!
+!
+!
+!
+!
+!
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+vtp version 1
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint TP-self-signed-818350299
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-818350299
+ revocation-check none
+ rsakeypair TP-self-signed-818350299
+ hash sha256
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+ hash sha256
+!
+!
+crypto pki certificate chain TP-self-signed-818350299
+ certificate self-signed 01
+  ! <certificate data removed>
+        quit
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  ! <certificate data removed>
+        quit
+!
+!
+diagnostic bootup level minimal
+!
+license udi pid ISR4221/K9 sn <removed>
+memory free low-watermark processor 61631
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+enable secret 9 <removed>
+!
+username admin secret 9 <removed>
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 20.20.20.20 255.255.255.255
+!
+interface GigabitEthernet0/0/0
+ description SYSLOG SERVER
+ ip address 172.26.255.237 255.255.255.252
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ description SNMP SERVER
+ ip address 172.26.255.241 255.255.255.252
+ negotiation auto
+!
+interface Serial0/1/0
+ description LINK TO COLORADO
+ ip address 172.26.255.249 255.255.255.252
+!
+interface Serial0/1/1
+ description LINK TO LIMA
+ ip address 172.26.255.253 255.255.255.252
+!
+router ospf 50
+ router-id 20.20.20.20
+ network 172.26.255.236 0.0.0.3 area 0
+ network 172.26.255.240 0.0.0.3 area 0
+ network 172.26.255.248 0.0.0.3 area 0
+ network 172.26.255.252 0.0.0.3 area 0
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+ip ssh bulk-mode 131072
+ip ssh time-out 45
+!
+!
+!
+!
+!
+control-plane
+!
+banner motd ^CAUTHORIZED ACCESS ONLY^C
+!
+line con 0
+ password 7 <removed>
+ logging synchronous
+ transport input none
+ stopbits 1
+line aux 0
+line vty 0 4
+ password 7 <removed>
+ login local
+ transport input ssh
+line vty 5 15
+ password 7 <removed>
+ login local
+ transport input ssh
+!
+ntp server 172.26.255.245
+!
+!
+!
+!
+!
+!
+end

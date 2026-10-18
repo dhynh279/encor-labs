@@ -24,3 +24,4 @@ Each `labNN-*/` folder holds the `.pkt` / topology file, `configs/<device>.txt` 
 | [project-meridian](project-meridian) | Five-site IPv6-only WAN: OSPFv3 / RIPng / BGP, HSRP, EtherChannel, GRE, IPsec | Real hardware (ISR 4221, Cat 1000) + Packet Tracer |
 | [north-pole](north-pole) | Three-tier campus: multi-area OSPF, BFD, HSRP, Meraki MS core leafs, wireless | Real hardware (Cat 9300L, Meraki MS) + Packet Tracer |
 | [project-lattice](project-lattice) | Multi-domain WAN over an MPLS hub: OSPF area types + virtual links, EIGRP, RIP, redistribution, ASA | Real hardware (ISR 4221, Catalyst L3, ASA) + Packet Tracer |
+| [ccna-case-study-2025](ccna-case-study-2025) | **Solo case study, presented:** VLSM, OSPF + RIP redistribution, GRE over IPsec, NAT/PAT, ACLs, DHCP, VLANs, NTP/Syslog/SNMP, 50-test verification | Real hardware (ISR 4221, Cat 1000) + Packet Tracer |

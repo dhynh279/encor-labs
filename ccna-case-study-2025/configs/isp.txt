@@ -1,0 +1,133 @@
+version 17.12
+no service timestamps debug
+no service timestamps log
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+!
+hostname ISP
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+vtp version 1
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint TP-self-signed-4015705826
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-4015705826
+ revocation-check none
+ rsakeypair TP-self-signed-4015705826
+ hash sha256
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+ hash sha256
+!
+!
+!
+!
+diagnostic bootup level minimal
+!
+license udi pid ISR4221/K9 sn <removed>
+memory free low-watermark processor 61631
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+enable secret 9 <removed>
+!
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ ip address 10.0.0.1 255.0.0.0
+ ip nat inside
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface Serial0/1/0
+ description LINK to GERMANY
+ ip address 209.165.100.1 255.255.255.252
+ ip nat outside
+!
+interface Serial0/1/1
+ description LINK to COLORADO
+ ip address 209.165.200.2 255.255.255.252
+ ip nat outside
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+ip nat inside source static 10.0.0.2 64.100.231.1
+ip route 55.69.241.0 255.255.255.248 209.165.200.1
+ip route 64.100.231.1 255.255.255.255 209.165.200.1
+ip route 64.100.231.1 255.255.255.255 209.165.100.2
+ip route 77.100.10.1 255.255.255.255 209.165.100.2
+ip ssh bulk-mode 131072
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ transport input none
+ stopbits 1
+line aux 0
+line vty 0 4
+ password <removed>
+ login
+ transport input telnet
+line vty 5 15
+ password <removed>
+ login
+ transport input telnet
+!
+ntp server 209.165.200.1
+!
+!
+!
+!
+!
+!
+end

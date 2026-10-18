@@ -1,0 +1,355 @@
+version 17.12
+no service timestamps debug
+no service timestamps log
+service password-encryption
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+!
+hostname COLORADO
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+no ip domain lookup
+ip domain name COLO.com
+!
+!
+!
+!
+!
+!
+ip dhcp excluded-address 172.26.4.1 172.26.4.10
+ip dhcp excluded-address 172.26.5.1 172.26.5.10
+ip dhcp excluded-address 172.26.6.1 172.26.6.10
+!
+ip dhcp pool COLO-VLAN100
+ network 172.26.4.0 255.255.255.0
+ default-router 172.26.4.1
+ domain-name COLO.com
+!
+ip dhcp pool COLO-VLAN200
+ network 172.26.5.0 255.255.255.0
+ default-router 172.26.5.1
+ domain-name COLO.com
+!
+ip dhcp pool COLO-VLAN300
+ network 172.26.6.0 255.255.255.0
+ default-router 172.26.6.1
+ domain-name COLO.com
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+!
+!
+!
+!
+!
+vtp version 1
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint TP-self-signed-826213188
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-826213188
+ revocation-check none
+ rsakeypair TP-self-signed-826213188
+ hash sha256
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+ hash sha256
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+enable secret 9 <removed>
+!
+username admin secret 9 <removed>
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+crypto isakmp policy 10
+ encryption aes 256
+ hash sha256
+ authentication pre-share
+ group 19
+ lifetime 3600
+crypto isakmp key <PSK> address 209.165.100.2
+!
+!
+crypto ipsec transform-set TRANSET esp-aes 256 esp-sha256-hmac
+ mode tunnel
+!
+!
+!
+!
+crypto map GREMAP 10 ipsec-isakmp
+ set pfs group19
+ set peer 209.165.100.2
+ set transform-set TRANSET
+ match address GRE-VPN
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 10.10.10.10 255.255.255.255
+!
+interface Tunnel0
+ ip address 1.1.1.1 255.255.255.252
+ tunnel source Serial0/1/0
+ tunnel destination 209.165.100.2
+!
+interface GigabitEthernet0/0/0
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ no shutdown
+ no ip address
+ ip nat inside
+ negotiation auto
+!
+interface GigabitEthernet0/0/1.100
+ description VLAN 100
+ encapsulation dot1Q 100
+ ip address 172.26.4.1 255.255.255.0
+ ip nat inside
+!
+interface GigabitEthernet0/0/1.200
+ description VLAN 200
+ encapsulation dot1Q 200
+ ip address 172.26.5.1 255.255.255.0
+ ip nat inside
+!
+interface GigabitEthernet0/0/1.300
+ description VLAN 300
+ encapsulation dot1Q 300
+ ip address 172.26.6.1 255.255.255.0
+ ip nat inside
+!
+interface GigabitEthernet0/0/1.401
+ description MANAGEMENT
+ encapsulation dot1Q 401
+ ip address 172.26.255.245 255.255.255.252
+!
+interface Serial0/1/0
+ no shutdown
+ description LINK to ISP
+ ip address 209.165.200.1 255.255.255.252
+ ip nat outside
+ crypto map GREMAP
+!
+interface Serial0/1/1
+ no shutdown
+ description LINK TO BELGUM
+ ip address 172.26.255.250 255.255.255.252
+ ip nat inside
+!
+router ospf 50
+ router-id 10.10.10.10
+ redistribute rip metric 1
+ network 172.26.4.0 0.0.0.255 area 0
+ network 172.26.5.0 0.0.0.255 area 0
+ network 172.26.6.0 0.0.0.255 area 0
+ network 172.26.255.244 0.0.0.3 area 0
+ network 172.26.255.248 0.0.0.3 area 0
+ default-information originate
+!
+router rip
+ version 2
+ redistribute ospf 50 metric 1
+ network 1.0.0.0
+ network 172.26.0.0
+ no auto-summary
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+ip nat pool COLO-NAT 55.69.241.1 55.69.241.7 netmask 255.255.255.248
+ip nat inside source list 10 pool COLO-NAT overload
+ip route 0.0.0.0 0.0.0.0 Serial0/1/0
+ip ssh bulk-mode 131072
+ip ssh time-out 45
+!
+ip access-list standard SNMP-ACL
+ 10 permit 172.26.255.242
+!
+ip access-list extended GRE-VPN
+ remark ACL for GRE
+ permit gre any any
+!
+!
+!
+no logging trap
+ip access-list standard 10
+ 10 permit 172.26.0.0 0.0.255.255
+!
+snmp-server community <removed> RW SNMP-ACL
+snmp-server location BELGUM
+snmp-server contact admin@colo.com
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps vrrp
+snmp-server enable traps flowmon
+snmp-server enable traps pfr
+snmp-server enable traps ds1
+snmp-server enable traps entity-perf throughput-notif
+snmp-server enable traps sdwan bfd omp system policy security
+snmp-server enable traps ds3
+snmp-server enable traps call-home message-send-fail server-fail
+snmp-server enable traps tty
+snmp-server enable traps eigrp
+snmp-server enable traps casa
+snmp-server enable traps ospf state-change
+snmp-server enable traps ospf errors
+snmp-server enable traps ospf retransmit
+snmp-server enable traps ospf lsa
+snmp-server enable traps ospf cisco-specific state-change nssa-trans-change
+snmp-server enable traps ospf cisco-specific state-change shamlink interface
+snmp-server enable traps ospf cisco-specific state-change shamlink neighbor
+snmp-server enable traps ospf cisco-specific errors
+snmp-server enable traps ospf cisco-specific retransmit
+snmp-server enable traps ospf cisco-specific lsa
+snmp-server enable traps bfd
+snmp-server enable traps cef resource-failure peer-state-change peer-fib-state-change inconsistency
+snmp-server enable traps config-copy
+snmp-server enable traps config
+snmp-server enable traps config-ctid
+snmp-server enable traps memory bufferpeak
+snmp-server enable traps fru-ctrl
+snmp-server enable traps entity
+snmp-server enable traps event-manager
+snmp-server enable traps frame-relay
+snmp-server enable traps frame-relay subif
+snmp-server enable traps hsrp
+snmp-server enable traps entity-state
+snmp-server enable traps ethernet cfm cc mep-up mep-down cross-connect loop config
+snmp-server enable traps ethernet cfm crosscheck mep-missing mep-unknown service-up
+snmp-server enable traps ether-oam
+snmp-server enable traps ethernet evc status create delete
+snmp-server enable traps entity-qfp mem-res-thresh throughput-notif
+snmp-server enable traps entity-sensor
+snmp-server enable traps flash insertion removal lowspace
+snmp-server enable traps adslline
+snmp-server enable traps vdsl2line
+snmp-server enable traps isdn call-information
+snmp-server enable traps isdn layer2
+snmp-server enable traps isdn chan-not-avail
+snmp-server enable traps isdn ietf
+snmp-server enable traps cnpd
+snmp-server enable traps srp
+snmp-server enable traps entity-diag boot-up-fail hm-test-recover hm-thresh-reached scheduled-test-fail
+snmp-server enable traps aaa_server
+snmp-server enable traps atm subif
+snmp-server enable traps bgp cbgp2
+snmp-server enable traps pim neighbor-change rp-mapping-change invalid-pim-message
+snmp-server enable traps ipmulticast
+snmp-server enable traps msdp
+snmp-server enable traps mvpn
+snmp-server enable traps rsvp
+snmp-server enable traps isis
+snmp-server enable traps dhcp
+snmp-server enable traps ip local pool
+snmp-server enable traps nhrp nhs
+snmp-server enable traps nhrp nhc
+snmp-server enable traps nhrp nhp
+snmp-server enable traps nhrp quota-exceeded
+snmp-server enable traps ospfv3 state-change
+snmp-server enable traps ospfv3 errors
+snmp-server enable traps pppoe
+snmp-server enable traps cpu threshold
+snmp-server enable traps ipsla
+snmp-server enable traps syslog
+snmp-server enable traps smart-license
+snmp-server enable traps pimstdmib neighbor-loss invalid-register invalid-join-prune rp-mapping-change interface-election
+snmp-server enable traps l2tun session
+snmp-server enable traps l2tun pseudowire status
+snmp-server enable traps l2tun tunnel
+snmp-server enable traps auth-framework sec-violation
+snmp-server enable traps c3g
+snmp-server enable traps LTE
+snmp-server enable traps pki
+snmp-server enable traps stpx inconsistency root-inconsistency loop-inconsistency
+snmp-server enable traps port-security
+snmp-server enable traps bridge newroot topologychange
+snmp-server enable traps vtp
+snmp-server enable traps vlancreate
+snmp-server enable traps vlandelete
+snmp-server enable traps alarms informational
+snmp-server enable traps bulkstat collection transfer
+snmp-server enable traps ethernet cfm alarm
+snmp-server enable traps rf
+snmp-server enable traps transceiver all
+snmp-server enable traps vrfmib vrf-up vrf-down vnet-trunk-up vnet-trunk-down
+snmp-server host 172.26.255.242 version 2c <removed>
+!
+!
+control-plane
+!
+banner motd ^CAUTHORIZED ACCESS ONLY^C
+!
+line con 0
+ password 7 <removed>
+ logging synchronous
+ login
+ transport input none
+ stopbits 1
+line aux 0
+line vty 0 4
+ password 7 <removed>
+ logging synchronous
+ login local
+ transport input ssh
+line vty 5 15
+ password 7 <removed>
+ logging synchronous
+ login local
+ transport input ssh
+!
+ntp master 5
+!
+!
+!
+!
+!
+!
+end

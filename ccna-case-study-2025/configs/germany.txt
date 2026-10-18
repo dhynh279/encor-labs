@@ -1,0 +1,208 @@
+version 17.12
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+!
+hostname GERMANY
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+no ip domain lookup
+ip domain name GERM.com
+!
+!
+!
+!
+!
+!
+ip dhcp excluded-address 172.26.0.1 172.26.0.20
+!
+ip dhcp pool GERMANY-DHCP
+ network 172.26.0.0 255.255.252.0
+ default-router 172.26.0.1
+ domain-name GERM.com
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+!
+!
+!
+!
+!
+vtp version 1
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint TP-self-signed-2482309292
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2482309292
+ revocation-check none
+ rsakeypair TP-self-signed-2482309292
+ hash sha256
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+ hash sha256
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+enable secret 9 <removed>
+!
+username admin secret 9 <removed>
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+crypto isakmp policy 10
+ encryption aes 256
+ hash sha256
+ authentication pre-share
+ group 19
+ lifetime 3600
+crypto isakmp key <PSK> address 209.165.200.1
+!
+!
+crypto ipsec transform-set TRANSET esp-aes 256 esp-sha256-hmac
+ mode tunnel
+!
+!
+!
+!
+crypto map GREMAP 10 ipsec-isakmp
+ set pfs group19
+ set peer 209.165.200.1
+ set transform-set TRANSET
+ match address GRE-VPN
+!
+!
+!
+!
+!
+!
+!
+!
+interface Tunnel0
+ ip address 1.1.1.2 255.255.255.252
+ tunnel source Serial0/1/0
+ tunnel destination 209.165.200.1
+!
+interface GigabitEthernet0/0/0
+ no shutdown
+ ip address 172.26.0.1 255.255.252.0
+ ip nat inside
+ ip access-group GERMANY-ACL in
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface Serial0/1/0
+ no shutdown
+ description LINK to ISP
+ ip address 209.165.100.2 255.255.255.252
+ ip nat outside
+ crypto map GREMAP
+!
+interface Serial0/1/1
+ no ip address
+ shutdown
+!
+router rip
+ version 2
+ network 1.0.0.0
+ network 172.26.0.0
+ no auto-summary
+!
+ip forward-protocol nd
+ip http server
+ip http authentication local
+ip http secure-server
+!
+ip nat pool GERMANY-NAT 77.100.10.1 77.100.10.1 netmask 255.255.255.255
+ip nat inside source list 10 pool GERMANY-NAT overload
+ip route 0.0.0.0 0.0.0.0 Serial0/1/0
+ip ssh bulk-mode 131072
+ip ssh time-out 45
+!
+ip access-list extended GERMANY-ACL
+ 10 remark CONTROLS LAN TRAFFIC
+ 10 permit tcp 172.26.0.0 0.0.3.255 host 209.165.200.1 eq 22
+ 20 permit ip 172.26.0.0 0.0.3.255 172.26.0.0 0.0.255.255
+ 30 permit tcp 172.26.0.0 0.0.3.255 host 64.100.231.1 eq www
+ 40 permit udp any eq bootpc any
+ 50 permit udp any eq bootps any
+ 60 deny ip any any
+ip access-list extended GRE-VPN
+ 10 remark ACL FOR GRE
+ 10 permit gre any any
+!
+ip access-list standard 10
+ 10 permit 172.26.0.0 0.0.255.255
+!
+!
+!
+control-plane
+!
+banner motd ^CAUTHORIZED ACCESS ONLY^C
+!
+line con 0
+ password 7 <removed>
+ logging synchronous
+ transport input none
+ stopbits 1
+line aux 0
+line vty 0 4
+ password 7 <removed>
+ login local
+ transport input ssh
+line vty 5 15
+ password 7 <removed>
+ login local
+ transport input ssh
+!
+ntp server 209.165.200.1
+!
+!
+!
+!
+!
+!
+end
