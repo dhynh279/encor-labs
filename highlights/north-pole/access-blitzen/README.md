@@ -2,30 +2,7 @@
 
 The largest access zone: seven Catalyst access switches (plus a Meraki in the S6 position) under the DSW-5/DSW-6 gateway pair, with a single /25 server VLAN and a router acting as the internal DNS server.
 
-```mermaid
-flowchart TB
-    D5(["DSW-5<br/>VLAN 10 VIP .129 · active"])
-    D6(["DSW-6<br/>standby"])
-    S1["S1 · .1"]
-    S2["S2 · .2"]
-    S3["S3 · .3"]
-    S4["S4 · .4"]
-    S5["S5 · .5"]
-    S6["S6 · Meraki"]
-    S7["S7 · .7"]
-    S8["S8 · .8"]
-    D5 & D6 ---|"Gi1/0/23 / 24 trunk 1,10,67"| S1 & S2
-    D5 & D6 ---|"trunk"| S5 & S6
-    S1 ===|"Po1 · Gi1/0/1-2 · LACP"| S2
-    S1 ---|"Gi1/0/3"| S3
-    S2 ---|"Gi1/0/3"| S4
-    S3 ---|"Gi1/0/4"| S4
-    S5 ===|"Po · Gi1/0/1-2"| S6
-    S5 ===|"Po3 · Gi1/0/3-4"| S7
-    S6 ===|"Po3 · Gi1/0/3-4"| S8
-    S3 --- SRV1["DNS / Email servers<br/>VLAN 10"]
-    S8 --- SRV2["Gi1/0/24 · Proxmox<br/>VLAN 10"]
-```
+![Blitzen access topology](../docs/diagrams/access-blitzen.svg)
 
 | VLAN | Name | Subnet | Notes |
 |---|---|---|---|

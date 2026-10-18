@@ -4,34 +4,7 @@ Nogales runs **RIPng** internally and redistributes it into the **OSPFv3 area 0*
 
 ## Topology (from final configs)
 
-```mermaid
-flowchart TB
-    A51(["Area 51 Edge<br/>2001:db8:1:1::1"])
-    R1["R1 · hostname Nogales<br/>ISR 4221<br/>RID 11.11.11.11<br/>RIPng ⇄ OSPFv3 10"]
-    R2["R2<br/>HSRP standby<br/>…:2002::3"]
-    R3["R3<br/>HSRP active · pri 150<br/>…:2002::2"]
-    VIP{{"HSRPv2 group 1<br/>VIP …:2002::1"}}
-    CORE["Core_SW"]
-    R4["R4<br/>router-on-a-stick<br/>…:2002::4"]
-    S1["S1"]
-    S2["S2"]
-    S3["S3"]
-
-    A51 ===|"S0/2/0 · 2001:db8:1:1::2/64 · OSPF area 0"| R1
-    R1 ---|"S0/1/0 · …:2001::/64"| R2
-    R1 ---|"S0/1/1 · …:2000::/64"| R3
-    R2 --- |"Gi0/0/0"| CORE
-    R3 --- |"Gi0/0/0"| CORE
-    R2 -.- VIP -.- R3
-    CORE ---|"Gi0/0/1"| R4
-    R4 ---|"Gi0/0/0 trunk · .20 .30 .40"| S1
-    S1 ===|"Po1 · Gi1/0/23-24 · LACP"| S2
-    S2 ===|"Po2 · Gi1/0/15-16 · LACP"| S3
-    S3 ===|"Po1 ↔ S1 Po2 · Gi1/0/19-20 · LACP"| S1
-    S2 --- MC["Gi1/0/5 · VLAN 40 McDonald's"]
-    S3 --- TB["Gi1/0/1 · VLAN 30 Taco Bell"]
-    S3 --- SB["Gi1/0/2 · VLAN 20 Starbucks"]
-```
+![Nogales topology](../../docs/diagrams/nogales.svg)
 
 ## Devices
 

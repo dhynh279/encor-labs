@@ -1,0 +1,28 @@
+from topo import Diagram
+OUT = 'highlights/north-pole/docs/diagrams/core-rudolph'
+def build():
+    d = Diagram(1400, 790)
+    d.node('up', 700, 50, 280, 50, 'Campus network', ['VLAN 3900 · DHCP'], 'external')
+    d.area(40, 110, 1320, 420, 'OSPF 8008 · area 0 · 100.10.0.0/24')
+    d.node('c1', 400, 200, 250, 56, 'RDLPH-CORE-1', ['Catalyst 9300L · RID 1.10.1.1'])
+    d.node('c2', 1000, 200, 250, 56, 'RDLPH-CORE-2', ['Catalyst 9300L · RID 1.10.1.2'])
+    d.node('cl2', 180, 450, 230, 56, 'RDLPH-CL-2', ['Catalyst (48× FE) · RID 1.10.1.4'])
+    d.node('mk', 700, 450, 320, 76, 'CL-1 · CL-3 · CL-5', ['Meraki MS · L3 /30 on Gi1/0/18, 16, 14', 'trunk Gi1/0/20, 22, 24 · VLAN 1, 414, 3900'], 'meraki')
+    d.node('cl4', 1220, 450, 230, 56, 'RDLPH-CL-4', ['Catalyst 9300L · RID 1.10.1.6'])
+    d.link('up', 'c1', 'ethernet', None, 'Gi1/0/11 trunk 1,414,3900')
+    d.link('c1', 'cl2', 'ethernet', 'Gi1/0/1 .249', 'Fa1/0/13 .250', '.248/30', mid_t=0.55)
+    d.link('c2', 'cl2', 'ethernet', 'Gi1/0/1 .229', 'Fa1/0/14 .230', '.228/30', mid_t=0.66)
+    d.link('c1', 'cl4', 'fiber', 'Gi1/0/2 .241', 'Gi1/0/1 .242', '.240/30 · BFD', mid_t=0.72)
+    d.link('c2', 'cl4', 'fiber', 'Gi1/0/2 .221', 'Gi1/0/2 .222', '.220/30 · BFD', mid_t=0.55)
+    d.link('c1', 'mk', 'ethernet')
+    d.link('c2', 'mk', 'ethernet')
+    d.node('da10', 150, 680, 220, 50, 'DSW-1 / DSW-2', ['area 10 · Vixen'], 'external')
+    d.node('da20', 700, 680, 220, 50, 'DSW-3 / DSW-4', ['area 20 · Blitzen'], 'external')
+    d.node('da30', 1250, 680, 220, 50, 'DSW-7 / DSW-8', ['area 30 · Dasher'], 'external')
+    d.link('cl2', 'da10', 'ethernet', 'Fa1/0/36, /33')
+    d.link('cl2', 'da20', 'ethernet', 'Fa1/0/35, /34')
+    d.link('cl4', 'da20', 'ethernet', 'Gi1/0/14, /16')
+    d.link('cl4', 'da30', 'ethernet', 'Gi1/0/13, /15 · p2p')
+    d.note(700, 765, 'Meraki leafs also hand DHCP-addressed uplinks to DSW-1/2/3/4/8 and /30s to DSW-7 · Core-2 ↔ CL-5 is .216/30 (planning drawing: .196/30)', 's')
+    d.legend(70, 40, [('meraki', 'Meraki MS (cloud-managed)')])
+    return d

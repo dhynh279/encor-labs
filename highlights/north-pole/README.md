@@ -14,45 +14,7 @@ A five-team build of a **three-tier campus / data-center network** on real Catal
 
 ## Topology
 
-```mermaid
-flowchart TB
-    UP(["Campus uplink<br/>VLAN 3900"])
-
-    subgraph CORE["CORE · Rudolph · OSPF area 0 · 100.10.0.0/24"]
-        C1["RDLPH-CORE-1<br/>Cat 9300L · RID 1.10.1.1"]
-        C2["RDLPH-CORE-2<br/>Cat 9300L · RID 1.10.1.2"]
-        CL1["CL-1<br/>Meraki MS"]
-        CL2["RDLPH-CL-2<br/>Catalyst · RID 1.10.1.4"]
-        CL3["CL-3<br/>Meraki MS"]
-        CL4["RDLPH-CL-4<br/>Cat 9300L · RID 1.10.1.6"]
-        CL5["CL-5<br/>Meraki MS"]
-    end
-
-    subgraph DIST["DISTRIBUTION · Comet · 200.10.0.0/24 p2p links"]
-        D1["DSW-1"] & D2["DSW-2"]
-        D3["DSW-3"] & D4["DSW-4"]
-        D5["DSW-5"] & D6["DSW-6"]
-        D7["DSW-7"] & D8["DSW-8"]
-    end
-
-    VIX["VIXEN · Zone 1<br/>10.10.10.0/24 · area 10"]
-    BLI["BLITZEN · Zone 2<br/>10.10.20.0/24 · area 20"]
-    DAS["DASHER · Zone 3<br/>10.10.30.0/24 · area 30"]
-
-    UP --- C1
-    C1 & C2 === CL1 & CL2 & CL3 & CL4 & CL5
-    CL2 ---|area 10| D1 & D2
-    CL2 ---|area 20| D3 & D4
-    CL4 ---|area 20| D3 & D4
-    CL4 ---|area 30| D7 & D8
-    CL1 -.-|Meraki · DHCP| D1 & D2 & D3
-    CL3 -.-|Meraki · DHCP| D2 & D3 & D4 & D7
-    CL5 -.-|Meraki · DHCP| D4 & D7 & D8
-    D3 & D4 === D5 & D6
-    D1 & D2 --- VIX
-    D5 & D6 --- BLI
-    D7 & D8 --- DAS
-```
+![North Pole campus topology](docs/diagrams/campus.svg)
 
 Solid lines are Catalyst-to-Catalyst routed /30s with static addressing. Dotted lines are links to the Meraki core leafs, where the distribution side uses `ip address dhcp` and the Meraki hands out the address.
 

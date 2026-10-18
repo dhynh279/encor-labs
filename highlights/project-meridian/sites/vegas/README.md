@@ -4,31 +4,7 @@ Vegas is a multi-router **OSPFv3 area 1** site. The Edge router is the ABR into 
 
 ## Topology (from final configs)
 
-```mermaid
-flowchart TB
-    A51(["Area 51 Edge<br/>2001:db8:1:5::1"])
-    BKK1(["Bangkok R1<br/>2001:db8:1:2::2"])
-    BKK2(["Bangkok R2<br/>2001:db8:1:3::2"])
-    EDGE["Vegas Edge<br/>ISR 4221<br/>ospfv3 2 · RID 21.21.21.21<br/>ABR area 0 / 1"]
-    S2["Vegas-S2"]
-    R2["Vegas-R2<br/>RID 7.7.7.7<br/>HSRP 10 · pri 110"]
-    R3["Vegas-R3<br/>RID 8.8.8.8<br/>HSRP 10 · VIP …:3050::ffff"]
-    R1["Vegas-R1<br/>RID 6.6.6.6<br/>router-on-a-stick"]
-    S1["S1"]
-
-    A51 ===|"S0/1/0 · 2001:db8:1:5::2/64 · area 0"| EDGE
-    EDGE -.- |"Tunnel0 GRE · 2001:db8:13:1::2"| BKK1
-    EDGE -.- |"Tunnel1 GRE · 2001:db8:13:2::2"| BKK2
-    EDGE ---|"Gi0/0/0 · …:3060::1"| S2
-    S2 ---|"Gi0/0/0 · …:3040::1"| R2
-    S2 ---|"Gi0/0/0 · …:3050::1"| R3
-    R2 ---|"S0/1/0 · …:3010::/64"| R1
-    R3 ---|"S0/1/0 ↔ R1 S0/1/1 · …:3020::/64"| R1
-    R1 ---|"Gi0/0/0 trunk"| S1
-    S1 --- H100["Gi1/0/2 · VLAN 100"]
-    S1 --- H200["Gi1/0/3 · VLAN 200"]
-    S1 -.- H34["VLAN 300 / 400 RADIUS<br/>(routed on R1, not on final S1)"]
-```
+![Vegas topology](../../docs/diagrams/vegas.svg)
 
 ## Devices
 

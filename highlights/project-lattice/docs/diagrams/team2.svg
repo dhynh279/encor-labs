@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 830" width="1200" height="830" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<defs><style>.s{font-size:11.5px;fill:#374151}.h{font-size:15px;font-weight:700;fill:#111827}.a{font-size:15px;font-weight:700;fill:#4b5563}.t{font-size:13px;fill:#1f2937}.lbl{font-size:11px;fill:#111827}.ip{font-size:11px;fill:#1d4ed8;font-family:Consolas,Menlo,monospace}.tt{font-size:18px;font-weight:700;fill:#111827}</style></defs>
+<rect x="40" y="120" width="1120" height="630" rx="24" fill="#f3f4f6" stroke="#9ca3af" stroke-dasharray="6 5"/>
+<text class="a" x="60" y="734">Team 2 · OSPF 50 area 99 · 10.0.0.0/16</text>
+<path d="M600.0,50.0 Q600.0,125.0 600.0,200.0" fill="none" stroke="#9ca3af" stroke-width="2.0" stroke-dasharray="3 5"/>
+<path d="M600.0,200.0 Q465.0,280.0 330.0,360.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M600.0,200.0 Q735.0,280.0 870.0,360.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M330.0,360.0 Q465.0,430.0 600.0,500.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M870.0,360.0 Q735.0,430.0 600.0,500.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M600.0,500.0 Q440.0,580.0 280.0,660.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M600.0,500.0 Q600.0,580.0 600.0,660.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M600.0,500.0 Q760.0,580.0 920.0,660.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<rect x="470.0" y="25.0" width="260" height="50" rx="8" fill="#f9fafb" stroke="#6b7280" stroke-width="1.5"/>
+<text class="h" x="600" y="45.0" text-anchor="middle">Hub</text>
+<text class="s" x="600" y="62.0" text-anchor="middle">P2 Gi1/0/13 · 8.8.9.108/30</text>
+<rect x="450.0" y="172.0" width="300" height="56" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+<text class="h" x="600" y="195.0" text-anchor="middle">ASA · PAT</text>
+<text class="s" x="600" y="212.0" text-anchor="middle">Gi1/3 8.8.9.50 · default → 8.8.9.49</text>
+<rect x="210.0" y="332.0" width="240" height="56" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="330" y="355.0" text-anchor="middle">R1</text>
+<text class="s" x="330" y="372.0" text-anchor="middle">SD-WAN edge 1</text>
+<rect x="730.0" y="332.0" width="280" height="56" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="870" y="355.0" text-anchor="middle">R2</text>
+<text class="s" x="870" y="372.0" text-anchor="middle">SD-WAN edge 2 · default-info originate</text>
+<rect x="470.0" y="472.0" width="260" height="56" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+<text class="h" x="600" y="495.0" text-anchor="middle">CSW1_2 core stack</text>
+<text class="s" x="600" y="512.0" text-anchor="middle">SVIs + DHCP</text>
+<rect x="165.0" y="632.0" width="230" height="56" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+<text class="h" x="280" y="655.0" text-anchor="middle">ASW1 · floor 1</text>
+<text class="s" x="280" y="672.0" text-anchor="middle">VLAN 10 · 10.0.0.0/21</text>
+<rect x="485.0" y="632.0" width="230" height="56" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+<text class="h" x="600" y="655.0" text-anchor="middle">ASW2 · floor 2</text>
+<text class="s" x="600" y="672.0" text-anchor="middle">VLAN 20 · 10.0.16.0/21</text>
+<rect x="805.0" y="632.0" width="230" height="56" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+<text class="h" x="920" y="655.0" text-anchor="middle">ASW3 · floor 3</text>
+<text class="s" x="920" y="672.0" text-anchor="middle">VLAN 30 · 10.0.32.0/21</text>
+<rect x="416.6" y="271.0" width="96.8" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="465.0" y="284.0" text-anchor="middle">10.0.50.244/30</text>
+<rect x="686.6" y="271.0" width="96.8" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="735.0" y="284.0" text-anchor="middle">10.0.50.240/30</text>
+<rect x="478.8" y="442.7" width="56.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="506.9" y="455.7" text-anchor="middle">Fa3/0/1</text>
+<rect x="401.1" y="412.9" width="96.8" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="449.5" y="425.9" text-anchor="middle">10.0.50.252/30</text>
+<rect x="665.0" y="442.7" width="56.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="693.1" y="455.7" text-anchor="middle">Fa4/0/1</text>
+<rect x="702.1" y="412.9" width="96.8" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="750.5" y="425.9" text-anchor="middle">10.0.50.248/30</text>
+<rect x="475.9" y="539.0" width="56.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="504.0" y="552.0" text-anchor="middle">Fa4/0/2</text>
+<rect x="571.9" y="540.6" width="56.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="600.0" y="553.6" text-anchor="middle">Fa4/0/3</text>
+<rect x="667.9" y="539.0" width="56.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="696.0" y="552.0" text-anchor="middle">Fa4/0/4</text>
+<text class="s" x="600" y="790" text-anchor="middle">ASA outside 8.8.9.50 points at P4's segment, not P2's 8.8.9.108/30 (known issue T2-2) · VLAN 40 mgmt, 50 Ansible</text>
+<rect x="848" y="18" width="329" height="84" rx="6" fill="#ffffff" stroke="#d1d5db"/>
+<line x1="860" y1="38" x2="900" y2="38" stroke="#111827" stroke-width="2.0"/>
+<text class="t" x="910" y="42">Ethernet</text>
+<line x1="860" y1="60" x2="900" y2="60" stroke="#9ca3af" stroke-width="2.0" stroke-dasharray="3 5"/>
+<text class="t" x="910" y="64">addresses don't match in final saves</text>
+<rect x="866" y="74" width="28" height="16" rx="3" fill="#fff7ed" stroke="#ea580c"/>
+<text class="t" x="910" y="86">ASA firewall</text>
+</svg>

@@ -4,40 +4,7 @@ Eight L3 distribution switches in pairs, one pair (or two for Zone 2) per access
 
 ## Topology (from final configs)
 
-```mermaid
-flowchart TB
-    CL2(["CL-2 (Catalyst)"])
-    CL4(["CL-4 (Catalyst)"])
-    MK(["CL-1 / CL-3 / CL-5 (Meraki)"])
-
-    subgraph A10["Area 10 · Zone 1 Vixen"]
-        D1["DSW-1<br/>RID 10.1.1.1"]
-        D2["DSW-2<br/>RID 10.1.1.2"]
-    end
-    subgraph A20["Area 20 · Zone 2 Blitzen"]
-        D3["DSW-3<br/>RID 20.1.1.3<br/>wireless SVIs + DHCP"]
-        D4["DSW-4<br/>RID 20.1.1.4"]
-        D5["DSW-5<br/>RID 20.1.1.5<br/>HSRP active"]
-        D6["DSW-6<br/>RID 20.1.1.6"]
-    end
-    subgraph A30["Area 30 · Zone 3 Dasher"]
-        D7["DSW-7<br/>RID 30.1.1.7"]
-        D8["DSW-8<br/>RID 30.1.1.8"]
-    end
-
-    CL2 --- D1 & D2 & D3 & D4
-    CL4 --- D3 & D4 & D7 & D8
-    MK -.-|"ip address dhcp"| D1 & D2 & D3 & D4 & D8
-    D3 ---|".160/30"| D5
-    D3 ---|".152/30"| D6
-    D4 ---|".156/30"| D5
-    D4 ---|".140/30"| D6
-    D5 ===|"2 × /30"| D6
-    D1 & D2 --- VX(["Vixen S1 / S2<br/>trunk · native 100"])
-    D5 & D6 --- BZ(["Blitzen S1 / S2<br/>trunk 1,10,67"])
-    D7 & D8 --- DS(["Dasher SW1 / SW2<br/>trunk 90-120 · native 200"])
-    D3 --- AP(["AP + Meraki uplinks"])
-```
+![Distribution layer topology](../docs/diagrams/distribution-comet.svg)
 
 ## Devices
 

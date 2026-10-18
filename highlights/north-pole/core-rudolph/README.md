@@ -4,31 +4,7 @@ Two core switches and five core leafs make up **OSPF area 0** (`router ospf 8008
 
 ## Topology (from final configs)
 
-```mermaid
-flowchart TB
-    UP(["Campus network<br/>VLAN 3900 · DHCP"])
-    C1["RDLPH-CORE-1<br/>Catalyst 9300L<br/>RID 1.10.1.1"]
-    C2["RDLPH-CORE-2<br/>Catalyst 9300L<br/>RID 1.10.1.2"]
-    CL1["CL-1 · Meraki MS"]
-    CL2["RDLPH-CL-2<br/>Catalyst (48× FE)<br/>RID 1.10.1.4"]
-    CL3["CL-3 · Meraki MS"]
-    CL4["RDLPH-CL-4<br/>Catalyst 9300L<br/>RID 1.10.1.6"]
-    CL5["CL-5 · Meraki MS"]
-    DA10(["DSW-1 / DSW-2<br/>area 10"])
-    DA20(["DSW-3 / DSW-4<br/>area 20"])
-    DA30(["DSW-7 / DSW-8<br/>area 30"])
-
-    UP ---|"Gi1/0/11 trunk 1,414,3900"| C1
-    C1 ---|"Gi1/0/1 · .248/30"| CL2
-    C2 ---|"Gi1/0/1 · .228/30"| CL2
-    C1 ===|"Gi1/0/2 · .240/30 · BFD"| CL4
-    C2 ===|"Gi1/0/2 · .220/30 · BFD"| CL4
-    C1 & C2 ---|"L3 /30 + trunk 1,414,3900"| CL1 & CL3 & CL5
-    CL2 ---|"Fa1/0/36, /33"| DA10
-    CL2 ---|"Fa1/0/35, /34"| DA20
-    CL4 ---|"Gi1/0/14, /16"| DA20
-    CL4 ---|"Gi1/0/13, /15 · p2p"| DA30
-```
+![Core layer topology](../docs/diagrams/core-rudolph.svg)
 
 ## Devices
 

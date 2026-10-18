@@ -4,30 +4,7 @@ Maine is a two-router **OSPFv3 area 2** site. R1 is the ABR to the area 0 backbo
 
 ## Topology (from final configs)
 
-```mermaid
-flowchart TB
-    A51(["Area 51 Edge<br/>2001:db8:1:4::1"])
-    NOG(["Nogales<br/>2001:db8:1:1::2"])
-    R1["Maine-R1<br/>ISR 4221 · RID 4.0.0.1<br/>ABR area 0 / 2"]
-    R2["Maine-R2<br/>ISR 4221 · RID 4.0.0.2<br/>DHCPv6 · router-on-a-stick"]
-    ROOT["ASW1-ROOT"]
-    ACA["ASW2-ALCADIA"]
-    BAX["ASW3-BAXTER"]
-    CAM["ASW4-CAMERA"]
-    AP["MAINE_ACCESSPOINT<br/>SSID Main_AP1 · WPA2-PSK AES"]
-
-    A51 ===|"S0/1/0 · 2001:db8:1:4::2/64 · area 0"| R1
-    R1 ---|"S0/1/1 ↔ S0/1/0 · …:4000::/64 · area 2"| R2
-    R2 -.- |"Tunnel0 GRE · 2001:db8:12:1::2"| NOG
-    R2 ---|"Gi0/0/1 trunk · .15 .30 .45 .60 · native 75"| ROOT
-    ROOT ---|"Gi1/0/1 trunk · VLAN 15"| ACA
-    ROOT ---|"Gi1/0/2 trunk · VLAN 30"| BAX
-    ROOT ---|"Gi1/0/3 trunk · VLAN 45"| CAM
-    ROOT ---|"Gi1/0/4 access · VLAN 60"| AP
-    ACA --- HA["Gi1/0/1 · Acadia hosts"]
-    BAX --- HB["Gi1/0/1 · Baxter hosts"]
-    CAM --- HC["Gi1/0/1 · cameras"]
-```
+![Maine topology](../../docs/diagrams/maine.svg)
 
 ## Devices
 

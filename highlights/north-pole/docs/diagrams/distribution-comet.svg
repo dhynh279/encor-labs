@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 810" width="1500" height="810" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<defs><style>.s{font-size:11.5px;fill:#374151}.h{font-size:15px;font-weight:700;fill:#111827}.a{font-size:15px;font-weight:700;fill:#4b5563}.t{font-size:13px;fill:#1f2937}.lbl{font-size:11px;fill:#111827}.ip{font-size:11px;fill:#1d4ed8;font-family:Consolas,Menlo,monospace}.tt{font-size:18px;font-weight:700;fill:#111827}</style></defs>
+<rect x="60" y="150" width="440" height="580" rx="24" fill="#f3f4f6" stroke="#9ca3af" stroke-dasharray="6 5"/>
+<text class="a" x="80" y="178">Area 10 · Vixen</text>
+<rect x="530" y="150" width="440" height="580" rx="24" fill="#f3f4f6" stroke="#9ca3af" stroke-dasharray="6 5"/>
+<text class="a" x="550" y="178">Area 20 · Blitzen</text>
+<rect x="1000" y="150" width="440" height="580" rx="24" fill="#f3f4f6" stroke="#9ca3af" stroke-dasharray="6 5"/>
+<text class="a" x="1020" y="178">Area 30 · Dasher</text>
+<path d="M420.0,50.0 Q300.0,175.0 180.0,300.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M420.0,50.0 Q405.0,175.0 390.0,300.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M420.0,50.0 Q530.0,175.0 640.0,300.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M420.0,50.0 Q645.0,175.0 870.0,300.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M1080.0,50.0 Q860.0,175.0 640.0,300.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M1080.0,50.0 Q975.0,175.0 870.0,300.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M1080.0,50.0 Q1095.0,175.0 1110.0,300.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M1080.0,50.0 Q1205.0,175.0 1330.0,300.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M640.0,300.0 Q640.0,410.0 640.0,520.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M640.0,300.0 Q755.0,410.0 870.0,520.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M870.0,300.0 Q755.0,410.0 640.0,520.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M870.0,300.0 Q870.0,410.0 870.0,520.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M640.0,520.0 Q755.0,520.0 870.0,520.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M180.0,300.0 Q230.0,480.0 280.0,660.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M390.0,300.0 Q335.0,480.0 280.0,660.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M640.0,520.0 Q695.0,590.0 750.0,660.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M870.0,520.0 Q810.0,590.0 750.0,660.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M1110.0,300.0 Q1165.0,480.0 1220.0,660.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M1330.0,300.0 Q1275.0,480.0 1220.0,660.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<rect x="310.0" y="25.0" width="220" height="50" rx="8" fill="#f9fafb" stroke="#6b7280" stroke-width="1.5"/>
+<text class="h" x="420" y="45.0" text-anchor="middle">RDLPH-CL-2</text>
+<text class="s" x="420" y="62.0" text-anchor="middle">core leaf · Catalyst</text>
+<rect x="970.0" y="25.0" width="220" height="50" rx="8" fill="#f9fafb" stroke="#6b7280" stroke-width="1.5"/>
+<text class="h" x="1080" y="45.0" text-anchor="middle">RDLPH-CL-4</text>
+<text class="s" x="1080" y="62.0" text-anchor="middle">core leaf · Cat 9300L</text>
+<rect x="85.0" y="268.0" width="190" height="64" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="180" y="286.5" text-anchor="middle">DSW-1</text>
+<text class="s" x="180" y="303.5" text-anchor="middle">RID 10.1.1.1</text>
+<text class="s" x="180" y="320.5" text-anchor="middle">HSRP active 10, 20</text>
+<rect x="295.0" y="268.0" width="190" height="64" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="390" y="286.5" text-anchor="middle">DSW-2</text>
+<text class="s" x="390" y="303.5" text-anchor="middle">RID 10.1.1.2</text>
+<text class="s" x="390" y="320.5" text-anchor="middle">HSRP active 30, 40</text>
+<rect x="540.0" y="260.0" width="200" height="80" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="640" y="278.0" text-anchor="middle">DSW-3</text>
+<text class="s" x="640" y="295.0" text-anchor="middle">RID 20.1.1.3</text>
+<text class="s" x="640" y="312.0" text-anchor="middle">wireless SVIs 11–15 + DHCP</text>
+<text class="s" x="640" y="329.0" text-anchor="middle">Meraki Gi1/0/12–15 · AP Gi1/0/16</text>
+<rect x="785.0" y="268.0" width="170" height="64" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="870" y="295.0" text-anchor="middle">DSW-4</text>
+<text class="s" x="870" y="312.0" text-anchor="middle">RID 20.1.1.4</text>
+<rect x="540.0" y="488.0" width="200" height="64" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="640" y="506.5" text-anchor="middle">DSW-5</text>
+<text class="s" x="640" y="523.5" text-anchor="middle">RID 20.1.1.5</text>
+<text class="s" x="640" y="540.5" text-anchor="middle">HSRP active · VIP .129</text>
+<rect x="785.0" y="488.0" width="170" height="64" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="870" y="506.5" text-anchor="middle">DSW-6</text>
+<text class="s" x="870" y="523.5" text-anchor="middle">RID 20.1.1.6</text>
+<text class="s" x="870" y="540.5" text-anchor="middle">HSRP standby</text>
+<rect x="1015.0" y="268.0" width="190" height="64" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="1110" y="286.5" text-anchor="middle">DSW-7</text>
+<text class="s" x="1110" y="303.5" text-anchor="middle">RID 30.1.1.7</text>
+<text class="s" x="1110" y="320.5" text-anchor="middle">HSRP active 90, 100</text>
+<rect x="1235.0" y="268.0" width="190" height="64" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="1330" y="286.5" text-anchor="middle">DSW-8</text>
+<text class="s" x="1330" y="303.5" text-anchor="middle">RID 30.1.1.8</text>
+<text class="s" x="1330" y="320.5" text-anchor="middle">HSRP active 110, 120</text>
+<rect x="130.0" y="635.0" width="300" height="50" rx="8" fill="#f9fafb" stroke="#6b7280" stroke-width="1.5"/>
+<text class="h" x="280" y="655.0" text-anchor="middle">Vixen S1 / S2</text>
+<text class="s" x="280" y="672.0" text-anchor="middle">trunk · native 100</text>
+<rect x="600.0" y="635.0" width="300" height="50" rx="8" fill="#f9fafb" stroke="#6b7280" stroke-width="1.5"/>
+<text class="h" x="750" y="655.0" text-anchor="middle">Blitzen S1 / S2 · S5 / S6</text>
+<text class="s" x="750" y="672.0" text-anchor="middle">trunk 1, 10, 67</text>
+<rect x="1070.0" y="635.0" width="300" height="50" rx="8" fill="#f9fafb" stroke="#6b7280" stroke-width="1.5"/>
+<text class="h" x="1220" y="655.0" text-anchor="middle">Dasher SW1 / SW2</text>
+<text class="s" x="1220" y="672.0" text-anchor="middle">trunk 90–120 · native 200</text>
+<rect x="201.4" y="222.2" width="89.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="246.0" y="235.2" text-anchor="middle">Fa1/0/2 .249</text>
+<rect x="352.5" y="232.2" width="89.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="397.1" y="245.2" text-anchor="middle">Gi1/0/2 .241</text>
+<rect x="527.2" y="213.5" width="89.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="571.8" y="226.5" text-anchor="middle">Gi1/0/2 .229</text>
+<rect x="672.4" y="206.0" width="89.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="717.0" y="219.0" text-anchor="middle">Gi1/0/1 .197</text>
+<rect x="760.4" y="197.2" width="89.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="805.0" y="210.2" text-anchor="middle">Gi1/0/4 .221</text>
+<rect x="883.7" y="221.6" width="89.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="928.3" y="234.6" text-anchor="middle">Gi1/0/3 .189</text>
+<rect x="1058.3" y="232.2" width="89.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="1102.9" y="245.2" text-anchor="middle">Gi1/0/2 .177</text>
+<rect x="1216.7" y="222.2" width="89.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="1261.2" y="235.2" text-anchor="middle">Gi1/0/2 .165</text>
+<rect x="613.3" y="404.9" width="53.4" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="640.0" y="417.9" text-anchor="middle">.160/30</text>
+<rect x="695.0" y="369.1" width="53.4" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="721.7" y="382.1" text-anchor="middle">.152/30</text>
+<rect x="768.0" y="363.1" width="53.4" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="794.7" y="376.1" text-anchor="middle">.156/30</text>
+<rect x="843.3" y="401.0" width="53.4" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="870.0" y="414.0" text-anchor="middle">.140/30</text>
+<rect x="723.4" y="511.0" width="78.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="762.5" y="524.0" text-anchor="middle">.148 + .144</text>
+<text class="s" x="750" y="765" text-anchor="middle">OSPF process 1 · routed /30s from 200.10.0.0/24 (DSW-side address shown) · area 20 links are point-to-point</text>
+<text class="s" x="750" y="788" text-anchor="middle">Meraki core leafs CL-1/3/5 also uplink DSW-1/2/3/4/8 (ip address dhcp) and DSW-7 (Gi1/0/1 .181, Gi1/0/3 .169)</text>
+</svg>

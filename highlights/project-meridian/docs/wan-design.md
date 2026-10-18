@@ -14,30 +14,7 @@
 
 ## Physical / logical design
 
-```mermaid
-flowchart LR
-    subgraph A51["Area 51 (area 0)"]
-        EDGE[Edge-Router] --- A51R2[R2] --- A51R1[R1]
-    end
-    subgraph NOG["Nogales (RIPng)"]
-        NR1[R1 edge] --- NR2[R2] & NR3[R3]
-    end
-    subgraph VEG["Vegas (area 1)"]
-        VE[Edge] --- VS2[S2] --- VR2[R2] & VR3[R3]
-        VR2 & VR3 --- VR1[R1]
-    end
-    subgraph MAI["Maine (area 2)"]
-        MR1[R1] --- MR2[R2]
-    end
-    subgraph BKK["Bangkok"]
-        BR1[R1] & BR2[R2]
-    end
-    EDGE ---|1:1| NR1
-    EDGE ---|1:2| BR1
-    EDGE ---|1:3| BR2
-    EDGE ---|1:4| MR1
-    EDGE ---|1:5| VE
-```
+![Project Meridian WAN topology](diagrams/wan.svg)
 
 All WAN links are serial (the Edge-Router is the DCE / clock source at 2 Mbps). Every outer-site edge router has exactly one serial link back to the Area 51 Edge-Router, except Bangkok, which is dual-homed (R1 and R2) and runs HSRP between them.
 

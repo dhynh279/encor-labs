@@ -12,48 +12,7 @@ Five teams each built a different enterprise network on real Cisco gear, then jo
 
 ## How it connects
 
-```mermaid
-flowchart TB
-    subgraph T1["Team 1 · 20.0.0.0/16"]
-        ER["EdgeR"]
-        EE["EdgeE"]
-    end
-
-    subgraph HUB["Hub · 8.8.0.0/16"]
-        P1["P1"]
-        CORE(("MPLS core<br/>P1–P4 full mesh<br/>OSPF 65535"))
-        P2["P2"]
-        P4["P4"]
-        HASA{{"Hub ASA<br/>OSPF ⇄ EIGRP"}}
-    end
-
-    subgraph T2["Team 2 · 10.0.0.0/16"]
-        T2ASA{{"ASA"}}
-    end
-
-    subgraph T3["Team 3 · 172.0.0.0/24"]
-        R4["R4"]
-        MESH["R1–R5 mesh<br/>+ 2 branch sites"]
-        T3ASA{{"ASA"}}
-    end
-
-    subgraph T4["Team 4 · 192.168.0.0/16"]
-        T4ASA{{"ASA<br/>EIGRP ⇄ OSPF"}}
-        PE["PE-0 … PE-4"]
-    end
-
-    ER ---|"RIP"| P1
-    EE ---|"EIGRP 1"| P1
-    P1 === CORE
-    P2 === CORE
-    P4 === CORE
-    P2 -.-|"OSPF area 99"| T2ASA
-    P4 ---|"OSPF"| HASA
-    HASA ---|"EIGRP 200"| R4
-    R4 --- MESH --- T3ASA
-    T3ASA ---|"EIGRP 200"| T4ASA
-    T4ASA --- PE
-```
+![Project Lattice WAN topology](docs/diagrams/wan.svg)
 
 Solid lines are links whose addresses match on both ends in the final saves. The dashed Team 2 link is the hub's port for Team 2, which doesn't match Team 2's final firewall save (see known issue T2-2). The hub's four switches are a full mesh, drawn in detail on the [hub page](hub/README.md).
 

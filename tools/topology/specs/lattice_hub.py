@@ -1,0 +1,27 @@
+from topo import Diagram
+OUT = 'highlights/project-lattice/docs/diagrams/hub'
+def build():
+    d = Diagram(1500, 800)
+    d.area(260, 110, 940, 510, 'Hub · OSPF 65535 area 0 · MPLS LDP · core 8.8.8.0/24')
+    d.node('p1', 460, 230, 230, 64, 'P1', ['Lo1 100.20.30.40', 'mgmt VLAN 1 8.7.0.1/16'])
+    d.node('p2', 1000, 230, 230, 64, 'P2', ['Lo1 100.20.30.41', 'mgmt 8.6.0.1/16'])
+    d.node('p3', 460, 530, 230, 64, 'P3', ['Lo1 100.20.30.42', 'mgmt 8.5.0.1/24'])
+    d.node('p4', 1000, 530, 230, 64, 'P4', ['Lo1 100.20.30.43', 'mgmt 8.4.0.1/24'])
+    d.link('p1', 'p2', 'ethernet', 'Gi1/0/1 .13', 'Gi1/0/1 .14', '.12/30')
+    d.link('p1', 'p3', 'ethernet', 'Gi1/0/3 .21', 'Gi1/0/1 .22', '.20/30')
+    d.link('p2', 'p4', 'ethernet', 'Gi1/0/3 .29', 'Gi1/0/3 .30', '.28/30')
+    d.link('p3', 'p4', 'ethernet', 'Gi1/0/3 .33', 'Gi1/0/1 .34', '.32/30')
+    d.link('p1', 'p4', 'ethernet', 'Gi1/0/2 .17', 'Gi1/0/2 .18', '.16/30', mid_t=0.3)
+    d.link('p2', 'p3', 'ethernet', 'Gi1/0/2 .25', 'Gi1/0/2 .26', '.24/30', mid_t=0.3)
+    d.node('t1r', 120, 170, 200, 56, 'Team 1 EdgeR', ['8.8.9.102 · RIP'], 'external')
+    d.node('t1e', 120, 300, 200, 56, 'Team 1 EdgeE', ['8.8.9.106 · EIGRP 1'], 'external')
+    d.link('t1r', 'p1', 'ethernet', None, 'Gi1/0/13 .101')
+    d.link('t1e', 'p1', 'ethernet', None, 'Gi1/0/14 .105')
+    d.node('t2', 1370, 230, 220, 76, 'Team 2', ['8.8.9.108/30', 'OSPF area 99'], 'external')
+    d.link('p2', 't2', 'ethernet', 'Gi1/0/13 .109')
+    d.node('hasa', 1000, 720, 230, 56, 'Hub ASA', ['outside .50 · Gi1/8 .41'], 'firewall')
+    d.link('p4', 'hasa', 'ethernet', 'Gi1/0/24 .49', None, '8.8.9.48/29 · OSPF', mid_t=0.6)
+    d.node('t3', 1370, 720, 220, 56, 'Team 3 R4', ['8.8.9.42 · EIGRP 200'], 'external')
+    d.link('hasa', 't3', 'ethernet', None, None, '8.8.9.40/30')
+    d.legend(300, 690, [('firewall', 'ASA firewall')])
+    return d

@@ -1,0 +1,6 @@
+{
+  "name": "topology",
+  "private": true,
+  "scripts": { "build": "python3 build.py" },
+  "dependencies": { "playwright": "1.56.1" }
+}

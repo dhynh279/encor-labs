@@ -8,46 +8,7 @@ Bangkok is the only site dual-homed to Area 51: **R1 (HSRP active)** and **R2 (s
 
 Re-drawn from the team diagram and the Packet Tracer build, with final-build addressing.
 
-```mermaid
-flowchart TB
-    A51(["Area 51 Edge"])
-    VEG(["Vegas Edge"])
-    NOG(["Nogales R1"])
-    R1["R1 · HSRP active<br/>S0/1/0 2001:db8:1:2::2"]
-    R2["R2 · HSRP standby<br/>S0/1/0 2001:db8:1:3::2"]
-    VR{{"HSRP VIP<br/>…:5006::/64"}}
-    S1["S1"]
-    R3["R3"]
-    R4["R4"]
-    R5["R5"]
-    R6["R6<br/>DHCPv6 server"]
-    SYS["Syslog server<br/>…:5004::4"]
-    AP1["AP1"]
-    S2["S2"]
-    S3["S3"]
-    AP2["AP2"]
-
-    A51 ===|"S0/2/1 · 2001:db8:1:2::/64"| R1
-    A51 ===|"S0/2/0 · 2001:db8:1:3::/64"| R2
-    VEG -.- |"GRE · 2001:db8:13:1::/64"| R1
-    VEG -.- |"GRE · 2001:db8:13:2::/64"| R2
-    NOG -.- |"IPsec cmap 10 / 20"| R1 & R2
-    R1 ---|"G0/0/0 ↔ G1/0/11"| S1
-    R2 ---|"G0/0/0 ↔ G1/0/12"| S1
-    R1 -.- VR -.- R2
-    S1 ---|"G1/0/1 ↔ G0/0/0"| R3
-    R3 ---|"G0/0/1 ↔ G0/0/0"| R4
-    R4 ---|"S0/1/0 DCE"| R5
-    R4 ---|"S0/1/1 DCE"| R6
-    R5 ---|"G0/0/0"| SYS
-    R6 ---|"G0/0/0 · LAN 1"| AP1
-    R6 ---|"G0/0/1 trunk ↔ G1/0/1"| S2
-    S2 --- CAM1["G1/0/11 · CAM-1"]
-    S2 --- CAM2["G1/0/12 · CAM-2"]
-    S2 ---|"G1/0/13"| S3
-    S3 --- CAM3["G1/0/24 · CAM-3"]
-    S2 ---|"G1/0/24 · LAN 2"| AP2
-```
+![Bangkok topology](../../docs/diagrams/bangkok.svg)
 
 ## Addressing (final, after the 9/29 renumbering)
 

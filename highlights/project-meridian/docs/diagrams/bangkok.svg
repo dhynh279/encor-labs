@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 1230" width="1300" height="1230" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<defs><style>.s{font-size:11.5px;fill:#374151}.h{font-size:15px;font-weight:700;fill:#111827}.a{font-size:15px;font-weight:700;fill:#4b5563}.t{font-size:13px;fill:#1f2937}.lbl{font-size:11px;fill:#111827}.ip{font-size:11px;fill:#1d4ed8;font-family:Consolas,Menlo,monospace}.tt{font-size:18px;font-weight:700;fill:#111827}</style></defs>
+<rect x="40" y="200" width="1220" height="1000" rx="24" fill="#f3f4f6" stroke="#9ca3af" stroke-dasharray="6 5"/>
+<text class="a" x="60" y="228">OSPFv3 process 10</text>
+<path d="M1170.0,60.0 Q1020.0,180.0 870.0,300.0" fill="none" stroke="#7c3aed" stroke-opacity="0.16" stroke-width="20"/>
+<path d="M1170.0,60.0 Q821.6,246.6 430.0,300.0" fill="none" stroke="#7c3aed" stroke-opacity="0.16" stroke-width="20"/>
+<path d="M650.0,60.0 Q540.0,180.0 430.0,300.0" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+<path d="M650.0,60.0 Q760.0,180.0 870.0,300.0" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+<path d="M1170.0,60.0 Q1020.0,180.0 870.0,300.0" fill="none" stroke="#7c3aed" stroke-width="2.0" stroke-dasharray="7 5"/>
+<path d="M1170.0,60.0 Q821.6,246.6 430.0,300.0" fill="none" stroke="#7c3aed" stroke-width="2.0" stroke-dasharray="7 5"/>
+<path d="M130.0,60.0 Q280.0,180.0 430.0,300.0" fill="none" stroke="#d97706" stroke-width="2.0" stroke-dasharray="7 5"/>
+<path d="M430.0,300.0 Q650.0,300.0 870.0,300.0" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="2 4"/>
+<path d="M430.0,300.0 Q540.0,370.0 650.0,440.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M870.0,300.0 Q760.0,370.0 650.0,440.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M650.0,440.0 Q650.0,495.0 650.0,550.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M650.0,550.0 Q650.0,610.0 650.0,670.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M650.0,670.0 Q515.0,735.0 380.0,800.0" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+<path d="M650.0,670.0 Q785.0,735.0 920.0,800.0" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+<path d="M380.0,800.0 Q380.0,870.0 380.0,940.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M920.0,800.0 Q810.0,870.0 700.0,940.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M920.0,800.0 Q985.0,870.0 1050.0,940.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M1050.0,940.0 Q935.0,1015.0 820.0,1090.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M1050.0,940.0 Q1065.0,1015.0 1080.0,1090.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M1050.0,940.0 Q1115.0,885.0 1180.0,830.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<rect x="530.0" y="35.0" width="240" height="50" rx="8" fill="#f9fafb" stroke="#6b7280" stroke-width="1.5"/>
+<text class="h" x="650" y="55.0" text-anchor="middle">Area 51 Edge</text>
+<text class="s" x="650" y="72.0" text-anchor="middle">OSPFv3 area 0</text>
+<rect x="30.0" y="35.0" width="200" height="50" rx="8" fill="#f9fafb" stroke="#6b7280" stroke-width="1.5"/>
+<text class="h" x="130" y="55.0" text-anchor="middle">Nogales R1</text>
+<text class="s" x="130" y="72.0" text-anchor="middle">IPsec peer</text>
+<rect x="1070.0" y="35.0" width="200" height="50" rx="8" fill="#f9fafb" stroke="#6b7280" stroke-width="1.5"/>
+<text class="h" x="1170" y="55.0" text-anchor="middle">Vegas Edge</text>
+<text class="s" x="1170" y="72.0" text-anchor="middle">GRE peer</text>
+<rect x="325.0" y="272.0" width="210" height="56" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="430" y="295.0" text-anchor="middle">R1</text>
+<text class="s" x="430" y="312.0" text-anchor="middle">HSRP active</text>
+<rect x="765.0" y="272.0" width="210" height="56" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="870" y="295.0" text-anchor="middle">R2</text>
+<text class="s" x="870" y="312.0" text-anchor="middle">HSRP standby</text>
+<rect x="570.0" y="417.0" width="160" height="46" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+<text class="h" x="650" y="443.5" text-anchor="middle">S1</text>
+<rect x="570.0" y="527.0" width="160" height="46" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="650" y="553.5" text-anchor="middle">R3</text>
+<rect x="570.0" y="647.0" width="160" height="46" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="650" y="673.5" text-anchor="middle">R4</text>
+<rect x="300.0" y="777.0" width="160" height="46" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="380" y="803.5" text-anchor="middle">R5</text>
+<rect x="820.0" y="775.0" width="200" height="50" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="920" y="795.0" text-anchor="middle">R6</text>
+<text class="s" x="920" y="812.0" text-anchor="middle">DHCPv6 server</text>
+<rect x="270.0" y="915.0" width="220" height="50" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+<text class="h" x="380" y="935.0" text-anchor="middle">Syslog server</text>
+<text class="s" x="380" y="952.0" text-anchor="middle">servers …:5004::/64 · ::4</text>
+<rect x="600.0" y="915.0" width="200" height="50" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+<text class="h" x="700" y="935.0" text-anchor="middle">AP1 · LAN 1</text>
+<text class="s" x="700" y="952.0" text-anchor="middle">…:5001::/64</text>
+<rect x="970.0" y="917.0" width="160" height="46" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+<text class="h" x="1050" y="943.5" text-anchor="middle">S2</text>
+<rect x="710.0" y="1065.0" width="220" height="50" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+<text class="h" x="820" y="1085.0" text-anchor="middle">CAM-1 · CAM-2</text>
+<text class="s" x="820" y="1102.0" text-anchor="middle">cameras …:5003::/64</text>
+<rect x="1020.0" y="1067.0" width="120" height="46" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+<text class="h" x="1080" y="1093.5" text-anchor="middle">S3</text>
+<rect x="1095.0" y="805.0" width="170" height="50" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+<text class="h" x="1180" y="825.0" text-anchor="middle">AP2 · LAN 2</text>
+<text class="s" x="1180" y="842.0" text-anchor="middle">…:5002::/64</text>
+<rect x="576.8" y="103.8" width="49.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="601.6" y="116.8" text-anchor="middle">S0/2/1</text>
+<rect x="427.2" y="209.4" width="155.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="504.8" y="222.4" text-anchor="middle">S0/1/0 2001:db8:1:2::2</text>
+<rect x="511.9" y="169.2" width="59.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="541.7" y="182.2" text-anchor="middle">1:2::/64</text>
+<rect x="673.6" y="103.8" width="49.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="698.4" y="116.8" text-anchor="middle">S0/2/0</text>
+<rect x="717.6" y="209.4" width="155.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="795.2" y="222.4" text-anchor="middle">S0/1/0 2001:db8:1:3::2</text>
+<rect x="728.6" y="169.2" width="59.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="758.4" y="182.2" text-anchor="middle">1:3::/64</text>
+<rect x="943.8" y="190.8" width="103.0" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="995.2" y="203.8" text-anchor="middle">GRE …:13:2::/64</text>
+<rect x="943.4" y="135.2" width="103.0" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="994.9" y="148.2" text-anchor="middle">GRE …:13:1::/64</text>
+<rect x="257.2" y="169.2" width="41.0" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="277.8" y="182.2" text-anchor="middle">IPsec</text>
+<rect x="589.2" y="291.0" width="121.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="650.0" y="304.0" text-anchor="middle">HSRP · …:5006::/64</text>
+<rect x="482.7" y="340.3" width="49.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="507.5" y="353.3" text-anchor="middle">G0/0/0</text>
+<rect x="549.3" y="384.8" width="56.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="577.4" y="397.8" text-anchor="middle">G1/0/11</text>
+<rect x="767.6" y="340.3" width="49.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="792.4" y="353.3" text-anchor="middle">G0/0/0</text>
+<rect x="694.5" y="384.8" width="56.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="722.6" y="397.8" text-anchor="middle">G1/0/12</text>
+<rect x="625.2" y="475.3" width="49.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="650.0" y="488.3" text-anchor="middle">G1/0/1</text>
+<rect x="625.2" y="496.7" width="49.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="650.0" y="509.7" text-anchor="middle">G0/0/0</text>
+<rect x="625.2" y="585.4" width="49.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="650.0" y="598.4" text-anchor="middle">G0/0/1</text>
+<rect x="625.2" y="616.6" width="49.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="650.0" y="629.6" text-anchor="middle">G0/0/0</text>
+<rect x="516.2" y="707.1" width="76.0" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="554.2" y="720.1" text-anchor="middle">S0/1/0 DCE</text>
+<rect x="440.2" y="750.0" width="49.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="465.0" y="763.0" text-anchor="middle">S0/1/0</text>
+<rect x="707.9" y="707.1" width="76.0" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="745.9" y="720.1" text-anchor="middle">S0/1/1 DCE</text>
+<rect x="805.4" y="747.8" width="49.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="830.2" y="760.8" text-anchor="middle">S0/1/0</text>
+<rect x="355.2" y="835.5" width="49.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="380.0" y="848.5" text-anchor="middle">G0/0/0</text>
+<rect x="822.0" y="837.5" width="49.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="846.8" y="850.5" text-anchor="middle">G0/0/0</text>
+<rect x="932.9" y="853.0" width="89.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="977.5" y="866.0" text-anchor="middle">G0/0/1 trunk</text>
+<rect x="978.7" y="881.0" width="49.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="1003.5" y="894.0" text-anchor="middle">G1/0/1</text>
+<rect x="933.8" y="982.0" width="76.0" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="971.8" y="995.0" text-anchor="middle">G1/0/11-12</text>
+<rect x="1031.7" y="980.1" width="56.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="1059.8" y="993.1" text-anchor="middle">G1/0/13</text>
+<rect x="1080.1" y="881.8" width="56.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="1108.2" y="894.8" text-anchor="middle">G1/0/24</text>
+<text class="s" x="1080" y="1145" text-anchor="middle">S3 G1/0/24 → CAM-3</text>
+<text class="s" x="650" y="1185" text-anchor="middle">internal links on …:5000::/64 · management …:5005::/64 · all of 2001:db8:cafe:5000::/52 · MP-BGP in the design phase, OSPFv3 in the final build · final configs not saved (see README)</text>
+<rect x="58" y="980" width="401" height="128" rx="6" fill="#ffffff" stroke="#d1d5db"/>
+<line x1="70" y1="1000" x2="110" y2="1000" stroke="#dc2626" stroke-width="2.5"/>
+<text class="t" x="120" y="1004">serial link</text>
+<line x1="70" y1="1022" x2="110" y2="1022" stroke="#111827" stroke-width="2.0"/>
+<text class="t" x="120" y="1026">Ethernet</text>
+<line x1="70" y1="1044" x2="110" y2="1044" stroke="#7c3aed" stroke-opacity="0.16" stroke-width="14"/>
+<line x1="70" y1="1044" x2="110" y2="1044" stroke="#7c3aed" stroke-width="2.0" stroke-dasharray="7 5"/>
+<text class="t" x="120" y="1048">tunnel up (GRE / IPsec overlay)</text>
+<line x1="70" y1="1066" x2="110" y2="1066" stroke="#d97706" stroke-width="2.0" stroke-dasharray="7 5"/>
+<text class="t" x="120" y="1070">tunnel configured, not working at the deadline</text>
+<line x1="70" y1="1088" x2="110" y2="1088" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="2 4"/>
+<text class="t" x="120" y="1092">HSRP group (virtual gateway)</text>
+</svg>

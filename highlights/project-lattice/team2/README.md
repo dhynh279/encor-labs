@@ -4,25 +4,7 @@ A campus with a stacked core switch, one access switch per floor (APs, printers,
 
 ## Topology (from final configs, 11/04)
 
-```mermaid
-flowchart TB
-    HUB(["Hub"])
-    ASA{{"ASA · PAT<br/>Gi1/3 8.8.9.50 → default 8.8.9.49"}}
-    R1["R1 (SD-WAN edge 1)"]
-    R2["R2 (SD-WAN edge 2)<br/>default-information originate"]
-    CORE["CSW1_2 · core stack<br/>SVIs + DHCP"]
-    A1["ASW1 · floor 1<br/>VLAN 10"]
-    A2["ASW2 · floor 2<br/>VLAN 20"]
-    A3["ASW3 · floor 3<br/>VLAN 30"]
-    HUB --- ASA
-    ASA ---|"10.0.50.244/30"| R1
-    ASA ---|"10.0.50.240/30"| R2
-    R1 ---|"10.0.50.252/30 · Fa3/0/1"| CORE
-    R2 ---|"10.0.50.248/30 · Fa4/0/1"| CORE
-    CORE ---|"Fa4/0/2"| A1
-    CORE ---|"Fa4/0/3"| A2
-    CORE ---|"Fa4/0/4"| A3
-```
+![Team 2 topology](../docs/diagrams/team2.svg)
 
 ## Addressing
 

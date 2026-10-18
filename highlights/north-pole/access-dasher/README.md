@@ -2,19 +2,7 @@
 
 Two Catalyst access switches bundled with LACP, each dual-linked to DSW-7/DSW-8, and both trunked to a Meraki switch that hosts the servers.
 
-```mermaid
-flowchart TB
-    D7(["DSW-7<br/>HSRP active 90/100"])
-    D8(["DSW-8<br/>HSRP active 110/120"])
-    SW1["SW1"]
-    SW2["SW2"]
-    MK["Meraki (SW3)"]
-    D7 & D8 ---|"Gi1/0/23-24 → Gi1/0/13-14<br/>trunk 90,100,110,120 · native 200"| SW1 & SW2
-    SW1 ===|"Po1 · Gi1/0/21-24 · LACP active/passive"| SW2
-    SW1 & SW2 ---|"Gi1/0/17 trunk"| MK
-    MK --- SRV["Email .254 · RADIUS .246<br/>SNMP .238 · Proxmox .230"]
-    SW1 --- P["Gi1/0/2 · VLAN 110<br/>Gi1/0/4 · VLAN 90"]
-```
+![Dasher access topology](../docs/diagrams/access-dasher.svg)
 
 | VLAN | Name | Subnet | Gateway (VIP) |
 |---|---|---|---|

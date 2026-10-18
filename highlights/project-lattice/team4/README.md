@@ -4,31 +4,7 @@ A small provider-style network: a central **PE-0** with serial links to four PEs
 
 ## Topology (from the team's scripts)
 
-```mermaid
-flowchart TB
-    T3(["Team 3 ASA<br/>172.0.0.213"])
-    ASA{{"ASA-LOCAL<br/>EIGRP 200 ⇄ OSPF 1"}}
-    PE0["PE-0<br/>area 0 hub"]
-    PE1["PE-1"]
-    PE2["PE-2"]
-    PE3["PE-3<br/>default-information originate"]
-    PE4["PE-4"]
-    DC1["DC-1 L3 · area 1<br/>192.168.64.0/19"]
-    DC2["DC-2 L3 · area 2<br/>192.168.96.0/19"]
-    S1["Site-1 L3 · area 3<br/>192.168.0.0/19<br/>SD-WAN managers"]
-    S2["Site-2 L3 · area 4<br/>192.168.32.0/19"]
-
-    T3 ---|"172.0.0.212/30"| ASA
-    ASA ---|"192.168.255.220/30"| PE3
-    PE0 ---|".244/30"| PE1
-    PE0 ---|".240/30"| PE2
-    PE0 ---|".252/30"| PE3
-    PE0 ---|".248/30"| PE4
-    PE1 ---|".232/30"| DC1
-    PE2 ---|".236/30"| DC2
-    PE3 ---|".224/30"| S1
-    PE4 ---|".228/30"| S2
-```
+![Team 4 topology](../docs/diagrams/team4.svg)
 
 | Block | Use |
 |---|---|

@@ -4,36 +4,7 @@ The hub of the WAN. Every other site lands on the Area 51 **Edge-Router** over a
 
 ## Topology (from final configs)
 
-```mermaid
-flowchart TB
-    WAN(["Nogales · Bangkok R1 · Bangkok R2 · Maine · Vegas"])
-    EDGE["Edge-Router<br/>Cisco 2901 · IOS 15.6<br/>RID 19.19.19.19"]
-    R2["R2-Area51<br/>ISR 4221 · IOS-XE 17.9<br/>RID 2.2.2.2<br/>Lo0 …:1009:100::5"]
-    R1["R1-Area51<br/>ISR 4221 · IOS-XE 17.9<br/>RID 1.1.1.1"]
-    S1["S1 · C1000-24T"]
-    S3["S3 · C1000-24T"]
-    SRV["Web + Syslog servers<br/>…:1007::/64"]
-    RAD["RADIUS segment<br/>…:1000::/64"]
-
-    WAN ===|"5 × serial · 2001:db8:1:1–5::/64"| EDGE
-    EDGE ---|"S0/0/0 ↔ S0/1/1<br/>fe80::1 ↔ fe80::2"| R2
-    R2 ---|"S0/1/0 ↔ S0/1/0<br/>fe80::3 ↔ fe80::4"| R1
-    R2 ---|"Gi0/0/0 trunk ↔ Gi1/0/24<br/>VLAN 6,100,200,300 · native 999"| S1
-    R2 ---|"Gi0/0/1"| SRV
-    R1 ---|"Gi0/0/0 trunk ↔ Gi1/0/24<br/>VLAN 6,400,500,600 · native 999"| S3
-    R1 ---|"Gi0/0/1"| RAD
-
-    S1 --- V100["Gi1/0/1 · VLAN 100"] & V200["Gi1/0/2 · VLAN 200"] & V300["Gi1/0/3 · VLAN 300"]
-    S3 --- V500["Gi1/0/1 · VLAN 500"] & V600["Gi1/0/2 · VLAN 600 cameras"] & V400["Gi1/0/3 · VLAN 400"]
-
-    subgraph RING["LACP EtherChannel ring"]
-        S4["S4"] ===|"Po1 · Gi1/0/23-24"| S5["S5"]
-        S5 ===|"Po3 · Gi1/0/17-18"| S6["S6"]
-        S6 ===|"Po4 · Gi1/0/19-20"| S7["S7"]
-        S7 ===|"Po2 · Gi1/0/21-22"| S4
-    end
-    S3 -.-|"per original drawing"| RING
-```
+![Area 51 topology](../../docs/diagrams/area51.svg)
 
 The serial links inside the site use **link-local addresses only** (`fe80::1`–`::4`) — OSPFv3 forms adjacencies over link-local, so no global prefix is needed on router-to-router links.
 

@@ -8,32 +8,7 @@ Five "cities" were each built by a separate team and then stitched together over
 
 ## WAN at a glance
 
-```mermaid
-flowchart TB
-    subgraph CORE["AREA 51 core · OSPFv3 area 0"]
-        EDGE["Edge-Router<br/>Cisco 2901<br/>RID 19.19.19.19"]
-    end
-
-    NOG["NOGALES · R1 edge<br/>RID 11.11.11.11<br/>RIPng ⇄ OSPFv3"]
-    BR1["BANGKOK · R1 (HSRP active)"]
-    BR2["BANGKOK · R2 (HSRP standby)"]
-    MR1["MAINE · R1<br/>ABR area 0 / area 2<br/>RID 4.0.0.1"]
-    MR2["MAINE · R2<br/>RID 4.0.0.2"]
-    VE["VEGAS · Edge<br/>ABR area 0 / area 1<br/>RID 21.21.21.21"]
-
-    EDGE ---|"S0/1/0 · 2001:db8:1:1::/64"| NOG
-    EDGE ---|"S0/2/1 · 2001:db8:1:2::/64"| BR1
-    EDGE ---|"S0/2/0 · 2001:db8:1:3::/64"| BR2
-    EDGE ---|"S0/0/1 · 2001:db8:1:4::/64"| MR1
-    EDGE ---|"S0/1/1 · 2001:db8:1:5::/64"| VE
-    MR1 ---|"2001:db8:cafe:4000::/64"| MR2
-
-    VE -. "GRE Tunnel0 · 2001:db8:13:1::/64 ✅" .- BR1
-    VE -. "GRE Tunnel1 · 2001:db8:13:2::/64 ✅" .- BR2
-    NOG -. "IPsec crypto map 10/20 ⚠️" .- BR1
-    NOG -. "IPsec crypto map 30 ⚠️" .- VE
-    MR2 -. "GRE Tunnel0 · 2001:db8:12:1::/64 ⚠️" .- NOG
-```
+![Project Meridian WAN topology](docs/diagrams/wan.svg)
 
 ✅ = reported up and routing in the final-night notes · ⚠️ = configured on at least one side but not up at the deadline (see [docs/known-issues.md](docs/known-issues.md)).
 
@@ -52,12 +27,12 @@ Full addressing: [docs/addressing.md](docs/addressing.md) · Routing and tunnels
 ## Repo layout
 
 ```
-sites/<site>/README.md        topology (Mermaid), addressing, device roles, notes
+sites/<site>/README.md        topology, addressing, device roles, notes
 sites/<site>/configs/         final running-configs pulled from the hardware (10/07–10/09/2025)
 sites/<site>/snippets/        helper scripts and drafts the team pasted in (VLANs, AAA, IPsec)
 sites/bangkok/design-phase-pt/  Bangkok configs extracted from the Packet Tracer file (pre-renumbering)
 docs/                         WAN design, addressing plan, known issues, lessons learned
-docs/diagrams/                PNG renders of the Mermaid topologies (for viewing outside GitHub)
+docs/diagrams/                topology diagrams (SVG + PNG), built by tools/topology
 docs/original-diagrams/       the team's original drawings and planning tables
 packet-tracer/                original .pkt files (Packet Tracer 8.2)
 ```

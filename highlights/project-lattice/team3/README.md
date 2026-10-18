@@ -4,35 +4,7 @@ A five-router serial mesh running **EIGRP AS 200**, with two branch sites, an AS
 
 ## Topology (from final configs)
 
-```mermaid
-flowchart TB
-    HUB(["Hub ASA → MPLS core<br/>8.8.9.41"])
-    T4(["Team 4 ASA<br/>172.0.0.214"])
-    R4["R4<br/>Gi0/0/0 8.8.9.42/30<br/>static default → hub"]
-    R1["R1"]
-    R2["R2"]
-    R3["R3"]
-    R5["R5"]
-    ASA{{"ASA<br/>inside .218/29 · outside .213/30"}}
-    R6["R6 · Site 1 edge<br/>EIGRP 200 ⇄ 300 ⇄ RIP"]
-    R9["R9 · Site 2 edge<br/>EIGRP 200 ⇄ 600 ⇄ RIP"]
-    S1(["Site 1 Catalyst 1000 L3 ×2<br/>100.100.100.0/30 · 100.100.200.0/30"])
-    S2(["Site 2 Catalyst 1000 L3 ×2<br/>100.200.100.0/30 · 100.200.200.0/30"])
-
-    HUB ---|"8.8.9.40/30"| R4
-    R1 ---|".252/30"| R2
-    R1 ---|".248/30"| R3
-    R1 ---|".244/30"| R4
-    R2 ---|".240/30"| R5
-    R3 ---|".236/30"| R5
-    R4 ---|".232/30"| R5
-    R1 ---|".224/30"| R6
-    R5 ---|".228/30"| R9
-    R2 ---|"Gi0/0/0 · .216/29"| ASA
-    ASA ---|".212/30"| T4
-    R6 ---|"RIP"| S1
-    R9 ---|"RIP"| S2
-```
+![Team 3 topology](../docs/diagrams/team3.svg)
 
 All of the `172.0.0.x` links are serial /30s, which is why we had to install two extra serial cards on 10/16.
 

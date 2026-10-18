@@ -1,0 +1,28 @@
+from topo import Diagram
+OUT = 'highlights/project-meridian/docs/diagrams/area51'
+def build():
+    d = Diagram(1300, 900)
+    d.area(30, 140, 1240, 720, 'OSPFv3 process 10 · area 0')
+    d.node('wan', 700, 60, 380, 56, 'Nogales · Bangkok R1/R2 · Maine · Vegas', ['5 serial links, 2001:db8:1:1–5::/64'], 'external')
+    d.node('edge', 700, 230, 230, 64, 'EDGE-ROUTER', ['Cisco 2901 · RID 19.19.19.19'])
+    d.node('r2', 720, 420, 230, 80, 'R2-AREA51', ['ISR 4221 · RID 2.2.2.2', 'Lo0 …:1009:100::5'])
+    d.node('r1', 250, 420, 230, 64, 'R1-AREA51', ['ISR 4221 · RID 1.1.1.1'])
+    d.node('srv', 1080, 420, 230, 76, 'Web + Syslog', ['…:1007::/64 · R2 …:1007:100::1', 'web ::2 · syslog ::3'], 'lan')
+    d.node('rad', 250, 240, 200, 56, 'RADIUS', ['…:1000::/64'], 'lan')
+    d.node('s1', 720, 600, 200, 56, 'S1', ['Catalyst 1000'], 'switch')
+    d.node('s3', 250, 600, 200, 56, 'S3', ['Catalyst 1000'], 'switch')
+    d.node('lan1', 720, 770, 240, 90, 'VLANs on R2', ['100 · …:1001::/64', '200 · …:1002::/64', '300 · …:1003::/64'], 'lan')
+    d.node('lan3', 250, 770, 250, 90, 'VLANs on R1', ['400 · …:1004::/64', '500 · …:1005::/64', '600 cameras · …:1006::/64'], 'lan')
+    d.node('ring', 1080, 690, 260, 110, 'S4 – S7 EtherChannel ring', ['S4–S5 Po1 · S5–S6 Po3', 'S6–S7 Po4 · S7–S4 Po2', 'LACP, no VLANs configured', '(tied to S3 in the drawing only)'], 'switch')
+    d.link('wan', 'edge', 'serial', None, None, None)
+    d.link('edge', 'r2', 'serial', 'S0/0/0 fe80::1', 'S0/1/1 fe80::2', 'link-local only')
+    d.link('r2', 'r1', 'serial', 'S0/1/0 fe80::3', 'S0/1/0 fe80::4')
+    d.link('r2', 'srv', 'ethernet', 'Gi0/0/1')
+    d.link('r1', 'rad', 'ethernet', 'Gi0/0/1 …:1000:100::1')
+    d.link('r2', 's1', 'ethernet', 'Gi0/0/0 trunk', 'Gi1/0/24', 'VLAN 6,100,200,300 · native 999', mid_off=0)
+    d.link('r1', 's3', 'ethernet', 'Gi0/0/0 trunk', 'Gi1/0/24', 'VLAN 6,400,500,600 · native 999')
+    d.link('s1', 'lan1', 'ethernet', 'Gi1/0/1–3')
+    d.link('s3', 'lan3', 'ethernet', 'Gi1/0/1–3')
+    d.note(650, 885, 'Mgmt VLAN 6 · …:1008::/64 on R1 Gi0/0/0.6  ·  unused ports: VLAN 888, shut  ·  all prefixes in 2001:db8:cafe:1000::/52', 's')
+    d.legend(900, 190)
+    return d

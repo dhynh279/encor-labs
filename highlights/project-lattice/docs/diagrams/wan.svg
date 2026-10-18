@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 960" width="1500" height="960" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<defs><style>.s{font-size:11.5px;fill:#374151}.h{font-size:15px;font-weight:700;fill:#111827}.a{font-size:15px;font-weight:700;fill:#4b5563}.t{font-size:13px;fill:#1f2937}.lbl{font-size:11px;fill:#111827}.ip{font-size:11px;fill:#1d4ed8;font-family:Consolas,Menlo,monospace}.tt{font-size:18px;font-weight:700;fill:#111827}</style></defs>
+<rect x="40" y="70" width="400" height="240" rx="24" fill="#f3f4f6" stroke="#9ca3af" stroke-dasharray="6 5"/>
+<text class="a" x="60" y="98">Team 1 · 20.0.0.0/16</text>
+<rect x="480" y="70" width="570" height="600" rx="24" fill="#f3f4f6" stroke="#9ca3af" stroke-dasharray="6 5"/>
+<text class="a" x="500" y="98">Hub · 8.8.0.0/16</text>
+<rect x="1090" y="70" width="370" height="240" rx="24" fill="#f3f4f6" stroke="#9ca3af" stroke-dasharray="6 5"/>
+<text class="a" x="1110" y="98">Team 2 · 10.0.0.0/16</text>
+<rect x="40" y="720" width="1000" height="200" rx="24" fill="#f3f4f6" stroke="#9ca3af" stroke-dasharray="6 5"/>
+<text class="a" x="60" y="904">Team 3 · 172.0.0.0/24 · EIGRP 200</text>
+<rect x="1090" y="520" width="370" height="400" rx="24" fill="#f3f4f6" stroke="#9ca3af" stroke-dasharray="6 5"/>
+<text class="a" x="1110" y="904">Team 4 · 192.168.0.0/16</text>
+<path d="M240.0,165.0 Q430.0,167.5 620.0,170.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M240.0,255.0 Q430.0,212.5 620.0,170.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M620.0,170.0 Q692.5,245.0 765.0,320.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M880.0,170.0 Q822.5,245.0 765.0,320.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M765.0,470.0 Q765.0,395.0 765.0,320.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M765.0,470.0 Q765.0,535.0 765.0,600.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M880.0,170.0 Q1090.0,180.0 1300.0,190.0" fill="none" stroke="#9ca3af" stroke-width="2.0" stroke-dasharray="3 5"/>
+<path d="M765.0,600.0 Q497.5,700.0 230.0,800.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M230.0,800.0 Q385.0,800.0 540.0,800.0" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+<path d="M540.0,800.0 Q705.0,800.0 870.0,800.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M870.0,800.0 Q1072.5,710.0 1275.0,620.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<path d="M1275.0,620.0 Q1275.0,700.0 1275.0,780.0" fill="none" stroke="#111827" stroke-width="2.0"/>
+<rect x="120.0" y="140.0" width="240" height="50" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="240" y="160.0" text-anchor="middle">EdgeR</text>
+<text class="s" x="240" y="177.0" text-anchor="middle">RIP ⇄ OSPF (via RA)</text>
+<rect x="120.0" y="230.0" width="240" height="50" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="240" y="250.0" text-anchor="middle">EdgeE</text>
+<text class="s" x="240" y="267.0" text-anchor="middle">EIGRP 1 ⇄ OSPF</text>
+<rect x="545.0" y="145.0" width="150" height="50" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="620" y="165.0" text-anchor="middle">P1</text>
+<text class="s" x="620" y="182.0" text-anchor="middle">Lo1 100.20.30.40</text>
+<rect x="805.0" y="145.0" width="150" height="50" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="880" y="165.0" text-anchor="middle">P2</text>
+<text class="s" x="880" y="182.0" text-anchor="middle">Lo1 100.20.30.41</text>
+<rect x="630.0" y="288.0" width="270" height="64" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="765" y="306.5" text-anchor="middle">MPLS core</text>
+<text class="s" x="765" y="323.5" text-anchor="middle">P1–P4 full mesh · 8.8.8.0/24</text>
+<text class="s" x="765" y="340.5" text-anchor="middle">OSPF 65535 area 0 · LDP</text>
+<rect x="690.0" y="445.0" width="150" height="50" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="765" y="465.0" text-anchor="middle">P4</text>
+<text class="s" x="765" y="482.0" text-anchor="middle">Lo1 100.20.30.43</text>
+<rect x="655.0" y="572.0" width="220" height="56" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+<text class="h" x="765" y="595.0" text-anchor="middle">Hub ASA</text>
+<text class="s" x="765" y="612.0" text-anchor="middle">OSPF ⇄ EIGRP 200</text>
+<rect x="1170.0" y="152.0" width="260" height="76" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+<text class="h" x="1300" y="176.5" text-anchor="middle">ASA · PAT</text>
+<text class="s" x="1300" y="193.5" text-anchor="middle">R1 · R2 · core stack · 3 floors</text>
+<text class="s" x="1300" y="210.5" text-anchor="middle">OSPF 50 area 99</text>
+<rect x="115.0" y="768.0" width="230" height="64" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="230" y="786.5" text-anchor="middle">R4</text>
+<text class="s" x="230" y="803.5" text-anchor="middle">8.8.9.42 · static default</text>
+<text class="s" x="230" y="820.5" text-anchor="middle">→ hub</text>
+<rect x="410.0" y="768.0" width="260" height="64" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="540" y="795.0" text-anchor="middle">R1 – R5 serial mesh</text>
+<text class="s" x="540" y="812.0" text-anchor="middle">+ 2 branch sites (RIP)</text>
+<rect x="760.0" y="772.0" width="220" height="56" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+<text class="h" x="870" y="795.0" text-anchor="middle">ASA</text>
+<text class="s" x="870" y="812.0" text-anchor="middle">inside .218 · outside .213</text>
+<rect x="1145.0" y="592.0" width="260" height="56" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+<text class="h" x="1275" y="615.0" text-anchor="middle">ASA-LOCAL</text>
+<text class="s" x="1275" y="632.0" text-anchor="middle">EIGRP 200 ⇄ OSPF 1</text>
+<rect x="1145.0" y="748.0" width="260" height="64" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="1.5"/>
+<text class="h" x="1275" y="766.5" text-anchor="middle">PE-0 … PE-4</text>
+<text class="s" x="1275" y="783.5" text-anchor="middle">serial hub-and-spoke</text>
+<text class="s" x="1275" y="800.5" text-anchor="middle">OSPF areas 0–4</text>
+<rect x="382.5" y="158.7" width="121.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="443.3" y="171.7" text-anchor="middle">RIP · 8.8.9.100/30</text>
+<rect x="360.6" y="202.6" width="146.4" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="433.8" y="215.6" text-anchor="middle">EIGRP 1 · 8.8.9.104/30</text>
+<rect x="733.6" y="507.5" width="62.8" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="765.0" y="520.5" text-anchor="middle">Gi1/0/24</text>
+<rect x="704.2" y="531.5" width="121.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="765.0" y="544.5" text-anchor="middle">8.8.9.48/29 · OSPF</text>
+<rect x="992.6" y="169.7" width="140.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="1062.7" y="182.7" text-anchor="middle">P2 Gi1/0/13 · area 99</text>
+<rect x="643.1" y="631.0" width="29.8" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="ip" x="658.0" y="644.0" text-anchor="middle">.41</text>
+<rect x="445.3" y="682.0" width="152.6" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="521.6" y="695.0" text-anchor="middle">8.8.9.40/30 · EIGRP 200</text>
+<rect x="986.9" y="701.0" width="171.2" height="17" rx="3" fill="#ffffff" fill-opacity="0.94"/>
+<text class="lbl" x="1072.5" y="714.0" text-anchor="middle">172.0.0.212/30 · EIGRP 200</text>
+<text class="s" x="240" y="560" text-anchor="middle">Team 4 reaches the WAN through Team 3</text>
+<rect x="58" y="380" width="329" height="106" rx="6" fill="#ffffff" stroke="#d1d5db"/>
+<line x1="70" y1="400" x2="110" y2="400" stroke="#dc2626" stroke-width="2.5"/>
+<text class="t" x="120" y="404">serial link</text>
+<line x1="70" y1="422" x2="110" y2="422" stroke="#111827" stroke-width="2.0"/>
+<text class="t" x="120" y="426">Ethernet</text>
+<line x1="70" y1="444" x2="110" y2="444" stroke="#9ca3af" stroke-width="2.0" stroke-dasharray="3 5"/>
+<text class="t" x="120" y="448">addresses don't match in final saves</text>
+<rect x="76" y="458" width="28" height="16" rx="3" fill="#fff7ed" stroke="#ea580c"/>
+<text class="t" x="120" y="470">ASA firewall</text>
+</svg>

@@ -76,5 +76,5 @@ Each `labNN-*/` folder holds the `.pkt` / topology file, `configs/<device>.txt` 
 ```
 highlights/   the four real-hardware projects (start with highlights/README.md)
 labNN-*/      ENCOR workbook labs
-tools/        render-diagrams: rebuilds the topology PNGs from each project's Mermaid source
+tools/        topology: Python specs that draw every highlights topology (SVG + PNG)
 ```
