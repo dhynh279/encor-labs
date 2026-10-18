@@ -1,0 +1,20 @@
+vlan 20
+name Starbucks
+vlan 30
+name Taco Bell
+vlan 40
+name McDonald's
+vlan 999
+name Void
+vlan 1000
+name Native
+
+
+
+
+
+
+
+switchport mode trunk
+switchport trunk native vlan 1000
+switchport trunk allowed vlan 20,30,40

@@ -1,0 +1,35 @@
+license boot level securityk9
+crypto isakmp enable
+
+crypto isakmp policy 9
+authentication pre-share
+encryption aes 256
+group 14
+hash sha256
+lifetime 3600
+
+crypto ISAKMP key <PSK> address 2001:db8:1:4::2
+
+
+crypto ipsec transform-set tset esp-aes 256 esp-sha256-hmac
+crypto ipsec security-association lifetime seconds 900
+
+
+ip access-list extended 30
+remark link to Vegas
+permit ip 2001:db8:cafe:2000::/64 2001:db8:cafe:3000::/64
+permit ip 2001:db8:cafe:2001::/64 2001:db8:cafe:3000::/64
+permit ip 2001:db8:cafe:2002::/64 2001:db8:cafe:3000::/64
+permit ip 2001:db8:cafe:2003::/64 2001:db8:cafe:3000::/64
+permit ip 2001:db8:cafe:2004::/64 2001:db8:cafe:3000::/64
+permit ip 2001:db8:cafe:2005::/64 2001:db8:cafe:3000::/64
+
+
+crypto map cmap 30 ipsec-isakmp
+match address 30
+set peer 2001:db8:1:4::2
+set transform tset
+set pfs group14
+set security-association lifetime seconds 900
+interface <port used>
+crypto map cmap

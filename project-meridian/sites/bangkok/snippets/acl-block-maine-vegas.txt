@@ -1,0 +1,4 @@
+ipv6 access-list BLOCK_MAINE_VEGAS
+deny ipv6 2001:db8:cafe:4000::/64 any
+deny ipv6 2001:db8:cafe:3000::/64 any
+permit ipv6 any any

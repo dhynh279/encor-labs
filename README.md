@@ -16,3 +16,9 @@ Lab files, configs and notes for the 9-lab ENCOR workbook.
 
 ## Layout
 Each `labNN-*/` folder holds the `.pkt` / topology file, `configs/<device>.txt` (final `show run`), and `NOTES.md` (verification output, break/fix findings).
+
+## Capstone
+
+| Project | Topic | Platform |
+|---|---|---|
+| [project-meridian](project-meridian) | Five-site IPv6-only WAN: OSPFv3 / RIPng / BGP, HSRP, EtherChannel, GRE, IPsec | Real hardware (ISR 4221, Cat 1000) + Packet Tracer |

@@ -1,0 +1,270 @@
+
+!
+! Last configuration change at 04:39:42 UTC Tue Oct 7 2025
+!
+version 15.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname S2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+username Admin secret 9 <removed>
+no aaa new-model
+switch 1 provision c1000-24t-4g-l
+system mtu routing 1500
+!
+!
+no ip domain-lookup
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint TP-self-signed-2925897728
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2925897728
+ revocation-check none
+ rsakeypair TP-self-signed-2925897728
+!
+!
+crypto pki certificate chain TP-self-signed-2925897728
+ certificate self-signed 01
+  ! <certificate data removed>
+        quit
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+!
+interface Port-channel1
+ switchport trunk allowed vlan 20,30,40
+ switchport trunk native vlan 1000
+ switchport mode trunk
+!
+interface Port-channel2
+ switchport trunk allowed vlan 20,30,40
+ switchport trunk native vlan 1000
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/1
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/2
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/3
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/4
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/5
+ switchport access vlan 40
+ switchport mode access
+!
+interface GigabitEthernet1/0/6
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/7
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/8
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/9
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/10
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/11
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/12
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/13
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/14
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/15
+ switchport trunk allowed vlan 20,30,40
+ switchport trunk native vlan 1000
+ switchport mode trunk
+ channel-group 2 mode active
+!
+interface GigabitEthernet1/0/16
+ switchport trunk allowed vlan 20,30,40
+ switchport trunk native vlan 1000
+ switchport mode trunk
+ channel-group 2 mode active
+!
+interface GigabitEthernet1/0/17
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/18
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/19
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/20
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/21
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/22
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/23
+ switchport trunk allowed vlan 20,30,40
+ switchport trunk native vlan 1000
+ switchport mode trunk
+ channel-group 1 mode passive
+!
+interface GigabitEthernet1/0/24
+ switchport trunk allowed vlan 20,30,40
+ switchport trunk native vlan 1000
+ switchport mode trunk
+ channel-group 1 mode passive
+!
+interface GigabitEthernet1/0/25
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/26
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/27
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface GigabitEthernet1/0/28
+ switchport access vlan 999
+ switchport mode access
+ switchport port-security maximum 5
+ switchport port-security mac-address sticky
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip http server
+ip http secure-server
+ip ssh version 2
+!
+!
+!
+!
+line con 0
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login local
+ transport input ssh
+!
+end

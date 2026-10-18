@@ -1,0 +1,241 @@
+
+!
+! Last configuration change at 21:40:17 UTC Tue Oct 7 2025
+!
+version 17.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+!
+hostname Maine-R2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+login on-success log
+ipv6 unicast-routing
+ipv6 dhcp pool VLAN-15
+ domain-name ALCADIA.VLAN-15.EDU
+!
+ipv6 dhcp pool VLAN-30
+ domain-name BAXTER.VLAN-30.EDU
+!
+ipv6 dhcp pool VLAN-45
+ domain-name CAMERA.VLAN-45.EDU
+!
+ipv6 dhcp pool VLAN-60
+ domain-name WIRELESS.VLAN-60.EDU
+!
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint TP-self-signed-457653262
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-457653262
+ revocation-check none
+ rsakeypair TP-self-signed-457653262
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+!
+crypto pki certificate chain TP-self-signed-457653262
+ certificate self-signed 01
+  ! <certificate data removed>
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  ! <certificate data removed>
+!
+!
+license udi pid ISR4221/K9 sn <removed>
+memory free low-watermark processor 63109
+!
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+!
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+interface Tunnel0
+ description (TUNNEL-TO-NOGALES)
+ no ip address
+ ipv6 address 2001:DB8:12:1::2/64
+ ipv6 rip RIPNG enable
+ tunnel source Serial0/1/0
+ tunnel mode gre ipv6
+ tunnel destination 2001:DB8:1:1::2
+ tunnel path-mtu-discovery
+!
+interface GigabitEthernet0/0/0
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet0/0/1
+ description (CONNECTION TO ASW1-ROOT)
+ no ip address
+ negotiation auto
+!
+interface GigabitEthernet0/0/1.15
+description (ALCADIA HOSTS)
+encapsulation dot1Q 15
+ ipv6 address 2001:DB8:CAFE:4001::1/64
+ ipv6 nd other-config-flag
+ ipv6 dhcp server VLAN-15
+ ipv6 ospf 10 area 2
+!
+interface GigabitEthernet0/0/1.30
+description (BAXTER HOSTS)
+encapsulation dot1Q 30
+ ipv6 address 2001:DB8:CAFE:4002::1/64
+ ipv6 nd other-config-flag
+ ipv6 dhcp server VLAN-30
+ ipv6 ospf 10 area 2
+!
+interface GigabitEthernet0/0/1.45
+description (CAMERAS)
+encapsulation dot1Q 45
+ ipv6 address 2001:DB8:CAFE:4003::1/64
+ ipv6 nd other-config-flag
+ ipv6 dhcp server VLAN-45
+ ipv6 ospf 10 area 2
+!
+interface GigabitEthernet0/0/1.60
+description (WIRELESS HOSTS)
+encapsulation dot1Q 60
+ ipv6 address 2001:DB8:CAFE:4004::1/64
+ ipv6 nd other-config-flag
+ ipv6 dhcp server VLAN-60
+ ipv6 ospf 10 area 2
+!
+interface GigabitEthernet0/0/1.75
+description (UNTAGGED-NATIVE)
+encapsulation dot1Q 75 native
+!
+interface Serial0/1/0
+ description (CONNECTION TO MAIN-R1)
+ no ip address
+ ipv6 address 2001:DB8:CAFE:4000::2/64
+ ipv6 ospf 10 area 2
+!
+interface Serial0/1/1
+ no ip address
+ shutdown
+!
+ip http server
+ip http authentication local
+ip http secure-server
+ip forward-protocol nd
+!
+!
+!
+ipv6 router ospf 10
+ router-id 4.0.0.2
+!
+ipv6 router rip RIPng
+ redistribute ospf 10
+!
+ipv6 router rip RIPNG
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ logging synchronous
+ login
+ transport input none
+ stopbits 1
+line aux 0
+line vty 0 4
+ login
+ transport input ssh
+line vty 5 14
+ login
+ transport input ssh
+!
+!
+!
+!
+!
+!
+!
+end
+
+config t
+username maine secret <removed>
+enable secret <removed>
+no ip domain lookup
+ip domain-name MAINE.R2
+line con 0
+logging sync
+login local
+exit
+banner motd #
+==============================================================================================
+          This computer system is the private property of (MAINE-TEAM),
+          whether individual, corporate or government.  It is for authorized use only.
+          Users (authorized or unauthorized) have no explicit or implicit
+          expectation of privacy.
+
+          Any or all uses of this system and all files on this system may be
+          intercepted, monitored, recorded, copied, audited, inspected, and
+          disclosed to your employer, to authorized site, government, and law
+          enforcement personnel, as well as authorized officials of government
+          agencies, both domestic and foreign.
+
+
+          By using this system, the user consents to such interception, monitoring,
+          recording, copying, auditing, inspection, and disclosure at the
+          discretion of such personnel or officials.  Unauthorized or improper use
+          of this system may result in civil and criminal penalties and
+          administrative or disciplinary action, as appropriate. By continuing to use
+          this system you indicate your awareness of and consent to these terms
+          and conditions of use. LOG OFF IMMEDIATELY if you do not agree to the
+          conditions stated in this warning.
+
+          ----------- Default User Credentials ---------
+
+          Username : maine
+          Password : <removed>
+          enable password : <removed>
+
+          ----------------------------------------------
+============================================================================================== #
+end
+wr

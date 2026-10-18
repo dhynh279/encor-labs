@@ -1,0 +1,174 @@
+!
+! Last configuration change at 19:46:00 UTC Thu Oct 9 2025 by usr01
+!
+version 17.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+!
+hostname Vegas-R3
+!
+boot-start-marker
+boot-end-marker
+!
+!
+aaa new-model
+!
+!
+aaa authentication login VegasUsr local none
+!
+!
+aaa session-id common
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name vegas.com
+!
+!
+!
+login on-success log
+ipv6 unicast-routing
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+ hash sha256
+!
+crypto pki trustpoint TP-self-signed-2370394847
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2370394847
+ revocation-check none
+ rsakeypair TP-self-signed-2370394847
+!
+crypto pki trustpoint TP-self-signed-3944459313
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3944459313
+ revocation-check none
+ rsakeypair TP-self-signed-3944459313
+ hash sha256
+!
+crypto pki trustpoint TP-self-signed-2373983659
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2373983659
+ revocation-check none
+ rsakeypair TP-self-signed-2373983659
+ hash sha256
+!
+!
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  ! <certificate data removed>
+        quit
+crypto pki certificate chain TP-self-signed-2370394847
+ certificate self-signed 01
+  ! <certificate data removed>
+        quit
+crypto pki certificate chain TP-self-signed-3944459313
+crypto pki certificate chain TP-self-signed-2373983659
+!
+!
+license udi pid ISR4221/K9 sn <removed>
+memory free low-watermark processor 61631
+!
+diagnostic bootup level minimal
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+enable secret 9 <removed>
+!
+username usr01 secret 9 <removed>
+username usr02 secret 9 <removed>
+username usr03 secret 9 <removed>
+username usr04 secret 9 <removed>
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ description Link to S2
+ no ip address
+ standby version 2
+ standby 10 ipv6 autoconfig
+ standby 10 ipv6 2001:DB8:CAFE:3050::FFFF/64
+ standby 10 preempt
+ negotiation auto
+ ipv6 address 2001:DB8:CAFE:3050::1/64
+ ipv6 enable
+ ipv6 ospf 2 area 1
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface Serial0/1/0
+ no ip address
+ ipv6 address 2001:DB8:CAFE:3020::2/64
+ ipv6 enable
+ ipv6 ospf 2 area 1
+!
+interface Serial0/1/1
+ no ip address
+!
+ip http server
+ip http authentication local
+ip http secure-server
+ip forward-protocol nd
+ip ssh bulk-mode 131072
+!
+!
+!
+ipv6 router ospf 2
+ router-id 8.8.8.8
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ transport input none
+ stopbits 1
+line aux 0
+line vty 0 4
+ logging synchronous
+ transport input ssh
+line vty 5 14
+ transport input ssh
+!
+!
+!
+!
+!
+!
+!
+end

@@ -1,0 +1,152 @@
+
+!
+! Last configuration change at 07:08:28 UTC Tue Oct 7 2025
+!
+version 17.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+!
+hostname R4
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+!
+!
+!
+login on-success log
+ipv6 unicast-routing
+ipv6 dhcp pool Servers
+ domain-name ipv6_20
+!
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint TP-self-signed-1118197406
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1118197406
+ revocation-check none
+ rsakeypair TP-self-signed-1118197406
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+!
+crypto pki certificate chain TP-self-signed-1118197406
+ certificate self-signed 01
+  ! <certificate data removed>
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  ! <certificate data removed>
+!
+!
+license udi pid ISR4221/K9 sn <removed>
+memory free low-watermark processor 63109
+!
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+!
+!
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ no ip address
+ negotiation auto
+!
+interface GigabitEthernet0/0/0.20
+ encapsulation dot1Q 20
+ ipv6 address 2001:DB8:CAFE:2003::1/64
+ ipv6 nd other-config-flag
+ ipv6 dhcp server Servers
+ ipv6 rip process1 enable
+!
+interface GigabitEthernet0/0/0.30
+ encapsulation dot1Q 30
+ ipv6 address 2001:DB8:CAFE:2004::/64 eui-64
+ ipv6 rip process1 enable
+!
+interface GigabitEthernet0/0/0.40
+ encapsulation dot1Q 40
+ ipv6 address 2001:DB8:CAFE:2005::/64 eui-64
+ ipv6 rip process1 enable
+!
+interface GigabitEthernet0/0/1
+ description LinkToCore_SW
+ no ip address
+ negotiation auto
+ ipv6 address 2001:DB8:CAFE:2002::4/64
+ ipv6 rip process1 enable
+!
+interface Serial0/1/0
+ no ip address
+ shutdown
+!
+interface Serial0/1/1
+ no ip address
+ shutdown
+!
+ip http server
+ip http authentication local
+ip http secure-server
+ip forward-protocol nd
+!
+!
+!
+ipv6 router rip process1
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ transport input none
+ stopbits 1
+line aux 0
+line vty 0 4
+ login
+ transport input ssh
+line vty 5 14
+ login
+ transport input ssh
+!
+!
+!
+!
+!
+!
+!
+end

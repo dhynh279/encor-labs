@@ -1,0 +1,127 @@
+!
+version 15.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname R6
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+ipv6 unicast-routing
+!
+ipv6 cef
+!
+ipv6 dhcp pool LAN-1
+ address prefix 2001:db8:cafe:5000:0010::/80 lifetime 172800 86400
+ domain-name cisco.com
+!
+ipv6 dhcp pool LAN-2
+ address prefix 2001:db8:cafe:5000:0020::/80 lifetime 172800 86400
+ domain-name cisco.com
+!
+ipv6 dhcp pool CAMERAS
+ address prefix 2001:db8:cafe:5000:0030::/80 lifetime 172800 86400
+ domain-name cisco.com
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ no ip address
+ duplex auto
+ speed auto
+ ipv6 address FE80::6 link-local
+ ipv6 address 2001:DB8:CAFE:5000:10::1/80
+ ipv6 nd managed-config-flag
+ ipv6 dhcp server LAN-1
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0/1.10
+ description LINK to CAMERA VLAN
+ encapsulation dot1Q 10
+ no ip address
+ ipv6 address FE80::6 link-local
+ ipv6 address 2001:DB8:CAFE:5000:30::1/80
+ ipv6 nd managed-config-flag
+ ipv6 dhcp server CAMERAS
+!
+interface GigabitEthernet0/0/1.20
+ description LINK to LAN-2
+ encapsulation dot1Q 20
+ no ip address
+ ipv6 address FE80::6 link-local
+ ipv6 address 2001:DB8:CAFE:5000:20::1/80
+ ipv6 nd managed-config-flag
+ ipv6 dhcp server LAN-2
+!
+interface GigabitEthernet0/0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial0/1/0
+ no ip address
+ ipv6 address FE80:: link-local
+ ipv6 address 2001:DB8:CAFE:5000:F0::11/127
+!
+interface Serial0/1/1
+ no ip address
+ clock rate 2000000
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router bgp 64514
+ bgp router-id 6.6.6.6
+ bgp log-neighbor-changes
+ no synchronization
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end

@@ -1,0 +1,19 @@
+vlan 15
+name Alcadia
+
+vlan 30
+name Baxter
+
+vlan 45
+name Camara
+
+vlan 60
+name Wireless
+
+vlan 99
+name Void
+
+vlan 75
+name Native
+
+new process id is 1 area2 for ospf
