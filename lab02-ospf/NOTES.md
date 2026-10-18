@@ -128,4 +128,4 @@ R1 `show ipv6 route ospf`: OI 2001:db8:4::4/128 [110/4], OI 2001:db8:23::/64 [11
 - Stage 3 filter on a platform that supports `area filter-list`: try with and without R2's summary.
 - Optional in PT: `area 1 range ... not-advertise` on R2 to suppress the /22.
 - Recall questions still open: why 1.1.1.1 costs 4 on R4; why 3.3.3.3 costs 2 not 1; why GE costs the same as FE and how to fix it.
-- Save final `show run` from each router to `configs/R1.txt`–`R4.txt` and the `.pkt` to this folder.
+- Final `show run` saved to `configs/R1.txt`–`R4.txt` (2026-10-17).
