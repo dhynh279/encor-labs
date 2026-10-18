@@ -1,0 +1,8 @@
+.DS_Store
+*.bak
+*~
+__pycache__/
+.venv/
+# never commit sandbox credentials
+.env
+*.secret
