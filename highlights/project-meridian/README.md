@@ -10,6 +10,8 @@ Five "cities" were each built by a separate team and then stitched together over
 
 ![Project Meridian WAN topology](docs/diagrams/wan.svg)
 
+🗺️ **Interactive diagrams in Lucid:** [open in Lucidchart](https://lucid.app/lucidchart/72343d3a-6d54-4ba5-822c-11b3b1908b63/edit?invitationId=inv_30077e28-4c60-4ee4-856f-9e1151eb5891) (WAN and all five sites, one page each)
+
 ✅ = reported up and routing in the final-night notes · ⚠️ = configured on at least one side but not up at the deadline (see [docs/known-issues.md](docs/known-issues.md)).
 
 ## Sites

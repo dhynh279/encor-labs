@@ -16,6 +16,8 @@ A five-team build of a **three-tier campus / data-center network** on real Catal
 
 ![North Pole campus topology](docs/diagrams/campus.svg)
 
+🗺️ **Interactive diagrams in Lucid:** [open in Lucidchart](https://lucid.app/lucidchart/400db1ad-0172-45ba-82a2-dc482fdc128a/edit?invitationId=inv_1e42c609-f152-461a-abab-07db63c67813) (campus, core, distribution and all three access zones, one page each)
+
 Solid lines are Catalyst-to-Catalyst routed /30s with static addressing. Dotted lines are links to the Meraki core leafs, where the distribution side uses `ip address dhcp` and the Meraki hands out the address.
 
 ## OSPF design

@@ -14,6 +14,8 @@ Five teams each built a different enterprise network on real Cisco gear, then jo
 
 ![Project Lattice WAN topology](docs/diagrams/wan.svg)
 
+🗺️ **Interactive diagrams in Lucid:** [open in Lucidchart](https://lucid.app/lucidchart/4fc43e55-b3e2-4277-8d85-cc5ec4974fb5/edit?invitationId=inv_06b8ca11-34cf-4d9f-824b-d0d5e78f0b8f) (WAN, hub and all four teams, one page each)
+
 Solid lines are links whose addresses match on both ends in the final saves. The dashed Team 2 link is the hub's port for Team 2, which doesn't match Team 2's final firewall save (see known issue T2-2). The hub's four switches are a full mesh, drawn in detail on the [hub page](hub/README.md).
 
 Team 4 has no link of its own into the hub; its traffic goes through Team 3's network and two ASAs. Team 3 was the transit path, and Team 4 was brought into the WAN that way on 11/04.
